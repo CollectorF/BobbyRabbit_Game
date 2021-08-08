@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(CharacterController))]
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField]
+    private float characterSpeed;
+    //[SerializeField]
+    //private Transform playerCameraTarget;
+    [SerializeField]
+    private Animator animator;
+    [SerializeField]
+    private AnimationCurve speedCurve;
+
+    private CharacterController characterController;
+    private Camera playerCamera;
+    private Vector2 walkDirection;
+    private float characterSpeedCurrent;
+    private AnimatorClipInfo[] currentClipInfo;
+    private float currentClipLength;
+    private float currentTime = 0f;
+
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+        playerCamera = Camera.main;
+    }
+
+    private void Update()
+    {
+        animator.SetFloat("Vertical", walkDirection.y);
+        animator.SetFloat("Horizontal", walkDirection.x);
+        Vector3 movementDirection = transform.up * walkDirection.y;
+        movementDirection += transform.right * walkDirection.x;
+        characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
+        Debug.Log(currentTime);
+        if (walkDirection != new Vector2(0, 0))
+        {
+            currentClipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            currentClipLength = currentClipInfo[0].clip.length;
+            currentTime = Mathf.Clamp(currentTime, 0, currentClipLength);
+            characterSpeedCurrent = speedCurve.Evaluate(currentTime) * characterSpeed;
+            currentTime += Time.deltaTime;
+        }
+        else
+        {
+            currentTime = 0f;
+        }
+
+        //playerCamera.transform.LookAt(playerCameraTarget);
+    }
+
+    private void LateUpdate()
+    {
+
+    }
+
+    private IEnumerator WalkAnimationCoroutine()
+    {
+        yield return null;
+    }
+
+    public void OnWalk(InputAction.CallbackContext value)
+    {
+        walkDirection = value.ReadValue<Vector2>();
+    }
+}
