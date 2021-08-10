@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Grass_Green_2
+  m_Name: Road_Angle_Left
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 5634787087070781501, guid: c2f02701b5ef94743b23dec956c328a0, type: 3}
+  m_Sprite: {fileID: -3486150834051104465, guid: c2f02701b5ef94743b23dec956c328a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

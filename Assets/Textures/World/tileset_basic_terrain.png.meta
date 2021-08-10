@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8962527901448496191
-    second: Grass_Green_1
+    second: Grass_Default
   - first:
       213: 5634787087070781501
     second: Grass_Green_2
@@ -17,6 +17,18 @@ TextureImporter:
   - first:
       213: 2905104715629292754
     second: Sand_1
+  - first:
+      213: -3486150834051104465
+    second: Road_Angle_Left
+  - first:
+      213: -3171567878780330983
+    second: Road_Angle_Right
+  - first:
+      213: 361100761688130878
+    second: Road_End
+  - first:
+      213: 8058246179886966941
+    second: Road_Pass
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,13 +142,97 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grass_Green_1
+      name: Road_Angle_Left
       rect:
         serializedVersion: 2
-        x: 0
-        y: 576
-        width: 32
-        height: 32
+        x: 94
+        y: 271
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f21c3fe6944be9fc0800000000000000
+      internalID: -3486150834051104465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Road_Angle_Right
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 271
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91c524461d35cf3d0800000000000000
+      internalID: -3171567878780330983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Road_End
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 220
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e354b84ca33e20500800000000000000
+      internalID: 361100761688130878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Road_Pass
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 220
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d98afc8c434a4df60800000000000000
+      internalID: 8058246179886966941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Default
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 170
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,90 +242,6 @@ TextureImporter:
       bones: []
       spriteID: 1cb92a0fb54be9380800000000000000
       internalID: -8962527901448496191
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Grass_Green_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 576
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d30efc55009c23e40800000000000000
-      internalID: 5634787087070781501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rock_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 432
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2fab92c9568c19d10800000000000000
-      internalID: 2130704437460187890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dirt_1
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 432
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d4f70ed8f7940c50800000000000000
-      internalID: 6630591646528959698
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sand_1
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 432
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2dc6562d851015820800000000000000
-      internalID: 2905104715629292754
       vertices: []
       indices: 
       edges: []

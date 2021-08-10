@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float characterSpeed;
-    //[SerializeField]
-    //private Transform playerCameraTarget;
     [SerializeField]
     private Animator animator;
     [SerializeField]
     private AnimationCurve speedCurve;
+    //[SerializeField]
+    //private Transform playerCameraTarget;
 
     private CharacterController characterController;
     private Camera playerCamera;
@@ -36,18 +36,17 @@ public class PlayerController : MonoBehaviour
         Vector3 movementDirection = transform.up * walkDirection.y;
         movementDirection += transform.right * walkDirection.x;
         characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
-        Debug.Log(currentTime);
-        if (walkDirection != new Vector2(0, 0))
+        if (walkDirection == Vector2.zero ^ currentTime >= currentClipLength)
+        {
+            currentTime = 0f;
+        }
+        else
         {
             currentClipInfo = animator.GetCurrentAnimatorClipInfo(0);
             currentClipLength = currentClipInfo[0].clip.length;
             currentTime = Mathf.Clamp(currentTime, 0, currentClipLength);
             characterSpeedCurrent = speedCurve.Evaluate(currentTime) * characterSpeed;
             currentTime += Time.deltaTime;
-        }
-        else
-        {
-            currentTime = 0f;
         }
 
         //playerCamera.transform.LookAt(playerCameraTarget);
@@ -56,11 +55,6 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
 
-    }
-
-    private IEnumerator WalkAnimationCoroutine()
-    {
-        yield return null;
     }
 
     public void OnWalk(InputAction.CallbackContext value)
