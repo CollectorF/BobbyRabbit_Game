@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Road_End
+  m_Name: Mushroom2
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 361100761688130878, guid: c2f02701b5ef94743b23dec956c328a0, type: 3}
+  m_Sprite: {fileID: 4062057518739921950, guid: 41d0341007e539d4f837dc8d40b54a21, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

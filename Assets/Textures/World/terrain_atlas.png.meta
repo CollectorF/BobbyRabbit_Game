@@ -10,10 +10,10 @@ TextureImporter:
     second: Carrot1
   - first:
       213: 9182040444915441214
-    second: Carrot2
+    second: Tree1
   - first:
       213: 8888734245262333722
-    second: Kamish
+    second: Reed
   - first:
       213: 3661817903896816488
     second: Mushroom1
@@ -181,7 +181,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kamish
+      name: Reed
       rect:
         serializedVersion: 2
         x: 836
@@ -281,6 +281,27 @@ TextureImporter:
       bones: []
       spriteID: 6962e7b2d7b6fd240800000000000000
       internalID: 4818688311654491798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree1
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 5
+        width: 95
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e5478d2292d6f70800000000000000
+      internalID: 9182040444915441214
       vertices: []
       indices: 
       edges: []

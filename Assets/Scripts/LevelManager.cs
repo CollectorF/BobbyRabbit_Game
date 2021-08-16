@@ -10,7 +10,7 @@ public struct Tiles
     public char Code;
     public TileType Type;
     public MapTile MapTile;
-    public Tile Tile;
+    public Tile TileAsset;
 }
 
 public class LevelManager : MonoBehaviour
@@ -25,15 +25,20 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        Dictionary<char, Tile> loadingResourceTiles = new Dictionary<char, Tile>();
         Dictionary<char, TileType> loadingResource = new Dictionary<char, TileType>();
-        Dictionary<TileType, MapTile> tileLibrary = new Dictionary<TileType, MapTile>();
+        Dictionary<MapTile, Tile> tileAssets = new Dictionary<MapTile, Tile>();
+        //Dictionary<MapTile, TileType> tileLibrary = new Dictionary<MapTile, TileType>();
         foreach (var tile in tiles)
         {
+            loadingResourceTiles.Add(tile.Code, tile.TileAsset);
             loadingResource.Add(tile.Code, tile.Type);
-            tileLibrary.Add(tile.Type, tile.MapTile);
+            tileAssets.Add(tile.MapTile, tile.TileAsset);
+            //tileLibrary.Add(tile.MapTile, tile.Type);
         }
-        levelLoader = new ResourcesLevelLoader(loadingResource);
-        levelFiller = new TilemapLevelFiller(tilemap, tileLibrary);
+        levelLoader = new ResourcesLevelLoader(loadingResourceTiles, loadingResource);
+        levelFiller = new TilemapLevelFiller(tilemap, tileAssets);
+        //levelFiller = new TilemapLevelFiller(tilemap, tileLibrary, tileAssets);
 
         SetupLevel("Level1");
     }
