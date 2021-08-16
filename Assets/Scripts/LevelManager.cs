@@ -25,20 +25,15 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        Dictionary<char, Tile> loadingResourceTiles = new Dictionary<char, Tile>();
+        Dictionary<char, Tile> tileAssets = new Dictionary<char, Tile>();
         Dictionary<char, TileType> loadingResource = new Dictionary<char, TileType>();
-        Dictionary<MapTile, Tile> tileAssets = new Dictionary<MapTile, Tile>();
-        //Dictionary<MapTile, TileType> tileLibrary = new Dictionary<MapTile, TileType>();
         foreach (var tile in tiles)
         {
-            loadingResourceTiles.Add(tile.Code, tile.TileAsset);
+            tileAssets.Add(tile.Code, tile.TileAsset);
             loadingResource.Add(tile.Code, tile.Type);
-            tileAssets.Add(tile.MapTile, tile.TileAsset);
-            //tileLibrary.Add(tile.MapTile, tile.Type);
         }
-        levelLoader = new ResourcesLevelLoader(loadingResourceTiles, loadingResource);
+        levelLoader = new ResourcesLevelLoader(tileAssets, loadingResource);
         levelFiller = new TilemapLevelFiller(tilemap, tileAssets);
-        //levelFiller = new TilemapLevelFiller(tilemap, tileLibrary, tileAssets);
 
         SetupLevel("Level1");
     }

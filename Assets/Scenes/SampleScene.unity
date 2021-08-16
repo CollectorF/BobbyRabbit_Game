@@ -2660,43 +2660,43 @@ MonoBehaviour:
   tilemap: {fileID: 239693910}
   tiles:
   - Code: 81
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: b4f7f53e00a506d4d9bbe124a9ea4675, type: 2}
   - Code: 87
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: a375c3451515c6f4fabd3e97147abd6b, type: 2}
   - Code: 69
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: 35d48fed56f30e44ba126e0af198891f, type: 2}
   - Code: 65
     Type: 0
     TileAsset: {fileID: 11400000, guid: 9c2af078ada0f524e9d6322235c71034, type: 2}
   - Code: 68
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: d59c9d675d321e547ac74668459faf70, type: 2}
   - Code: 90
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: dce3ae085ea9d6846915117eca3895b7, type: 2}
   - Code: 88
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: e8c04cf50d9b5a843b000460f43f3fb8, type: 2}
   - Code: 67
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: e7487d36297d57c479e7b7a957cf47ce, type: 2}
   - Code: 83
-    Type: 2
+    Type: 3
     TileAsset: {fileID: 11400000, guid: 8ba4ac0807fe753469250061fd9ef570, type: 2}
   - Code: 82
-    Type: 1
+    Type: 2
     TileAsset: {fileID: 11400000, guid: e6b768b7c663de44db3c15efe55db81e, type: 2}
   - Code: 56
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: 6066e39d12639184cb2835004b6873ac, type: 2}
   - Code: 53
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: d56e825fd9ece3041829a05ff55fc7e4, type: 2}
   - Code: 50
-    Type: 0
+    Type: 1
     TileAsset: {fileID: 11400000, guid: 8e5995e4ffb94664d941425d6cb03d0f, type: 2}
 --- !u!4 &1907794769
 Transform:

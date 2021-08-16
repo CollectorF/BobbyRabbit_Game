@@ -12,11 +12,13 @@ public struct MapTile
 {
     public TileType Type;
     public Tile Tile;
+    public char Code;
 
-    public MapTile(TileType tileType, Tile tile)
+    public MapTile(TileType tileType, Tile tile, char code)
     {
         Type = tileType;
         Tile = tile;
+        Code = code;
     }
 }
 
@@ -33,7 +35,7 @@ public class Map
     {
         if (map.Length == 0)
         {
-            return new Vector2Int(0, 0);
+            return Vector2Int.zero;
         }
         return new Vector2Int(map.Length, map[0].Length);
     }
@@ -41,10 +43,5 @@ public class Map
     public Map(MapTile[][] tiles)
     {
         map = tiles;
-    }
-
-    public override bool Equals(object obj)
-    {
-        return Equals(obj);
     }
 }

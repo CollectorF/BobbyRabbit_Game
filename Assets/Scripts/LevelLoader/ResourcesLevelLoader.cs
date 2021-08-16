@@ -27,9 +27,10 @@ public class ResourcesLevelLoader : ILevelLoader
             levelBase[i] = new MapTile[stringsOfLine.Length];
             for (int j = 0; j < levelBase[i].Length; j++)
             {
+                char code = stringsOfLine[j][0];
                 tileLibrary.TryGetValue(stringsOfLine[j][0], out Tile tile);
                 tileTypeLibrary.TryGetValue(stringsOfLine[j][0], out TileType type);
-                levelBase[i][j] = new MapTile(type, tile);
+                levelBase[i][j] = new MapTile(type, tile, code);
             }
         }
         return new Map(levelBase);
