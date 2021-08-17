@@ -52,11 +52,6 @@ public class PlayerController : MonoBehaviour
         //playerCamera.transform.LookAt(playerCameraTarget);
     }
 
-    private void LateUpdate()
-    {
-
-    }
-
     public void OnWalk(InputAction.CallbackContext value)
     {
         walkDirection = value.ReadValue<Vector2>();

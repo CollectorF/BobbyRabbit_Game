@@ -23,14 +23,15 @@ public class ResourcesLevelLoader : ILevelLoader
         MapTile[][] levelBase = new MapTile[rows][];
         for (int i = 0; i < lines.Length; i++)
         {
-            string[] stringsOfLine = lines[i].Split(' ');
-            levelBase[i] = new MapTile[stringsOfLine.Length];
+            string[] castedCode = lines[i].Split(' ');
+            levelBase[i] = new MapTile[castedCode.Length];
             for (int j = 0; j < levelBase[i].Length; j++)
             {
-                char code = stringsOfLine[j][0];
-                tileLibrary.TryGetValue(stringsOfLine[j][0], out Tile tile);
-                tileTypeLibrary.TryGetValue(stringsOfLine[j][0], out TileType type);
-                levelBase[i][j] = new MapTile(type, tile, code);
+                char code = castedCode[j][0];
+                Vector2Int position = new Vector2Int(i, j);
+                tileLibrary.TryGetValue(castedCode[j][0], out Tile tile);
+                tileTypeLibrary.TryGetValue(castedCode[j][0], out TileType type);
+                levelBase[i][j] = new MapTile(type, tile, code, position);
             }
         }
         return new Map(levelBase);
