@@ -8,7 +8,8 @@ public enum TileType
     Carrot,
     Bonus,
     PlayerStart,
-    Default
+    Default,
+    Walkable
 }
 public struct MapTile
 {
@@ -32,7 +33,7 @@ public class Map
 
     public MapTile GetTileAt(int x, int y)
     {
-        return map[x][y];
+        return map[y][x];
     }
 
     public MapTile GetSingleTileByType(TileType type)

@@ -25,7 +25,7 @@ public class TilemapLevelFiller : ILevelFiller
                 foreach (KeyValuePair<char, Tile> tile in tileAssets)
                 {
                     tileAssets.TryGetValue(map.GetTileAt(x, y).Code, out Tile tileOut);
-                    tilemap.SetTile(new Vector3Int(y, -x, 0), tileOut);
+                    tilemap.SetTile(new Vector3Int(x, -y, 0), tileOut);
                 }
             }
         }

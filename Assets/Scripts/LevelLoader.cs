@@ -17,7 +17,7 @@ public struct Tiles
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField]
-    private GameObject playerPrefab;
+    private GameObject player;
     [SerializeField]
     private Tilemap tilemap;
     [SerializeField]
@@ -28,7 +28,6 @@ public class LevelLoader : MonoBehaviour
     private ILevelLoader levelLoader;
     private ILevelFiller levelFiller;
     internal Map map;
-    internal GameObject player;
 
     private void Awake()
     {
@@ -41,7 +40,6 @@ public class LevelLoader : MonoBehaviour
         }
         levelLoader = new ResourcesLevelLoader(tileAssets, loadingResource);
         levelFiller = new TilemapLevelFiller(tilemap, tileAssets);
-
         SetupLevel(levelName);
     }
 
@@ -50,12 +48,11 @@ public class LevelLoader : MonoBehaviour
         tilemap.ClearAllTiles();
         map = levelLoader.ReadLevel(levelName);
         levelFiller.FillLevel(map);
-        if (playerPrefab != null)
+        if (player != null)
         {
             MapTile startTile = map.GetSingleTileByType(TileType.PlayerStart);
-            Vector2 playerSpawnPoint = map.GetTileCenter(tilemap, startTile);
-            player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
-            player.name = "Player";
+            Vector2 playerStartPoint = map.GetTileCenter(tilemap, startTile);
+            player.transform.position = playerStartPoint;
         }
     }
 }
