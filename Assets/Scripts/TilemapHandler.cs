@@ -24,5 +24,10 @@ public class TilemapHandler : MonoBehaviour
             tilemapMain.SetTile(position, carrotEmpty);
             levelLoaderMain.map.SetTileType(position, TileType.Background);
         }
+        if (tileType == TileType.Bonus)
+        {
+            tilemapMain.SetTile(position, null);
+            levelLoaderMain.map.SetTileType(position, TileType.Background);
+        }
     }
 }

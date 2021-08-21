@@ -46,11 +46,11 @@ public class GameManager : MonoBehaviour
         {
             case TileType.Carrot:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
-
                 uiManager.UpdateScore(++carrotsPicked, carrotsAll, bonusesPicked);
                 break;
             case TileType.Bonus:
-                var bonuses = levelLoaderMain.map.bonusQuantity;
+                tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
+                uiManager.UpdateScore(carrotsPicked, carrotsAll, ++bonusesPicked);
                 break;
             case TileType.FinishPoint:
 
