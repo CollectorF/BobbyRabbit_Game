@@ -7,9 +7,10 @@ public enum TileType
     Obstacle,
     Carrot,
     Bonus,
-    PlayerStart,
+    StartPoint,
     Default,
-    Walkable
+    Walkable,
+    FinishPoint
 }
 public struct MapTile
 {
@@ -30,6 +31,15 @@ public struct MapTile
 public class Map
 {
     private MapTile[][] map;
+    public int carrotQuantity { get; private set; }
+    public int bonusQuantity { get; private set; }
+
+    public Map(MapTile[][] tiles, int carrots, int bonuses)
+    {
+        map = tiles;
+        carrotQuantity = carrots;
+        bonusQuantity = bonuses;
+    }
 
     public MapTile GetTileAt(int x, int y)
     {
@@ -68,8 +78,8 @@ public class Map
         return new Vector2Int(map.Length, map[0].Length);
     }
 
-    public Map(MapTile[][] tiles)
+    public void SetTileType(Vector3Int position, TileType tileType)
     {
-        map = tiles;
+        map[-position.y][position.x].Type = tileType;
     }
 }

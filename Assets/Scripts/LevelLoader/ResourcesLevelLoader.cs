@@ -21,6 +21,8 @@ public class ResourcesLevelLoader : ILevelLoader
         int rows = lines.Length;
 
         MapTile[][] levelBase = new MapTile[rows][];
+        int carrots = 0;
+        int bonuses = 0;
         for (int i = 0; i < lines.Length; i++)
         {
             string[] castedCode = lines[i].Split(' ');
@@ -32,8 +34,16 @@ public class ResourcesLevelLoader : ILevelLoader
                 tileLibrary.TryGetValue(castedCode[j][0], out Tile tile);
                 tileTypeLibrary.TryGetValue(castedCode[j][0], out TileType type);
                 levelBase[i][j] = new MapTile(type, tile, code, position);
+                if (levelBase[i][j].Type == TileType.Carrot)
+                {
+                    carrots++;
+                }
+                if (levelBase[i][j].Type == TileType.Bonus)
+                {
+                    bonuses++;
+                }
             }
         }
-        return new Map(levelBase);
+        return new Map(levelBase, carrots, bonuses);
     }
 }

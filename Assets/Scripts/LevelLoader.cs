@@ -50,7 +50,7 @@ public class LevelLoader : MonoBehaviour
         levelFiller.FillLevel(map);
         if (player != null)
         {
-            MapTile startTile = map.GetSingleTileByType(TileType.PlayerStart);
+            MapTile startTile = map.GetSingleTileByType(TileType.StartPoint);
             Vector2 playerStartPoint = map.GetTileCenter(tilemap, startTile);
             player.transform.position = playerStartPoint;
         }

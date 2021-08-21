@@ -14,16 +14,16 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private AnimationCurve speedCurve;
-    //[SerializeField]
-    //private Transform playerCameraTarget;
+
+    [Space(20)]
     [SerializeField]
     private LevelLoader levelLoader;
     [SerializeField]
     private Tilemap tilemapBackground;
+
+    [Space(20)]
     [SerializeField]
-    private Tilemap tilemapMain;
-    [SerializeField]
-    private CaptionLibrary captionLibrary;
+    private string NOWAY_KEY = "CantGoThere";
 
     internal event Action<string> OnNoWay;
 
@@ -34,9 +34,9 @@ public class PlayerController : MonoBehaviour
     private float currentClipLength;
     private float currentTime = 0f;
     private Vector2 walkDirection;
-    private Vector2 currentPositionVector;
-    private MapTile currntPosition;
+    internal Vector2 currentPositionVector;
     private MapTile nextPosition;
+    internal MapTile currentPosition;
 
     private void Start()
     {
@@ -46,23 +46,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        currentPositionVector = GetCurrentPosInVector(tilemapBackground);
+        nextPosition = GetNextTile(tilemapBackground);
+        Walk(walkDirection);
+    }
 
-        // Calcuating of current player position in grid coordinates and player's next position
-
-        currentPositionVector = new Vector2(tilemapBackground.WorldToCell(transform.position).x, -tilemapBackground.WorldToCell(transform.position).y);
-        currntPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(currentPositionVector.x), Mathf.FloorToInt(currentPositionVector.y));
-        nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(currentPositionVector.x + walkDirection.x), Mathf.FloorToInt(currentPositionVector.y - walkDirection.y));
-
-        // Player movement logics
-
+    // Player movement logics
+    private void Walk(Vector2 direction)
+    {
+        direction = walkDirection;
         if (nextPosition.Type == TileType.Walkable)
         {
-            animator.SetFloat("Vertical", walkDirection.y);
-            animator.SetFloat("Horizontal", walkDirection.x);
-            Vector3 movementDirection = transform.up * walkDirection.y;
-            movementDirection += transform.right * walkDirection.x;
+            animator.SetFloat("Vertical", direction.y);
+            animator.SetFloat("Horizontal", direction.x);
+            Vector3 movementDirection = transform.up * direction.y;
+            movementDirection += transform.right * direction.x;
             characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
-            if (walkDirection == Vector2.zero ^ currentTime >= currentClipLength)
+            if (direction == Vector2.zero ^ currentTime >= currentClipLength)
             {
                 currentTime = 0f;
             }
@@ -78,15 +78,27 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.Play("Player_Idle", 0);
-            captionLibrary.captionDictionary.TryGetValue("CantGoThere", out string msg);
-            Debug.Log(msg);
-            OnNoWay?.Invoke(msg);
+            OnNoWay?.Invoke(NOWAY_KEY);
         }
-        //playerCamera.transform.LookAt(playerCameraTarget);
+    }
+
+    private Vector2 GetCurrentPosInVector(Tilemap tilemap)
+    {
+        currentPositionVector = new Vector2(tilemap.WorldToCell(transform.position).x, -tilemap.WorldToCell(transform.position).y);
+        return currentPositionVector;
+    }
+
+    private MapTile GetNextTile(Tilemap tilemap)
+    {
+        //currentPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(currentPositionVector.x), Mathf.FloorToInt(currentPositionVector.y));
+        nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(currentPositionVector.x + walkDirection.x), Mathf.FloorToInt(currentPositionVector.y - walkDirection.y));
+        return nextPosition;
     }
 
     public void OnWalk(InputAction.CallbackContext value)
     {
         walkDirection = value.ReadValue<Vector2>();
     }
+
+
 }
