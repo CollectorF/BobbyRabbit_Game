@@ -23,11 +23,16 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private string levelName;
     [SerializeField]
+    [Tooltip("Set at least for one Level Loader on the scene")]
+    private bool loadLevelInfo;
+    [SerializeField]
     private List<Tiles> tiles;
 
     private ILevelLoader levelLoader;
+    private ILevelInfoLoader levelInfoLoader;
     private ILevelFiller levelFiller;
     internal Map map;
+    internal Level level;
 
     private void Awake()
     {
@@ -39,6 +44,7 @@ public class LevelLoader : MonoBehaviour
             loadingResource.Add(tile.Code, tile.Type);
         }
         levelLoader = new ResourcesLevelLoader(tileAssets, loadingResource);
+        levelInfoLoader = new ResourcesLevelInfoLoader();
         levelFiller = new TilemapLevelFiller(tilemap, tileAssets);
         SetupLevel(levelName);
     }
@@ -53,6 +59,10 @@ public class LevelLoader : MonoBehaviour
             MapTile startTile = map.GetSingleTileByType(TileType.StartPoint);
             Vector2 playerStartPoint = map.GetTileCenter(tilemap, startTile);
             player.transform.position = playerStartPoint;
+        }
+        if (loadLevelInfo)
+        {
+            level = levelInfoLoader.ReadLevelInfo(levelName);
         }
     }
 }

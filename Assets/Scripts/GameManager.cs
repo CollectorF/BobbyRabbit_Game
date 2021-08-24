@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     private int carrotsAll;
     private int carrotsPicked = 0;
     private int bonusesPicked = 0;
+    private float secondsLeft;
+    private float secondsToPassLevel;
 
     private void Start()
     {
@@ -32,6 +35,14 @@ public class GameManager : MonoBehaviour
         interactionProcessor.OnInteraction += ProcessInteraction;
         carrotsAll = levelLoaderMain.map.carrotQuantity;
         uiManager.UpdateScore(carrotsPicked, carrotsAll, bonusesPicked);
+        secondsToPassLevel = levelLoaderMain.level.timer;
+        secondsLeft = secondsToPassLevel;
+    }
+
+    private void Update()
+    {
+        uiManager.UpdateTimer(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
+        secondsLeft -= Time.deltaTime;
     }
 
     private void DisplayMessage(string key)
@@ -64,5 +75,13 @@ public class GameManager : MonoBehaviour
     {
         captionHandler.dictionary.TryGetValue(key, out string value);
         return value;
+    }
+
+    private string SetupTimer(float seconds)
+    {
+        float minutesLeft = TimeSpan.FromSeconds(seconds).Minutes;
+        float secondsLeft = TimeSpan.FromSeconds(seconds).Seconds;
+        string timer = string.Format("{0:00}:{1:00}", minutesLeft, secondsLeft);
+        return timer;
     }
 }

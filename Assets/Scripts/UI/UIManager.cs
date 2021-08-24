@@ -16,6 +16,10 @@ public class UIManager : MonoBehaviour
     private TMP_Text carrotsText;
     [SerializeField]
     private TMP_Text bonusesText;
+    [SerializeField]
+    private TMP_Text timerText;
+    [SerializeField]
+    private float highlightOnTimeLeft;
 
     private TMP_Text messagePanelText;
     private Coroutine timerCoroutine;
@@ -25,6 +29,7 @@ public class UIManager : MonoBehaviour
         messagePanelText = messagePanel.GetComponentInChildren<TMP_Text>();
         gameplayUI.SetActive(true);
         messagePanel.SetActive(false);
+        timerText.color = Color.white;
     }
 
     internal void DisplayTextMessage(string msg)
@@ -41,6 +46,15 @@ public class UIManager : MonoBehaviour
     {
         carrotsText.text = $"{carrots.ToString()}/{carrotsAll.ToString()}";
         bonusesText.text = bonuses.ToString();
+    }
+
+    public void UpdateTimer(string timer, float timeLeft)
+    {
+        if (timeLeft <= highlightOnTimeLeft)
+        {
+            timerText.color = Color.red;
+        }
+        timerText.text = timer;
     }
 
     private IEnumerator DisplayByTimeCoroutine(GameObject obj, float time)

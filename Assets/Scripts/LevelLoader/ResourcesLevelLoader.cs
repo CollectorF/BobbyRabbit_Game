@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -7,6 +8,7 @@ public class ResourcesLevelLoader : ILevelLoader
 {
     private Dictionary<char, Tile> tileLibrary;
     private Dictionary<char, TileType> tileTypeLibrary;
+    private string levelInfoFileSuffix = "_Info";
 
     public ResourcesLevelLoader(Dictionary<char, Tile> tileLibrary, Dictionary<char, TileType> tileTypeLibrary)
     {
@@ -45,5 +47,13 @@ public class ResourcesLevelLoader : ILevelLoader
             }
         }
         return new Map(levelBase, carrots, bonuses);
+    }
+
+    public Level ReadLevelInfo(string levelId)
+    {
+        var fullFileName = string.Concat(levelId, levelInfoFileSuffix);
+        string json = Resources.Load(fullFileName).ToString();
+        Level level = JsonConvert.DeserializeObject<Level>(json);
+        return new Level(level.name, level.difficulty, level.timer);
     }
 }

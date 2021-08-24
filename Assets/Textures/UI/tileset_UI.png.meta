@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 9041697992751682576
     second: Bonus
+  - first:
+      213: 5900468666633443034
+    second: Timer
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -150,7 +153,7 @@ TextureImporter:
         width: 38
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,6 +161,27 @@ TextureImporter:
       bones: []
       spriteID: 01493506b609a7d70800000000000000
       internalID: 9041697992751682576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Timer
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 201
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad652038dfca2e150800000000000000
+      internalID: 5900468666633443034
       vertices: []
       indices: 
       edges: []
