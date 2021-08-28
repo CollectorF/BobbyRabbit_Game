@@ -23,9 +23,14 @@ public class TilemapHandler : MonoBehaviour
     //private List<ReplacementTiles> replacementTiles;
     [SerializeField]
     private Tile carrotEmpty;
+    [SerializeField]
+    private Tile buttonOn;
+    [SerializeField]
+    private Tile buttonOff;
 
     private Tilemap tilemapMain;
     private LevelLoader levelLoaderMain;
+    private TileBase initialState;
 
     private void Start()
     {
@@ -44,6 +49,19 @@ public class TilemapHandler : MonoBehaviour
         {
             tilemapMain.SetTile(position, null);
             levelLoaderMain.map.SetTileType(position, TileType.Background);
+        }
+        if (tileType == TileType.ButtonOnOff)
+        {
+            if (levelLoaderMain.map.GetTileAt(position.x, -position.y).IsOn)
+            {
+                tilemapMain.SetTile(position, buttonOff);
+                levelLoaderMain.map.SetTileState(position, false);
+            }
+            else
+            {
+                tilemapMain.SetTile(position, buttonOn);
+                levelLoaderMain.map.SetTileState(position, true);
+            }
         }
     }
 }

@@ -41,6 +41,12 @@ TextureImporter:
   - first:
       213: -7727342441139247179
     second: Bonus
+  - first:
+      213: -9107332740215795285
+    second: Button_On
+  - first:
+      213: -8410114757688102176
+    second: Button_Off
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -414,7 +420,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -422,6 +428,48 @@ TextureImporter:
       bones: []
       spriteID: 5b76812bdf6f2c490800000000000000
       internalID: -7727342441139247179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_On
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 58
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba1172020214c9180800000000000000
+      internalID: -9107332740215795285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button_Off
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 58
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e2fab3cf25494b80800000000000000
+      internalID: -8410114757688102176
       vertices: []
       indices: 
       edges: []

@@ -10,7 +10,9 @@ public enum TileType
     StartPoint,
     Default,
     Walkable,
-    FinishPoint
+    FinishPoint,
+    ButtonOnOff,
+    Switch
 }
 public struct MapTile
 {
@@ -18,13 +20,15 @@ public struct MapTile
     public Tile Tile;
     public char Code;
     public Vector2Int Position;
+    public bool IsOn;
 
-    public MapTile(TileType tileType, Tile tile, char code, Vector2Int position)
+    public MapTile(TileType tileType, Tile tile, char code, Vector2Int position, bool isOn)
     {
         Type = tileType;
         Tile = tile;
         Code = code;
         Position = position;
+        IsOn = isOn;
     }
 }
 
@@ -81,5 +85,10 @@ public class Map
     public void SetTileType(Vector3Int position, TileType tileType)
     {
         map[-position.y][position.x].Type = tileType;
+    }
+
+    public void SetTileState(Vector3Int position, bool state)
+    {
+        map[-position.y][position.x].IsOn = state;
     }
 }

@@ -5,6 +5,13 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+public enum GameStatus
+{
+    Runing,
+    PlayerWin,
+    PlayerLoose
+}
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -16,6 +23,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private LevelLoader levelLoaderMain;
 
+    [Space(20)]
+    [SerializeField]
+    private string NOT_ALL_CARROTS_KEY = "NotAllCollected";
+    [SerializeField]
+    private string LOOSE_KEY = "LooseGame";
+    [SerializeField]
+    private string WIN_KEY = "WinGame";
+
+
     private CaptionHandler captionHandler;
     private PlayerController playerController;
     private InteractionHandler interactionProcessor;
@@ -24,6 +40,8 @@ public class GameManager : MonoBehaviour
     private int bonusesPicked = 0;
     private float secondsLeft;
     private float secondsToPassLevel;
+    bool playerWin;
+    private GameStatus status;
 
     private void Start()
     {
@@ -31,6 +49,7 @@ public class GameManager : MonoBehaviour
         interactionProcessor = player.GetComponent<InteractionHandler>();
         captionHandler = GetComponent<CaptionHandler>();
 
+        status = GameStatus.Runing;
         playerController.OnNoWay += DisplayMessage;
         interactionProcessor.OnInteraction += ProcessInteraction;
         carrotsAll = levelLoaderMain.map.carrotQuantity;
@@ -43,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager.UpdateTimer(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
         secondsLeft -= Time.deltaTime;
+        status = CheckLooseConditions();
     }
 
     private void DisplayMessage(string key)
@@ -64,6 +84,18 @@ public class GameManager : MonoBehaviour
                 uiManager.UpdateScore(carrotsPicked, carrotsAll, ++bonusesPicked);
                 break;
             case TileType.FinishPoint:
+                status = CheckWinConditions();
+                if (status == GameStatus.PlayerWin)
+                {
+                    DisplayMessage(WIN_KEY);
+                }
+                else
+                {
+                    DisplayMessage(NOT_ALL_CARROTS_KEY);
+                }
+                break;
+            case TileType.ButtonOnOff:
+                tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
 
                 break;
             default:
@@ -83,5 +115,28 @@ public class GameManager : MonoBehaviour
         float secondsLeft = TimeSpan.FromSeconds(seconds).Seconds;
         string timer = string.Format("{0:00}:{1:00}", minutesLeft, secondsLeft);
         return timer;
+    }
+
+    private GameStatus CheckWinConditions()
+    {
+        if (carrotsPicked == carrotsAll && secondsLeft > 0)
+        {
+            status = GameStatus.PlayerWin;
+        }
+        else
+        {
+            status = GameStatus.Runing;
+        }
+        return status;
+    }
+
+    private GameStatus CheckLooseConditions()
+    {
+        if (secondsLeft == 0)
+        {
+            DisplayMessage(LOOSE_KEY);
+            status = GameStatus.PlayerLoose;
+        }
+        return status;
     }
 }

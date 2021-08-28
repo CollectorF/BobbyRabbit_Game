@@ -33,9 +33,10 @@ public class ResourcesLevelLoader : ILevelLoader
             {
                 char code = castedCode[j][0];
                 Vector2Int position = new Vector2Int(i, j);
+                bool isOn = false;
                 tileLibrary.TryGetValue(castedCode[j][0], out Tile tile);
                 tileTypeLibrary.TryGetValue(castedCode[j][0], out TileType type);
-                levelBase[i][j] = new MapTile(type, tile, code, position);
+                levelBase[i][j] = new MapTile(type, tile, code, position, isOn);
                 if (levelBase[i][j].Type == TileType.Carrot)
                 {
                     carrots++;

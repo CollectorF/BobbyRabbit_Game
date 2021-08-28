@@ -12,27 +12,34 @@ public class InteractionHandler : MonoBehaviour
     private LevelLoader mainLevelLoader;
 
     private PlayerController playerController;
-    private MapTile currentPosition;
+    private MapTile currentTile;
+    private MapTile lastTile;
 
     internal event Action<MapTile, TileType> OnInteraction;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
+        lastTile = GetCurrentTile(mainLevelLoader, tilemapMain);
     }
 
     void Update()
     {
-        currentPosition = GetCurrentTile(mainLevelLoader, tilemapMain);
-        CheckInteraction(currentPosition, TileType.Carrot);
-        CheckInteraction(currentPosition, TileType.Bonus);
-        CheckInteraction(currentPosition, TileType.FinishPoint);
+        currentTile = GetCurrentTile(mainLevelLoader, tilemapMain);
+        if (currentTile.Position != lastTile.Position)
+        {
+            CheckInteraction(currentTile, TileType.Carrot);
+            CheckInteraction(currentTile, TileType.Bonus);
+            CheckInteraction(currentTile, TileType.FinishPoint);
+            CheckInteraction(currentTile, TileType.ButtonOnOff);
+        }
+        lastTile = currentTile;
     }
 
     private MapTile GetCurrentTile(LevelLoader levelLoader, Tilemap tilemap)
     {
-        currentPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(playerController.currentPositionVector.x), Mathf.FloorToInt(playerController.currentPositionVector.y));
-        return currentPosition;
+        currentTile = levelLoader.map.GetTileAt(Mathf.FloorToInt(playerController.currentPositionVector.x), Mathf.FloorToInt(playerController.currentPositionVector.y));
+        return currentTile;
     }
 
     private void CheckInteraction(MapTile currentTile, TileType tileType)
