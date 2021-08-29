@@ -47,6 +47,12 @@ TextureImporter:
   - first:
       213: -8410114757688102176
     second: Button_Off
+  - first:
+      213: 3085453732333286058
+    second: Spikes_Off
+  - first:
+      213: -6344847732045904330
+    second: Spikes_On
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -441,7 +447,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -462,7 +468,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -470,6 +476,48 @@ TextureImporter:
       bones: []
       spriteID: 0e2fab3cf25494b80800000000000000
       internalID: -8410114757688102176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_Off
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 58
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa2f0a672dbb1da20800000000000000
+      internalID: 3085453732333286058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes_On
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 58
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6360679aa9292f7a0800000000000000
+      internalID: -6344847732045904330
       vertices: []
       indices: 
       edges: []

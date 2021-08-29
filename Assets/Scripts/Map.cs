@@ -12,7 +12,7 @@ public enum TileType
     Walkable,
     FinishPoint,
     ButtonOnOff,
-    Switch
+    Switch,
 }
 public struct MapTile
 {

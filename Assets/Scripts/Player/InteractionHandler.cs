@@ -20,12 +20,12 @@ public class InteractionHandler : MonoBehaviour
     void Start()
     {
         playerController = GetComponent<PlayerController>();
-        lastTile = GetCurrentTile(mainLevelLoader, tilemapMain);
+        lastTile = playerController.GetCurrentTile(mainLevelLoader, playerController.currentPositionVector);
     }
 
     void Update()
     {
-        currentTile = GetCurrentTile(mainLevelLoader, tilemapMain);
+        currentTile = playerController.GetCurrentTile(mainLevelLoader, playerController.currentPositionVector);
         if (currentTile.Position != lastTile.Position)
         {
             CheckInteraction(currentTile, TileType.Carrot);
@@ -34,12 +34,6 @@ public class InteractionHandler : MonoBehaviour
             CheckInteraction(currentTile, TileType.ButtonOnOff);
         }
         lastTile = currentTile;
-    }
-
-    private MapTile GetCurrentTile(LevelLoader levelLoader, Tilemap tilemap)
-    {
-        currentTile = levelLoader.map.GetTileAt(Mathf.FloorToInt(playerController.currentPositionVector.x), Mathf.FloorToInt(playerController.currentPositionVector.y));
-        return currentTile;
     }
 
     private void CheckInteraction(MapTile currentTile, TileType tileType)

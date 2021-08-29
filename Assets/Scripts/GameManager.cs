@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string WIN_KEY = "WinGame";
 
-
     private CaptionHandler captionHandler;
     private PlayerController playerController;
     private InteractionHandler interactionProcessor;
@@ -40,8 +39,9 @@ public class GameManager : MonoBehaviour
     private int bonusesPicked = 0;
     private float secondsLeft;
     private float secondsToPassLevel;
-    bool playerWin;
     private GameStatus status;
+
+
 
     private void Start()
     {

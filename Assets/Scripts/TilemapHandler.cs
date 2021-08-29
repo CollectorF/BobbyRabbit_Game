@@ -27,10 +27,13 @@ public class TilemapHandler : MonoBehaviour
     private Tile buttonOn;
     [SerializeField]
     private Tile buttonOff;
+    [SerializeField]
+    private Tile spikesOn;
+    [SerializeField]
+    private Tile spikesOff;
 
     private Tilemap tilemapMain;
     private LevelLoader levelLoaderMain;
-    private TileBase initialState;
 
     private void Start()
     {

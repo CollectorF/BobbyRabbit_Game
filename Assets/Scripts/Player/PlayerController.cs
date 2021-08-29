@@ -17,13 +17,20 @@ public class PlayerController : MonoBehaviour
 
     [Space(20)]
     [SerializeField]
-    private LevelLoader levelLoader;
+    private LevelLoader levelLoaderBackground;
+    [SerializeField]
+    private LevelLoader levelLoaderMain;
     [SerializeField]
     private Tilemap tilemapBackground;
+    [SerializeField]
+    private Tilemap tilemapMain;
+    [SerializeField]
+    [Tooltip("Vector Comaration Tolerance")]
+    private float tolerance = 0.1f;
 
     [Space(20)]
     [SerializeField]
-    private string NOWAY_KEY = "CantGoThere";
+    private string NO_WAY_KEY = "CantGoThere";
 
     internal event Action<string> OnNoWay;
 
@@ -35,8 +42,8 @@ public class PlayerController : MonoBehaviour
     private float currentTime = 0f;
     private Vector2 walkDirection;
     internal Vector2 currentPositionVector;
-    private MapTile nextPosition;
-    internal MapTile currentPosition;
+    private MapTile nextPositionBackground;
+    private MapTile nextPositionMain;
 
     private void Start()
     {
@@ -47,15 +54,28 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         currentPositionVector = GetCurrentPosInVector(tilemapBackground);
-        nextPosition = GetNextTile(tilemapBackground);
+        if (walkDirection == Vector2.zero)
+        {
+            nextPositionBackground = GetNextTile(levelLoaderBackground, currentPositionVector);
+        }
+        else
+        {
+            MapTile currentTile = GetCurrentTile(levelLoaderMain, currentPositionVector);
+            Vector2 currentTileCenter = levelLoaderBackground.map.GetTileCenter(tilemapBackground, currentTile);
+            Vector2 currentPlayerPos = characterController.transform.position;
+            //if (CompareVectorsWithTolerance(currentTileCenter, currentPlayerPos, tolerance))
+            if ((currentTileCenter.x - currentPlayerPos.x) < 0.01 & (currentTileCenter.y - currentPlayerPos.y) < 0.05)
+            {
+                nextPositionBackground = GetNextTile(levelLoaderBackground, currentPositionVector);
+                nextPositionMain = GetNextTile(levelLoaderMain, currentPositionVector);
+            }
+        }
         Walk(walkDirection);
     }
 
-    // Player movement logics
     private void Walk(Vector2 direction)
     {
-        direction = walkDirection;
-        if (nextPosition.Type == TileType.Walkable)
+        if (nextPositionBackground.Type == TileType.Walkable && nextPositionMain.Type != TileType.Obstacle)
         {
             animator.SetFloat("Vertical", direction.y);
             animator.SetFloat("Horizontal", direction.x);
@@ -78,7 +98,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.Play("Player_Idle", 0);
-            OnNoWay?.Invoke(NOWAY_KEY);
+            OnNoWay?.Invoke(NO_WAY_KEY);
         }
     }
 
@@ -88,17 +108,29 @@ public class PlayerController : MonoBehaviour
         return currentPositionVector;
     }
 
-    private MapTile GetNextTile(Tilemap tilemap)
+    private MapTile GetNextTile(LevelLoader levelLoader, Vector2 position)
     {
-        //currentPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(currentPositionVector.x), Mathf.FloorToInt(currentPositionVector.y));
-        nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(currentPositionVector.x + walkDirection.x), Mathf.FloorToInt(currentPositionVector.y - walkDirection.y));
+        var nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(position.x + walkDirection.x), Mathf.FloorToInt(position.y - walkDirection.y));
         return nextPosition;
+    }
+
+    internal MapTile GetCurrentTile(LevelLoader levelLoader, Vector2 position)
+    {
+        var currentPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+        return currentPosition;
     }
 
     public void OnWalk(InputAction.CallbackContext value)
     {
         walkDirection = value.ReadValue<Vector2>();
+        if (walkDirection.x != 0 && walkDirection.y != 0)
+        {
+            walkDirection = Vector2.zero;
+        }
     }
 
-
+    public bool CompareVectorsWithTolerance(Vector2 a, Vector2 b, float tolerance)
+    {
+        return Vector2.SqrMagnitude(a - b) < tolerance;
+    }
 }
