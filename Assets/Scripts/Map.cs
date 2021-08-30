@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public enum TileType
@@ -35,14 +36,18 @@ public struct MapTile
 public class Map
 {
     private MapTile[][] map;
-    public int carrotQuantity { get; private set; }
-    public int bonusQuantity { get; private set; }
+    public int CarrotQuantity { get; private set; }
+    public int BonusQuantity { get; private set; }
+    public List<MapTile> Buttons = new List<MapTile>();
+    public List<MapTile> Obstacles = new List<MapTile>();
 
-    public Map(MapTile[][] tiles, int carrots, int bonuses)
+    public Map(MapTile[][] tiles, int carrots, int bonuses, List<MapTile> buttons, List<MapTile> obstacles)
     {
         map = tiles;
-        carrotQuantity = carrots;
-        bonusQuantity = bonuses;
+        CarrotQuantity = carrots;
+        BonusQuantity = bonuses;
+        Buttons = buttons;
+        Obstacles = obstacles;
     }
 
     public MapTile GetTileAt(int x, int y)

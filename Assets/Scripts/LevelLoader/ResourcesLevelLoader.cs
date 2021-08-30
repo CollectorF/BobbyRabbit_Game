@@ -25,15 +25,17 @@ public class ResourcesLevelLoader : ILevelLoader
         MapTile[][] levelBase = new MapTile[rows][];
         int carrots = 0;
         int bonuses = 0;
+        List<MapTile> buttons = new List<MapTile>();
+        List<MapTile> obstacles = new List<MapTile>();
         for (int i = 0; i < lines.Length; i++)
         {
             string[] castedCode = lines[i].Split(' ');
             levelBase[i] = new MapTile[castedCode.Length];
             for (int j = 0; j < levelBase[i].Length; j++)
             {
+                bool isOn = false;
                 char code = castedCode[j][0];
                 Vector2Int position = new Vector2Int(i, j);
-                bool isOn = false;
                 tileLibrary.TryGetValue(castedCode[j][0], out Tile tile);
                 tileTypeLibrary.TryGetValue(castedCode[j][0], out TileType type);
                 levelBase[i][j] = new MapTile(type, tile, code, position, isOn);
@@ -45,9 +47,17 @@ public class ResourcesLevelLoader : ILevelLoader
                 {
                     bonuses++;
                 }
+                if (levelBase[i][j].Type == TileType.ButtonOnOff)
+                {
+                    buttons.Add(levelBase[i][j]);
+                }
+                if (levelBase[i][j].Type == TileType.Obstacle)
+                {
+                    obstacles.Add(levelBase[i][j]);
+                }
             }
         }
-        return new Map(levelBase, carrots, bonuses);
+        return new Map(levelBase, carrots, bonuses, buttons, obstacles);
     }
 
     public Level ReadLevelInfo(string levelId)

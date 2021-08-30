@@ -9,38 +9,46 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField]
     private Tilemap tilemapMain;
     [SerializeField]
-    private LevelLoader mainLevelLoader;
+    private LevelLoader levelLoaderMain;
 
     private PlayerController playerController;
     private MapTile currentTile;
     private MapTile lastTile;
+    private int number;
 
-    internal event Action<MapTile, TileType> OnInteraction;
+    internal event Action<MapTile, TileType, int?> OnInteraction;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
-        lastTile = playerController.GetCurrentTile(mainLevelLoader, playerController.currentPositionVector);
+        lastTile = playerController.GetCurrentTile(levelLoaderMain, playerController.currentPositionVector);
     }
 
     void Update()
     {
-        currentTile = playerController.GetCurrentTile(mainLevelLoader, playerController.currentPositionVector);
+        currentTile = playerController.GetCurrentTile(levelLoaderMain, playerController.currentPositionVector);
+        foreach (var button in levelLoaderMain.map.Buttons)
+        {
+            if (currentTile.Position == button.Position)
+            {
+                number = levelLoaderMain.map.Buttons.IndexOf(button);
+            }
+        }
         if (currentTile.Position != lastTile.Position)
         {
-            CheckInteraction(currentTile, TileType.Carrot);
-            CheckInteraction(currentTile, TileType.Bonus);
-            CheckInteraction(currentTile, TileType.FinishPoint);
-            CheckInteraction(currentTile, TileType.ButtonOnOff);
+            CheckInteraction(currentTile, TileType.Carrot, null);
+            CheckInteraction(currentTile, TileType.Bonus, null);
+            CheckInteraction(currentTile, TileType.FinishPoint, null);
+            CheckInteraction(currentTile, TileType.ButtonOnOff, number);
         }
         lastTile = currentTile;
     }
 
-    private void CheckInteraction(MapTile currentTile, TileType tileType)
+    private void CheckInteraction(MapTile currentTile, TileType tileType, int? number)
     {
         if (currentTile.Type == tileType)
         {
-            OnInteraction?.Invoke(currentTile, tileType);
+            OnInteraction?.Invoke(currentTile, tileType, number);
         }
     }
 }

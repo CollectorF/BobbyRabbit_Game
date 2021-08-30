@@ -34,6 +34,7 @@ public class TilemapHandler : MonoBehaviour
 
     private Tilemap tilemapMain;
     private LevelLoader levelLoaderMain;
+    private MapTile tileToChange;
 
     private void Start()
     {
@@ -64,6 +65,22 @@ public class TilemapHandler : MonoBehaviour
             {
                 tilemapMain.SetTile(position, buttonOn);
                 levelLoaderMain.map.SetTileState(position, true);
+            }
+        }
+        if (tileType == TileType.Obstacle)
+        {
+            tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y);
+            if (tileToChange.Tile == spikesOn)
+            {
+                tilemapMain.SetTile(position, spikesOff);
+                levelLoaderMain.map.SetTileState(position, false);
+                levelLoaderMain.map.SetTileType(position, TileType.Walkable);
+            }
+            if (tileToChange.Tile == spikesOff)
+            {
+                tilemapMain.SetTile(position, spikesOn);
+                levelLoaderMain.map.SetTileState(position, false);
+                levelLoaderMain.map.SetTileType(position, TileType.Obstacle);
             }
         }
     }

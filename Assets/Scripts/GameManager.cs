@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     private float secondsToPassLevel;
     private GameStatus status;
 
-
+    internal event Action<MapTile, int> OnButtonInteraction;
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         status = GameStatus.Runing;
         playerController.OnNoWay += DisplayMessage;
         interactionProcessor.OnInteraction += ProcessInteraction;
-        carrotsAll = levelLoaderMain.map.carrotQuantity;
+        carrotsAll = levelLoaderMain.map.CarrotQuantity;
         uiManager.UpdateScore(carrotsPicked, carrotsAll, bonusesPicked);
         secondsToPassLevel = levelLoaderMain.level.timer;
         secondsLeft = secondsToPassLevel;
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         uiManager.DisplayTextMessage(msg);
     }
 
-    private void ProcessInteraction(MapTile currentTile, TileType tileType)
+    private void ProcessInteraction(MapTile currentTile, TileType tileType, int? number)
     {
         switch (tileType)
         {
@@ -96,7 +96,8 @@ public class GameManager : MonoBehaviour
                 break;
             case TileType.ButtonOnOff:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
-
+                
+                Debug.Log(levelLoaderMain.map.GetTileAt(currentTile.Position.x, currentTile.Position.y).IsOn);
                 break;
             default:
                 break;
@@ -138,5 +139,14 @@ public class GameManager : MonoBehaviour
             status = GameStatus.PlayerLoose;
         }
         return status;
+    }
+
+    private void CheckInteraction(int number)
+    {
+        if (levelLoaderMain.map.Buttons[number].IsOn)
+        {
+            MapTile obstacleToInteract = levelLoaderMain.map.Obstacles[(int)number];
+            tilemapHandler.ChangeTile(new Vector3Int(obstacleToInteract.Position.y, -obstacleToInteract.Position.x, 0), obstacleToInteract.Type);
+        }
     }
 }

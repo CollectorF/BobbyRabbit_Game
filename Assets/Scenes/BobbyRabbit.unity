@@ -1039,28 +1039,28 @@ MonoBehaviour:
   loadLevelInfo: 1
   tiles:
   - Code: 81
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: be3d12b5e8c844449aaf2c46b295ad6e, type: 2}
   - Code: 87
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: 681eef6bd2c70674fa4b616b1f63628b, type: 2}
   - Code: 69
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: de78be4802b64ab4c8be3c9d8d57e97a, type: 2}
   - Code: 65
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: 9561b0aa4d035dd4cb5def76f3b28b3e, type: 2}
   - Code: 68
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: 3653e47c3421a264199cfa18ac3a20d0, type: 2}
   - Code: 90
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: caee93da71a03114e8ede01ab131ba2d, type: 2}
   - Code: 88
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: decc49826cc28e74e82a5406025f54a4, type: 2}
   - Code: 67
-    Type: 1
+    Type: 5
     TileAsset: {fileID: 11400000, guid: 41390a787228b39469dcf70ec57dc195, type: 2}
   - Code: 71
     Type: 2
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   levelLoaderMain: {fileID: 239693912}
   tilemapBackground: {fileID: 1543594766}
   tilemapMain: {fileID: 239693910}
-  tolerance: 0.005
+  tolerance: 0.06
   NO_WAY_KEY: CantGoThere
 --- !u!114 &950404258
 MonoBehaviour:
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemapMain: {fileID: 239693910}
-  mainLevelLoader: {fileID: 239693912}
+  levelLoaderMain: {fileID: 239693912}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,7 +2127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2765459}
-  m_AnchoredPosition: {x: -175, y: 24.501648}
+  m_AnchoredPosition: {x: -175, y: 24.501892}
   m_SizeDelta: {x: -450, y: -51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522492959

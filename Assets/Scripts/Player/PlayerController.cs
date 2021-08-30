@@ -49,33 +49,27 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = Camera.main;
+
     }
 
     private void Update()
     {
         currentPositionVector = GetCurrentPosInVector(tilemapBackground);
-        if (walkDirection == Vector2.zero)
+        MapTile currentTile = GetCurrentTile(levelLoaderMain, currentPositionVector);
+        Vector2 currentTileCenter = levelLoaderBackground.map.GetTileCenter(tilemapBackground, currentTile);
+        Vector2 currentPlayerPos = characterController.transform.position;
+        if (CompareVectorsWithTolerance(currentTileCenter, currentPlayerPos, tolerance))
+        //if ((currentTileCenter.x - currentPlayerPos.x) < 0.01 & (currentTileCenter.y - currentPlayerPos.y) < 0.05)
         {
             nextPositionBackground = GetNextTile(levelLoaderBackground, currentPositionVector);
+            nextPositionMain = GetNextTile(levelLoaderMain, currentPositionVector);
         }
-        else
-        {
-            MapTile currentTile = GetCurrentTile(levelLoaderMain, currentPositionVector);
-            Vector2 currentTileCenter = levelLoaderBackground.map.GetTileCenter(tilemapBackground, currentTile);
-            Vector2 currentPlayerPos = characterController.transform.position;
-            //if (CompareVectorsWithTolerance(currentTileCenter, currentPlayerPos, tolerance))
-            if ((currentTileCenter.x - currentPlayerPos.x) < 0.01 & (currentTileCenter.y - currentPlayerPos.y) < 0.05)
-            {
-                nextPositionBackground = GetNextTile(levelLoaderBackground, currentPositionVector);
-                nextPositionMain = GetNextTile(levelLoaderMain, currentPositionVector);
-            }
-        }
-        Walk(walkDirection);
+        Walk(walkDirection, nextPositionBackground, nextPositionMain);
     }
 
-    private void Walk(Vector2 direction)
+    private void Walk(Vector2 direction, MapTile nextBack, MapTile nextMain)
     {
-        if (nextPositionBackground.Type == TileType.Walkable && nextPositionMain.Type != TileType.Obstacle)
+        if (nextBack.Type == TileType.Walkable && nextMain.Type != TileType.Obstacle)
         {
             animator.SetFloat("Vertical", direction.y);
             animator.SetFloat("Horizontal", direction.x);
