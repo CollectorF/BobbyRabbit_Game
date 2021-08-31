@@ -8,7 +8,7 @@ public class ResourcesLevelLoader : ILevelLoader
 {
     private Dictionary<char, Tile> tileLibrary;
     private Dictionary<char, TileType> tileTypeLibrary;
-    private string levelInfoFileSuffix = "_Info";
+    private string levelInfoFilePostfix = "_Info";
 
     public ResourcesLevelLoader(Dictionary<char, Tile> tileLibrary, Dictionary<char, TileType> tileTypeLibrary)
     {
@@ -18,20 +18,18 @@ public class ResourcesLevelLoader : ILevelLoader
 
     public Map ReadLevel(string levelId)
     {
-        string text = Resources.Load(levelId).ToString();
-        string[] lines = Regex.Split(text, "\r\n");
-        int rows = lines.Length;
-
-        MapTile[][] levelBase = new MapTile[rows][];
         int carrots = 0;
         int bonuses = 0;
         List<MapTile> buttons = new List<MapTile>();
         List<MapTile> obstacles = new List<MapTile>();
-        for (int i = 0; i < lines.Length; i++)
+        string text = Resources.Load(levelId).ToString();
+        string[] lines = Regex.Split(text, "\r\n");
+        MapTile[][] levelBase = new MapTile[lines.Length][];
+        for (int i = 0; i <= lines.Length - 1; i++)
         {
             string[] castedCode = lines[i].Split(' ');
             levelBase[i] = new MapTile[castedCode.Length];
-            for (int j = 0; j < levelBase[i].Length; j++)
+            for (int j = 0; j <= levelBase[i].Length - 1; j++)
             {
                 bool isOn = false;
                 char code = castedCode[j][0];
@@ -51,7 +49,7 @@ public class ResourcesLevelLoader : ILevelLoader
                 {
                     buttons.Add(levelBase[i][j]);
                 }
-                if (levelBase[i][j].Type == TileType.Obstacle)
+                if (levelBase[i][j].Type == TileType.InteractiveObstacle)
                 {
                     obstacles.Add(levelBase[i][j]);
                 }
@@ -62,9 +60,9 @@ public class ResourcesLevelLoader : ILevelLoader
 
     public Level ReadLevelInfo(string levelId)
     {
-        var fullFileName = string.Concat(levelId, levelInfoFileSuffix);
+        var fullFileName = string.Concat(levelId, levelInfoFilePostfix);
         string json = Resources.Load(fullFileName).ToString();
         Level level = JsonConvert.DeserializeObject<Level>(json);
-        return new Level(level.name, level.difficulty, level.timer);
+        return new Level(level.name, level.difficulty, level.timer, level.obstacles);
     }
 }

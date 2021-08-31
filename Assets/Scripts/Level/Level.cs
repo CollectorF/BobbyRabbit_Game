@@ -6,11 +6,14 @@ public class Level
 	public string name;
 	public string difficulty;
 	public float timer;
+    public int numberOfObstacles;
+    public bool[] obstacles;
 
-    public Level(string name, string difficulty, float timer)
+    public Level(string name, string difficulty, float timer, bool[] obstacles)
     {
         this.name = name;
         this.difficulty = difficulty;
         this.timer = timer;
+        this.obstacles = obstacles;
     }
 }

@@ -560,7 +560,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &239693908
 Transform:
@@ -984,7 +984,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: -9, z: 0}
-  m_Size: {x: 10, y: 9, z: 1}
+  m_Size: {x: 50, y: 59, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1039,47 +1039,50 @@ MonoBehaviour:
   loadLevelInfo: 1
   tiles:
   - Code: 81
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: be3d12b5e8c844449aaf2c46b295ad6e, type: 2}
   - Code: 87
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: 681eef6bd2c70674fa4b616b1f63628b, type: 2}
   - Code: 69
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: de78be4802b64ab4c8be3c9d8d57e97a, type: 2}
   - Code: 65
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: 9561b0aa4d035dd4cb5def76f3b28b3e, type: 2}
+  - Code: 83
+    Type: 4
+    TileAsset: {fileID: 11400000, guid: cdf6f07747468b74a90500a24f0cd4bf, type: 2}
   - Code: 68
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: 3653e47c3421a264199cfa18ac3a20d0, type: 2}
   - Code: 90
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: caee93da71a03114e8ede01ab131ba2d, type: 2}
   - Code: 88
-    Type: 5
+    Type: 2
     TileAsset: {fileID: 11400000, guid: decc49826cc28e74e82a5406025f54a4, type: 2}
   - Code: 67
-    Type: 5
-    TileAsset: {fileID: 11400000, guid: 41390a787228b39469dcf70ec57dc195, type: 2}
-  - Code: 71
     Type: 2
-    TileAsset: {fileID: 11400000, guid: cdf6f07747468b74a90500a24f0cd4bf, type: 2}
+    TileAsset: {fileID: 11400000, guid: 41390a787228b39469dcf70ec57dc195, type: 2}
   - Code: 66
-    Type: 3
+    Type: 5
     TileAsset: {fileID: 11400000, guid: 4d64c00839af2a143a7298b9a5d7c985, type: 2}
   - Code: 80
-    Type: 4
+    Type: 6
     TileAsset: {fileID: 0}
   - Code: 70
     Type: 7
     TileAsset: {fileID: 11400000, guid: c261ac20a3eafc448808bef7fcbddbcb, type: 2}
   - Code: 86
-    Type: 8
+    Type: 9
     TileAsset: {fileID: 11400000, guid: 5b338ccafc318f04689404087b089f5c, type: 2}
   - Code: 82
-    Type: 1
+    Type: 3
     TileAsset: {fileID: 11400000, guid: b898b3b681cb57d4d96125b7a49fb35f, type: 2}
+  - Code: 84
+    Type: 2
+    TileAsset: {fileID: 0}
 --- !u!1 &243963053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,7 +1146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb311c76662a98844b58b667dd027cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Caption\ru-RU
+  localization: Localization\ru-RU
 --- !u!1 &522276830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,11 +1443,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  levelLoaderBackground: {fileID: 1543594767}
   levelLoaderMain: {fileID: 239693912}
-  tilemapBackground: {fileID: 1543594766}
   tilemapMain: {fileID: 239693910}
-  tolerance: 0.06
   NO_WAY_KEY: CantGoThere
 --- !u!114 &950404258
 MonoBehaviour:
@@ -1941,7 +1941,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Size: {x: 50, y: 50, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2127,7 +2127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2765459}
-  m_AnchoredPosition: {x: -175, y: 24.501892}
+  m_AnchoredPosition: {x: -175, y: 24.502014}
   m_SizeDelta: {x: -450, y: -51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522492959
@@ -2185,7 +2185,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1543594764
 Transform:
@@ -3791,7 +3791,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: -11, z: 0}
-  m_Size: {x: 12, y: 12, z: 1}
+  m_Size: {x: 50, y: 61, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -3829,64 +3829,64 @@ MonoBehaviour:
   loadLevelInfo: 0
   tiles:
   - Code: 81
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 60a11d7e31784ee4585f56be5d0051e0, type: 2}
   - Code: 87
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 0dfb9695ddd78fa46a21febed48df903, type: 2}
   - Code: 69
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 3e7446b1e71d7eb4aa2cf5b76faa7929, type: 2}
   - Code: 65
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: b644bf95e44d90a43a2d89eff06c0b27, type: 2}
   - Code: 83
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: f6df48ad58471f4489e6bea92be0efde, type: 2}
   - Code: 68
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: a74b399295b564c428a6d702c1d4ea60, type: 2}
   - Code: 90
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: a14479676ccad80499c5354fb8be1bac, type: 2}
   - Code: 88
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: b9ca6dab9c7d17a438eda99dfdd62ed5, type: 2}
   - Code: 67
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: b7159ce51944d8a448489192766acdf2, type: 2}
   - Code: 82
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: b3ee3796e270daf4c93663e646e47103, type: 2}
   - Code: 70
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 7ccf4961d05f5d54893660e53f5d3f5f, type: 2}
   - Code: 86
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: b1d35870bb55ce649a0a85b98a65d870, type: 2}
   - Code: 49
-    Type: 1
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 0681af55eca7f54479db07bc13fda511, type: 2}
   - Code: 50
-    Type: 1
+    Type: 0
     TileAsset: {fileID: 11400000, guid: aaa1148e7dc9e594bb736a09396b4dfe, type: 2}
   - Code: 84
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 42bf68d687214b84a8cf9c0f7af8f762, type: 2}
   - Code: 89
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 474dc401b3f2a674f97b7c38d9dbce40, type: 2}
   - Code: 85
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 685bd128f2299a047b22a5979bf4da1a, type: 2}
   - Code: 71
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 874ef73d28610604dbb9d4bb5ab96409, type: 2}
   - Code: 72
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 2a92bec2150b1a543b1a67d79f4d7a1b, type: 2}
   - Code: 74
-    Type: 6
+    Type: 0
     TileAsset: {fileID: 11400000, guid: 17fed45a1cd59934cb6ade673bd64031, type: 2}
 --- !u!1 &1609807437
 GameObject:

@@ -52,6 +52,7 @@ public class LevelLoader : MonoBehaviour
     private void SetupLevel(string levelName)
     {
         tilemap.ClearAllTiles();
+        tilemap.size = new Vector3Int(50, 50, 0);
         map = levelLoader.ReadLevel(levelName);
         levelFiller.FillLevel(map);
         if (player != null)

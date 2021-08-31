@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string WIN_KEY = "WinGame";
 
-    private CaptionHandler captionHandler;
+    private LocalizationHandler captionHandler;
     private PlayerController playerController;
     private InteractionHandler interactionProcessor;
     private int carrotsAll;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         playerController = player.GetComponent<PlayerController>();
         interactionProcessor = player.GetComponent<InteractionHandler>();
-        captionHandler = GetComponent<CaptionHandler>();
+        captionHandler = GetComponent<LocalizationHandler>();
 
         status = GameStatus.Runing;
         playerController.OnNoWay += DisplayMessage;
@@ -95,9 +96,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case TileType.ButtonOnOff:
-                tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
-                
-                Debug.Log(levelLoaderMain.map.GetTileAt(currentTile.Position.x, currentTile.Position.y).IsOn);
+                tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType); //changes button on/off tiles
                 break;
             default:
                 break;

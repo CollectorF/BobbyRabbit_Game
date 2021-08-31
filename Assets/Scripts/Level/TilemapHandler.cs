@@ -40,6 +40,16 @@ public class TilemapHandler : MonoBehaviour
     {
         tilemapMain = GetComponent<Tilemap>();
         levelLoaderMain = GetComponent<LevelLoader>();
+        SetObstacleInitialState(levelLoaderMain.map, levelLoaderMain.level);
+    }
+
+    private void SetObstacleInitialState(Map map, Level level)
+    {
+        for (int i = 0; i < map.Obstacles.Count; i++)
+        {
+            Vector3Int position = new Vector3Int(map.Obstacles[i].Position.x, -map.Obstacles[i].Position.y, 0);
+            levelLoaderMain.map.SetTileState(position, level.obstacles[i]);
+        }
     }
 
     internal void ChangeTile(Vector3Int position, TileType tileType)
@@ -67,7 +77,7 @@ public class TilemapHandler : MonoBehaviour
                 levelLoaderMain.map.SetTileState(position, true);
             }
         }
-        if (tileType == TileType.Obstacle)
+        if (tileType == TileType.InteractiveObstacle)
         {
             tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y);
             if (tileToChange.Tile == spikesOn)
@@ -80,7 +90,7 @@ public class TilemapHandler : MonoBehaviour
             {
                 tilemapMain.SetTile(position, spikesOn);
                 levelLoaderMain.map.SetTileState(position, false);
-                levelLoaderMain.map.SetTileType(position, TileType.Obstacle);
+                levelLoaderMain.map.SetTileType(position, TileType.InteractiveObstacle);
             }
         }
     }

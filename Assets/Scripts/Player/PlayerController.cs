@@ -17,16 +17,9 @@ public class PlayerController : MonoBehaviour
 
     [Space(20)]
     [SerializeField]
-    private LevelLoader levelLoaderBackground;
-    [SerializeField]
     private LevelLoader levelLoaderMain;
     [SerializeField]
-    private Tilemap tilemapBackground;
-    [SerializeField]
     private Tilemap tilemapMain;
-    [SerializeField]
-    [Tooltip("Vector Comaration Tolerance")]
-    private float tolerance = 0.1f;
 
     [Space(20)]
     [SerializeField]
@@ -35,42 +28,40 @@ public class PlayerController : MonoBehaviour
     internal event Action<string> OnNoWay;
 
     private CharacterController characterController;
-    private Camera playerCamera;
     private AnimatorClipInfo[] currentClipInfo;
     private float characterSpeedCurrent;
     private float currentClipLength;
     private float currentTime = 0f;
     private Vector2 walkDirection;
     internal Vector2 currentPositionVector;
-    private MapTile nextPositionBackground;
-    private MapTile nextPositionMain;
+    private MapTile nextPosition;
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
-        playerCamera = Camera.main;
-
     }
 
     private void Update()
     {
-        currentPositionVector = GetCurrentPosInVector(tilemapBackground);
-        MapTile currentTile = GetCurrentTile(levelLoaderMain, currentPositionVector);
-        Vector2 currentTileCenter = levelLoaderBackground.map.GetTileCenter(tilemapBackground, currentTile);
-        Vector2 currentPlayerPos = characterController.transform.position;
-        if (CompareVectorsWithTolerance(currentTileCenter, currentPlayerPos, tolerance))
-        //if ((currentTileCenter.x - currentPlayerPos.x) < 0.01 & (currentTileCenter.y - currentPlayerPos.y) < 0.05)
-        {
-            nextPositionBackground = GetNextTile(levelLoaderBackground, currentPositionVector);
-            nextPositionMain = GetNextTile(levelLoaderMain, currentPositionVector);
-        }
-        Walk(walkDirection, nextPositionBackground, nextPositionMain);
+        currentPositionVector = GetCurrentPosInVector(tilemapMain);
+        //MapTile currentTile = GetCurrentTile(levelLoaderMain, currentPositionVector);
+        //Vector2 currentTileCenter = levelLoaderMain.map.GetTileCenter(tilemapMain, currentTile);
+        //Vector2 currentPlayerPos = characterController.transform.position;
+        //if (CompareVectorsWithTolerance(currentTileCenter, currentPlayerPos, 0.01f))
+        //{
+        //}
+        nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
+        Walk(walkDirection, nextPosition);
     }
 
-    private void Walk(Vector2 direction, MapTile nextBack, MapTile nextMain)
+    private void Walk(Vector2 direction, MapTile nextTile)
     {
-        if (nextBack.Type == TileType.Walkable && nextMain.Type != TileType.Obstacle)
+        if (nextTile.Type != TileType.InteractiveObstacle && nextTile.Type != TileType.Obstacle)
         {
+            if (true)
+            {
+
+            }
             animator.SetFloat("Vertical", direction.y);
             animator.SetFloat("Horizontal", direction.x);
             Vector3 movementDirection = transform.up * direction.y;
@@ -104,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private MapTile GetNextTile(LevelLoader levelLoader, Vector2 position)
     {
-        var nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(position.x + walkDirection.x), Mathf.FloorToInt(position.y - walkDirection.y));
+        MapTile nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(position.x + walkDirection.x), Mathf.FloorToInt(position.y - walkDirection.y));
         return nextPosition;
     }
 
@@ -123,8 +114,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool CompareVectorsWithTolerance(Vector2 a, Vector2 b, float tolerance)
-    {
-        return Vector2.SqrMagnitude(a - b) < tolerance;
-    }
+    //public bool CompareVectorsWithTolerance(Vector2 a, Vector2 b, float tolerance)
+    //{
+    //    return Vector2.SqrMagnitude(a - b) < tolerance;
+    //}
 }

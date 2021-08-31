@@ -4,16 +4,17 @@ using UnityEngine.Tilemaps;
 
 public enum TileType
 {
+    Default,
     Background,
     Obstacle,
+    InteractiveObstacle,
     Carrot,
     Bonus,
     StartPoint,
-    Default,
-    Walkable,
     FinishPoint,
+    Walkable,
     ButtonOnOff,
-    Switch,
+    Switch
 }
 public struct MapTile
 {

@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaptionHandler : MonoBehaviour
+public class LocalizationHandler : MonoBehaviour
 {
     [SerializeField]
-    private string levelName;
+    private string localization;
 
     private JSONReader jsonReader;
     internal Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -14,7 +14,7 @@ public class CaptionHandler : MonoBehaviour
     private void Awake()
     {
         jsonReader = new JSONReader(dictionary);
-        FillDictionary(levelName);
+        FillDictionary(localization);
     }
 
     private void FillDictionary(string levelName)
