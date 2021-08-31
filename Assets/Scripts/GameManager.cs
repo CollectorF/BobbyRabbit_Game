@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     private float secondsToPassLevel;
     private GameStatus status;
 
-    internal event Action<MapTile, int> OnButtonInteraction;
+    internal event Action<int> OnButtonInteraction;
 
     private void Start()
     {
@@ -96,7 +96,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case TileType.ButtonOnOff:
-                tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType); //changes button on/off tiles
+                bool controlState = tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType); //changes button on/off tiles
+                tilemapHandler.ChangeInteractiveObstacle(controlState, (int)number);
                 break;
             default:
                 break;

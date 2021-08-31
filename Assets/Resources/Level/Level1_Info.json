@@ -2,6 +2,5 @@
 	"name" : "Level 1",
 	"difficulty" : "Easy",
 	"timer" : 60,
-	"numberOfObstacles" : 2,
-	"obstacles" : [true, true]
+	"obstacles" : [true]
 }

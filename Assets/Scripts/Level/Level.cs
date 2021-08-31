@@ -6,7 +6,6 @@ public class Level
 	public string name;
 	public string difficulty;
 	public float timer;
-    public int numberOfObstacles;
     public bool[] obstacles;
 
     public Level(string name, string difficulty, float timer, bool[] obstacles)

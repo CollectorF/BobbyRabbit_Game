@@ -52,8 +52,9 @@ public class TilemapHandler : MonoBehaviour
         }
     }
 
-    internal void ChangeTile(Vector3Int position, TileType tileType)
+    internal bool ChangeTile(Vector3Int position, TileType tileType)
     {
+        bool state = false;
         if (tileType == TileType.Carrot)
         {
             tilemapMain.SetTile(position, carrotEmpty);
@@ -75,21 +76,27 @@ public class TilemapHandler : MonoBehaviour
             {
                 tilemapMain.SetTile(position, buttonOn);
                 levelLoaderMain.map.SetTileState(position, true);
+                state = true;
             }
         }
-        if (tileType == TileType.InteractiveObstacle)
+        return state;
+    }
+    internal void ChangeInteractiveObstacle(bool controlButtonState, int i)
+    {
+        Vector3Int position = new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.x, -levelLoaderMain.map.Obstacles[i].Position.y, 0);
+        tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y);
+        if (tileToChange.Tile == spikesOn || tileToChange.Tile == spikesOff)
         {
-            tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y);
-            if (tileToChange.Tile == spikesOn)
+            if (controlButtonState)
             {
                 tilemapMain.SetTile(position, spikesOff);
-                levelLoaderMain.map.SetTileState(position, false);
+                levelLoaderMain.map.SetTileState(position, false); //ONLY positive position!!!
                 levelLoaderMain.map.SetTileType(position, TileType.Walkable);
             }
-            if (tileToChange.Tile == spikesOff)
+            else
             {
                 tilemapMain.SetTile(position, spikesOn);
-                levelLoaderMain.map.SetTileState(position, false);
+                levelLoaderMain.map.SetTileState(position, true);
                 levelLoaderMain.map.SetTileType(position, TileType.InteractiveObstacle);
             }
         }

@@ -1,5 +1,5 @@
 T T T T T T T T T T T T
-T 0 0 0 0 0 0 0 0 0 R T
+T 0 0 0 0 0 0 0 0 0 0 T
 T 0 0 Q W W W W E 0 0 T
 T 0 0 A S S S S D 0 0 T
 T 0 0 A S S S S D 0 0 T
