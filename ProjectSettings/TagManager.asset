@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Locale_ru-RU
+  - Locale_en-US
   layers:
   - Default
   - TransparentFX

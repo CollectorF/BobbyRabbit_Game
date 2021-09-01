@@ -16,7 +16,9 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        gameplayUI.SetActive(true);
+        mainMenu.SetActive(true);
+        //levelMenu.SetActive(false);
+        gameplayUI.SetActive(false);
     }
 
     internal void DisplayMessage(string msg)
@@ -31,5 +33,12 @@ public class UIManager : MonoBehaviour
     public void TimerUpdate(string timer, float timeLeft)
     {
         OnUpdateTimer?.Invoke(timer, timeLeft);
+    }
+
+    public void StartGame()
+    {
+        mainMenu.SetActive(false);
+        //levelMenu.SetActive(false);
+        gameplayUI.SetActive(true);
     }
 }
