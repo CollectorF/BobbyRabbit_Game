@@ -54,14 +54,14 @@ public class GameManager : MonoBehaviour
         playerController.OnNoWay += DisplayMessage;
         interactionProcessor.OnInteraction += ProcessInteraction;
         carrotsAll = levelLoaderMain.map.CarrotQuantity;
-        uiManager.UpdateScore(carrotsPicked, carrotsAll, bonusesPicked);
-        secondsToPassLevel = levelLoaderMain.level.timer;
+        uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
+        secondsToPassLevel = levelLoaderMain.level.Timer;
         secondsLeft = secondsToPassLevel;
     }
 
     private void Update()
     {
-        uiManager.UpdateTimer(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
+        uiManager.TimerUpdate(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
         secondsLeft -= Time.deltaTime;
         status = CheckLooseConditions();
     }
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     private void DisplayMessage(string key)
     {
         string msg = FindByKey(key);
-        uiManager.DisplayTextMessage(msg);
+        uiManager.DisplayMessage(msg);
     }
 
     private void ProcessInteraction(MapTile currentTile, TileType tileType, int? number)
@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
         {
             case TileType.Carrot:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
-                uiManager.UpdateScore(++carrotsPicked, carrotsAll, bonusesPicked);
+                uiManager.ScoreUpdate(++carrotsPicked, carrotsAll, bonusesPicked);
                 break;
             case TileType.Bonus:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
-                uiManager.UpdateScore(carrotsPicked, carrotsAll, ++bonusesPicked);
+                uiManager.ScoreUpdate(carrotsPicked, carrotsAll, ++bonusesPicked);
                 break;
             case TileType.FinishPoint:
                 status = CheckWinConditions();

@@ -48,7 +48,7 @@ public class TilemapHandler : MonoBehaviour
         for (int i = 0; i < map.Obstacles.Count; i++)
         {
             Vector3Int position = new Vector3Int(map.Obstacles[i].Position.x, -map.Obstacles[i].Position.y, 0);
-            levelLoaderMain.map.SetTileState(position, level.obstacles[i]);
+            levelLoaderMain.map.SetTileState(position, level.Obstacles[i]);
         }
     }
 
@@ -84,13 +84,13 @@ public class TilemapHandler : MonoBehaviour
     internal void ChangeInteractiveObstacle(bool controlButtonState, int i)
     {
         Vector3Int position = new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.x, -levelLoaderMain.map.Obstacles[i].Position.y, 0);
-        tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y);
+        tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y); //ONLY positive Y position (-/- = +) !!!
         if (tileToChange.Tile == spikesOn || tileToChange.Tile == spikesOff)
         {
             if (controlButtonState)
             {
                 tilemapMain.SetTile(position, spikesOff);
-                levelLoaderMain.map.SetTileState(position, false); //ONLY positive position!!!
+                levelLoaderMain.map.SetTileState(position, false); //ONLY negative Y position !!!
                 levelLoaderMain.map.SetTileType(position, TileType.Walkable);
             }
             else

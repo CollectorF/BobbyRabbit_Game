@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 public class Level
 {
-	public string name;
-	public string difficulty;
-	public float timer;
-    public bool[] obstacles;
+	public string Name;
+	public string Difficulty;
+	public float Timer;
+    public bool[] Obstacles;
 
     public Level(string name, string difficulty, float timer, bool[] obstacles)
     {
-        this.name = name;
-        this.difficulty = difficulty;
-        this.timer = timer;
-        this.obstacles = obstacles;
+        Name = name;
+        Difficulty = difficulty;
+        Timer = timer;
+        Obstacles = obstacles;
     }
 }

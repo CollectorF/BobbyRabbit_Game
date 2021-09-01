@@ -1,67 +1,35 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject mainMenu;
+    [SerializeField]
+    private GameObject levelMenu;
+    [SerializeField]
     private GameObject gameplayUI;
-    [SerializeField]
-    private GameObject messagePanel;
-    [SerializeField]
-    private float messageDisplayTime;
-    [SerializeField]
-    private TMP_Text carrotsText;
-    [SerializeField]
-    private TMP_Text bonusesText;
-    [SerializeField]
-    private TMP_Text timerText;
-    [SerializeField]
-    private float highlightOnTimeLeft;
 
-    private TMP_Text messagePanelText;
-    private Coroutine timerCoroutine;
+    internal event Action<string> OnDisplayTextMessage;
+    internal event Action<int, int, int> OnUpdateScore;
+    internal event Action<string, float> OnUpdateTimer;
 
     private void Start()
     {
-        messagePanelText = messagePanel.GetComponentInChildren<TMP_Text>();
         gameplayUI.SetActive(true);
-        messagePanel.SetActive(false);
-        timerText.color = Color.white;
     }
 
-    internal void DisplayTextMessage(string msg)
+    internal void DisplayMessage(string msg)
     {
-        messagePanelText.text = msg;
-        if (timerCoroutine == null)
-        {
-            timerCoroutine = StartCoroutine(DisplayByTimeCoroutine(messagePanel, messageDisplayTime));
-        }
-        timerCoroutine = null;
+        OnDisplayTextMessage?.Invoke(msg);
     }
 
-    public void UpdateScore(int carrots, int carrotsAll, int bonuses)
+    public void ScoreUpdate(int carrots, int carrotsAll, int bonuses)
     {
-        carrotsText.text = $"{carrots.ToString()}/{carrotsAll.ToString()}";
-        bonusesText.text = bonuses.ToString();
+        OnUpdateScore?.Invoke(carrots, carrotsAll, bonuses);
     }
-
-    public void UpdateTimer(string timer, float timeLeft)
+    public void TimerUpdate(string timer, float timeLeft)
     {
-        if (timeLeft <= highlightOnTimeLeft)
-        {
-            timerText.color = Color.red;
-        }
-        timerText.text = timer;
-    }
-
-    private IEnumerator DisplayByTimeCoroutine(GameObject obj, float time)
-    {
-        obj = messagePanel;
-        obj.SetActive(true);
-        yield return new WaitForSeconds(time);
-        obj.SetActive(false);
+        OnUpdateTimer?.Invoke(timer, timeLeft);
     }
 }
