@@ -22,15 +22,22 @@ public class MainMenu : MonoBehaviour
     internal string QUIT_KEY = "Quit";
 
     internal Action<string> OnLocaleButtonClick;
+    internal Action<string> OnQuitButtonClick;
 
     public void OnLocaleClick(string locale)
     {
         OnLocaleButtonClick?.Invoke(locale);
     }
+
     public void UpdateMenu(string start, string store, string quit)
     {
         startGameButton.text = start;
         storeButton.text = store;
         quitButton.text = quit;
+    }
+
+    public void OnQuitClick()
+    {
+        OnQuitButtonClick?.Invoke(tag);
     }
 }

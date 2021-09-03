@@ -5,5 +5,10 @@
 	"WinGame" : "Hurrah! The harvest is collected!",
 	"StartGame" : "Start game",
 	"Store" : "Bobby's Store",
-	"Quit" : "Quit"
+	"Quit" : "Quit",
+	"Start" : "Go!",
+	"ResetProgress" : "Reset progress",
+	"PopupWarning" : "Are you sure?",
+	"Yes" : "Yes",
+	"No" : "No"
 }

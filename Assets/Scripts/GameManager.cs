@@ -78,7 +78,12 @@ public class GameManager : MonoBehaviour
         string startText = FindByKey(mainMenu.START_GAME_KEY);
         string storeText = FindByKey(mainMenu.STORE_KEY);
         string quitText = FindByKey(mainMenu.QUIT_KEY);
+        string warningText = FindByKey(uiManager.POPUP_WARNING_KEY);
+        string yesText = FindByKey(uiManager.POPUP_YES_KEY);
+        string noText = FindByKey(uiManager.POPUP_NO_KEY);
         mainMenu.UpdateMenu(startText, storeText, quitText);
+        uiManager.UpdatePopup(warningText, yesText, noText);
+
     }
 
     private void DisplayMessage(string key)

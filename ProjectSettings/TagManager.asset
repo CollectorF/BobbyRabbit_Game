@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Locale_ru-RU
-  - Locale_en-US
+  - MainMenu
+  - LevelMenu
   layers:
   - Default
   - TransparentFX

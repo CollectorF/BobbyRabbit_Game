@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -9,16 +10,58 @@ public class UIManager : MonoBehaviour
     private GameObject levelMenu;
     [SerializeField]
     private GameObject gameplayUI;
+    [SerializeField]
+    private GameObject popup;
+    [SerializeField]
+    internal TMP_Text popupText;
+    [SerializeField]
+    internal TMP_Text popupYes;
+    [SerializeField]
+    internal TMP_Text popupNo;
+
+    [Space(20)]
+    [SerializeField]
+    internal string POPUP_WARNING_KEY = "PopupWarning";
+    [SerializeField]
+    internal string POPUP_YES_KEY = "Yes";
+    [SerializeField]
+    internal string POPUP_NO_KEY = "No";
+
+    private MainMenu mainMenuManager;
+    private string popupCaller;
 
     internal event Action<string> OnDisplayTextMessage;
     internal event Action<int, int, int> OnUpdateScore;
     internal event Action<string, float> OnUpdateTimer;
 
+    private void Awake()
+    {
+        mainMenuManager = mainMenu.GetComponent<MainMenu>();
+        mainMenuManager.OnQuitButtonClick += ShowPopup;
+    }
+
     private void Start()
     {
         mainMenu.SetActive(true);
-        //levelMenu.SetActive(false);
+        levelMenu.SetActive(false);
         gameplayUI.SetActive(false);
+        popup.SetActive(false);
+    }
+
+    public void ActivateLevelMenu()
+    {
+        mainMenu.SetActive(false);
+        levelMenu.SetActive(true);
+        gameplayUI.SetActive(false);
+        popup.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+        mainMenu.SetActive(false);
+        levelMenu.SetActive(false);
+        gameplayUI.SetActive(true);
+        popup.SetActive(false);
     }
 
     internal void DisplayMessage(string msg)
@@ -35,10 +78,36 @@ public class UIManager : MonoBehaviour
         OnUpdateTimer?.Invoke(timer, timeLeft);
     }
 
-    public void StartGame()
+    public void ShowPopup(string caller)
     {
-        mainMenu.SetActive(false);
-        //levelMenu.SetActive(false);
-        gameplayUI.SetActive(true);
+        popup.SetActive(true);
+        popupCaller = caller;
+    }
+
+    public void HidePopup()
+    {
+        popup.SetActive(false);
+    }
+
+    public void UpdatePopup(string warning, string yes, string no)
+    {
+        popupText.text = warning;
+        popupYes.text = yes;
+        popupNo.text = no;
+    }
+    public void OnPopupYes()
+    {
+        if (popupCaller == "MainMenu")
+        {
+            Application.Quit();
+        }
+        if (popupCaller == "LevelMenu")
+        {
+
+        }
+    }
+    public void OnPopupNo()
+    {
+        HidePopup();
     }
 }
