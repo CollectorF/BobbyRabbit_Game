@@ -16,37 +16,45 @@ public class LocalizationHandler : MonoBehaviour
 
     private JSONReader jsonReader;
     internal Dictionary<string, string> dictionary = new Dictionary<string, string>();
+    string selectedLocale = null;
+
+    internal Action OnLocaleDictFill;
 
     private void Awake()
     {
         jsonReader = new JSONReader(dictionary);
-        mainMenu.OnLocaleButtonClick += FillDictionary;
+        SetDefaultLocale(defaultLocale);
+        mainMenu.OnLocaleButtonClick += SetLocale;
     }
 
-    private string SetLocale(string locale)
+    private void SetDefaultLocale(string locale)
     {
-        string selectedLocale = null;
+        foreach (var item in localizations)
+        {
+            if (item == locale)
+            {
+                selectedLocale = item;
+            }
+        }
+        FillDictionary(selectedLocale);
+    }
+
+    private void SetLocale(string locale)
+    {
         foreach (var item in localizations)
         {
             if (item.Contains(locale))
             {
                 selectedLocale = item;
             }
-            else
-            {
-                if (item == defaultLocale)
-                {
-                    selectedLocale = item;
-                }
-            }
         }
-        return selectedLocale;
+        FillDictionary(selectedLocale);
+        OnLocaleDictFill?.Invoke();
     }
 
     private void FillDictionary(string locale)
     {
-        string selectedLocale = SetLocale(locale);
-        string path = localeFolder + "/" + selectedLocale;
+        string path = localeFolder + "/" + locale;
         dictionary = jsonReader.ReadJson(path);
     }
 }

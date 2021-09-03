@@ -2,5 +2,8 @@
 	"CantGoThere":"I can't go there!",
 	"NotAllCollected":"I didn't collect all carrots yet!",
 	"LooseGame" : "I'm late to collect the harvest!",
-	"WinGame" : "Hurrah! The harvest is collected!"
+	"WinGame" : "Hurrah! The harvest is collected!",
+	"StartGame" : "Start game",
+	"Store" : "Bobby's Store",
+	"Quit" : "Quit"
 }

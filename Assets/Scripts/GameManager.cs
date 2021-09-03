@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private UIManager uiManager;
     [SerializeField]
+    private MainMenu mainMenu;
+    [SerializeField]
     private TilemapHandler tilemapHandler;
     [SerializeField]
     private LevelLoader levelLoaderMain;
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string WIN_KEY = "WinGame";
 
-    private LocalizationHandler captionHandler;
+    private LocalizationHandler localeHandler;
     private PlayerController playerController;
     private InteractionHandler interactionProcessor;
     private int carrotsAll;
@@ -42,21 +44,26 @@ public class GameManager : MonoBehaviour
     private float secondsToPassLevel;
     private GameStatus status;
 
-    internal event Action<int> OnButtonInteraction;
+    //internal event Action<int> OnButtonInteraction;
 
-    private void Start()
+    private void Awake()
     {
         playerController = player.GetComponent<PlayerController>();
         interactionProcessor = player.GetComponent<InteractionHandler>();
-        captionHandler = GetComponent<LocalizationHandler>();
+        localeHandler = GetComponent<LocalizationHandler>();
 
-        status = GameStatus.Runing;
         playerController.OnNoWay += DisplayMessage;
         interactionProcessor.OnInteraction += ProcessInteraction;
+        localeHandler.OnLocaleDictFill += UpdateMenuTexts;
+    }
+    private void Start()
+    {
+        status = GameStatus.Runing;
         carrotsAll = levelLoaderMain.map.CarrotQuantity;
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
         secondsToPassLevel = levelLoaderMain.level.Timer;
         secondsLeft = secondsToPassLevel;
+        UpdateMenuTexts();
     }
 
     private void Update()
@@ -64,6 +71,14 @@ public class GameManager : MonoBehaviour
         uiManager.TimerUpdate(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
         secondsLeft -= Time.deltaTime;
         status = CheckLooseConditions();
+    }
+
+    private void UpdateMenuTexts()
+    {
+        string startText = FindByKey(mainMenu.START_GAME_KEY);
+        string storeText = FindByKey(mainMenu.STORE_KEY);
+        string quitText = FindByKey(mainMenu.QUIT_KEY);
+        mainMenu.UpdateMenu(startText, storeText, quitText);
     }
 
     private void DisplayMessage(string key)
@@ -106,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     private string FindByKey(string key)
     {
-        captionHandler.dictionary.TryGetValue(key, out string value);
+        localeHandler.dictionary.TryGetValue(key, out string value);
         return value;
     }
 
