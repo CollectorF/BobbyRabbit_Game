@@ -44,12 +44,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         currentPositionVector = GetCurrentPosInVector(tilemapMain);
-        //MapTile currentTile = GetCurrentTile(levelLoaderMain, currentPositionVector);
-        //Vector2 currentTileCenter = levelLoaderMain.map.GetTileCenter(tilemapMain, currentTile);
-        //Vector2 currentPlayerPos = characterController.transform.position;
-        //if (CompareVectorsWithTolerance(currentTileCenter, currentPlayerPos, 0.01f))
-        //{
-        //}
         nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
         Walk(walkDirection, nextPosition);
     }
@@ -113,9 +107,4 @@ public class PlayerController : MonoBehaviour
             walkDirection = Vector2.zero;
         }
     }
-
-    //public bool CompareVectorsWithTolerance(Vector2 a, Vector2 b, float tolerance)
-    //{
-    //    return Vector2.SqrMagnitude(a - b) < tolerance;
-    //}
 }

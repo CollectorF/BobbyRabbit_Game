@@ -40,15 +40,15 @@ public class TilemapHandler : MonoBehaviour
     {
         tilemapMain = GetComponent<Tilemap>();
         levelLoaderMain = GetComponent<LevelLoader>();
-        SetObstacleInitialState(levelLoaderMain.map, levelLoaderMain.level);
+        SetObstacleInitialState(levelLoaderMain.map, levelLoaderMain.levels);
     }
 
-    private void SetObstacleInitialState(Map map, Level level)
+    private void SetObstacleInitialState(Map map, List<Level> levels)
     {
         for (int i = 0; i < map.Obstacles.Count; i++)
         {
             Vector3Int position = new Vector3Int(map.Obstacles[i].Position.x, -map.Obstacles[i].Position.y, 0);
-            levelLoaderMain.map.SetTileState(position, level.Obstacles[i]);
+            levelLoaderMain.map.SetTileState(position, levels[0].Obstacles[i]);
         }
     }
 

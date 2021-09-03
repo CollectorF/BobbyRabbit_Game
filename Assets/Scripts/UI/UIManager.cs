@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     internal string POPUP_NO_KEY = "No";
 
     private MainMenu mainMenuManager;
+    private LevelMenu levelMenuManager;
     private string popupCaller;
 
     internal event Action<string> OnDisplayTextMessage;
@@ -37,10 +38,17 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         mainMenuManager = mainMenu.GetComponent<MainMenu>();
+        levelMenuManager = levelMenu.GetComponent<LevelMenu>();
         mainMenuManager.OnQuitButtonClick += ShowPopup;
+        levelMenuManager.OnBackButtonClick += ActivateMainMenu;
     }
 
     private void Start()
+    {
+        ActivateMainMenu();
+    }
+
+    public void ActivateMainMenu()
     {
         mainMenu.SetActive(true);
         levelMenu.SetActive(false);

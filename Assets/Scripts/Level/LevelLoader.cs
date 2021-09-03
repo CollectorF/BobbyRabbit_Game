@@ -23,6 +23,8 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private string levelName;
     [SerializeField]
+    private string levelsPath;
+    [SerializeField]
     [Tooltip("Set at least for one Level Loader on the scene")]
     private bool loadLevelInfo;
     [SerializeField]
@@ -33,6 +35,7 @@ public class LevelLoader : MonoBehaviour
     private ILevelFiller levelFiller;
     internal Map map;
     internal Level level;
+    internal List<Level> levels;
 
     private void Awake()
     {
@@ -63,7 +66,7 @@ public class LevelLoader : MonoBehaviour
         }
         if (loadLevelInfo)
         {
-            level = levelInfoLoader.ReadLevelInfo(levelName);
+            levels = levelInfoLoader.ReadAllLevelsInfo(levelsPath);
         }
     }
 }

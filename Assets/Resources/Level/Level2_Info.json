@@ -1,7 +1,7 @@
 ﻿{
-	"name" : "Level 1",
+	"name" : "Level 2",
 	"difficulty" : "Easy",
 	"timer" : 60,
-	"isLocked" : false,
+	"isLocked" : true,
 	"obstacles" : [true]
 }

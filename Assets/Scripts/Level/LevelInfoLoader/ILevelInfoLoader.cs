@@ -1,4 +1,8 @@
-﻿interface ILevelInfoLoader
+﻿using System.Collections.Generic;
+
+interface ILevelInfoLoader
 {
-    Level ReadLevelInfo(string levelId);
+    //Level ReadLevelInfo(string levelId);
+
+    List<Level> ReadAllLevelsInfo(string levelId);
 }

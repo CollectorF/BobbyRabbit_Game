@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private MainMenu mainMenu;
     [SerializeField]
+    private LevelMenu levelMenu;
+    [SerializeField]
     private TilemapHandler tilemapHandler;
     [SerializeField]
     private LevelLoader levelLoaderMain;
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour
         status = GameStatus.Runing;
         carrotsAll = levelLoaderMain.map.CarrotQuantity;
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
-        secondsToPassLevel = levelLoaderMain.level.Timer;
+        secondsToPassLevel = levelLoaderMain.levels[0].Timer;
         secondsLeft = secondsToPassLevel;
         UpdateMenuTexts();
     }
@@ -81,8 +83,12 @@ public class GameManager : MonoBehaviour
         string warningText = FindByKey(uiManager.POPUP_WARNING_KEY);
         string yesText = FindByKey(uiManager.POPUP_YES_KEY);
         string noText = FindByKey(uiManager.POPUP_NO_KEY);
+        string goText = FindByKey(levelMenu.START_KEY);
+        string resetText = FindByKey(levelMenu.RESET_KEY);
+        string backText = FindByKey(levelMenu.BACK_KEY);
         mainMenu.UpdateMenu(startText, storeText, quitText);
         uiManager.UpdatePopup(warningText, yesText, noText);
+        levelMenu.UpdateMenu(goText, resetText, backText);
 
     }
 
@@ -161,12 +167,12 @@ public class GameManager : MonoBehaviour
         return status;
     }
 
-    private void CheckInteraction(int number)
-    {
-        if (levelLoaderMain.map.Buttons[number].IsOn)
-        {
-            MapTile obstacleToInteract = levelLoaderMain.map.Obstacles[(int)number];
-            tilemapHandler.ChangeTile(new Vector3Int(obstacleToInteract.Position.y, -obstacleToInteract.Position.x, 0), obstacleToInteract.Type);
-        }
-    }
+    //private void CheckInteraction(int number)
+    //{
+    //    if (levelLoaderMain.map.Buttons[number].IsOn)
+    //    {
+    //        MapTile obstacleToInteract = levelLoaderMain.map.Obstacles[(int)number];
+    //        tilemapHandler.ChangeTile(new Vector3Int(obstacleToInteract.Position.y, -obstacleToInteract.Position.x, 0), obstacleToInteract.Type);
+    //    }
+    //}
 }
