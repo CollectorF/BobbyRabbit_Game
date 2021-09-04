@@ -1,10 +1,5 @@
-using Newtonsoft.Json;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public enum GameStatus
 {
@@ -27,6 +22,10 @@ public class GameManager : MonoBehaviour
     private TilemapHandler tilemapHandler;
     [SerializeField]
     private LevelLoader levelLoaderMain;
+    [SerializeField]
+    private LevelLoader levelLoaderBackground;
+    [SerializeField]
+    private LevelInfoHandler levelInfoHandler;
 
     [Space(20)]
     [SerializeField]
@@ -38,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     private LocalizationHandler localeHandler;
     private PlayerController playerController;
-    private InteractionHandler interactionProcessor;
+    private InteractionHandler interactionHandler;
     private int carrotsAll;
     private int carrotsPicked = 0;
     private int bonusesPicked = 0;
@@ -46,28 +45,25 @@ public class GameManager : MonoBehaviour
     private float secondsToPassLevel;
     private GameStatus status;
     private PlayerPrefsManager prefsManager;
+    private int currentLevelId;
 
     //internal event Action<int> OnButtonInteraction;
 
     private void Awake()
     {
         playerController = player.GetComponent<PlayerController>();
-        interactionProcessor = player.GetComponent<InteractionHandler>();
+        interactionHandler = player.GetComponent<InteractionHandler>();
         localeHandler = GetComponent<LocalizationHandler>();
         prefsManager = GetComponent<PlayerPrefsManager>();
-
-        playerController.OnNoWay += DisplayMessage;
-        interactionProcessor.OnInteraction += ProcessInteraction;
-        localeHandler.OnLocaleDictFill += UpdateMenuTexts;
-        uiManager.OnClearPrefs += prefsManager.ClearPlayerPrefs;
     }
     private void Start()
     {
-        status = GameStatus.Runing;
-        carrotsAll = levelLoaderMain.map.CarrotQuantity;
-        uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
-        secondsToPassLevel = levelLoaderMain.levels[0].Timer;
-        secondsLeft = secondsToPassLevel;
+        playerController.OnNoWay += DisplayMessage;
+        interactionHandler.OnInteraction += ProcessInteraction;
+        localeHandler.OnLocaleDictFill += UpdateMenuTexts;
+        uiManager.OnClearPrefs += prefsManager.ClearPlayerPrefs;
+        uiManager.OnStartGame += StartGame;
+
         UpdateMenuTexts();
     }
 
@@ -76,6 +72,19 @@ public class GameManager : MonoBehaviour
         uiManager.TimerUpdate(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
         secondsLeft -= Time.deltaTime;
         status = CheckLooseConditions();
+    }
+
+    private void StartGame(int levelId)
+    {
+        currentLevelId = levelId;
+        levelLoaderMain.SetupLevel(currentLevelId);
+        levelLoaderBackground.SetupLevel(currentLevelId);
+        tilemapHandler.SetObstacleInitialState(levelLoaderMain.map, levelInfoHandler.levels, currentLevelId);
+        status = GameStatus.Runing;
+        carrotsAll = levelLoaderMain.map.CarrotQuantity;
+        uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
+        secondsToPassLevel = levelInfoHandler.levels[currentLevelId].Timer;
+        secondsLeft = secondsToPassLevel;
     }
 
     private void UpdateMenuTexts()
@@ -102,7 +111,7 @@ public class GameManager : MonoBehaviour
         levelMenu.UpdateMenu(goText, resetText, backText, levelDifficultyText);
         levelMenu.levelName = levelNameText;
 
-        foreach (var item in levelLoaderMain.levels)
+        foreach (var item in levelInfoHandler.levels)
         {
             switch (item.Difficulty)
             {

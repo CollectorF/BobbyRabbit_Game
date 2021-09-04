@@ -698,11 +698,11 @@ GameObject:
   - component: {fileID: 239693908}
   - component: {fileID: 239693910}
   - component: {fileID: 239693909}
-  - component: {fileID: 239693911}
   - component: {fileID: 239693912}
+  - component: {fileID: 239693911}
   m_Layer: 0
   m_Name: MainTilemap
-  m_TagString: Untagged
+  m_TagString: MainLoader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1180,9 +1180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 950404256}
   tilemap: {fileID: 239693910}
-  levelName: Level\Level1
-  levelsPath: Level\Level
-  loadLevelInfo: 1
+  levelDir: Level\Level
   tiles:
   - Code: 81
     Type: 2
@@ -1398,6 +1396,8 @@ MonoBehaviour:
   levelMenu: {fileID: 564011434}
   tilemapHandler: {fileID: 239693911}
   levelLoaderMain: {fileID: 239693912}
+  levelLoaderBackground: {fileID: 1543594767}
+  levelInfoHandler: {fileID: 1074500513}
   NOT_ALL_CARROTS_KEY: NotAllCollected
   LOOSE_KEY: LooseGame
   WIN_KEY: WinGame
@@ -1662,9 +1662,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1484034517}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 564011434}
+        m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
+        m_MethodName: OnStartClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2205,7 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b868c4be457d794d8c4c230c8b838bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 928614354}
+  startButtonObj: {fileID: 306217564}
   clearProgressButton: {fileID: 1606023093}
   backButton: {fileID: 416525473}
   difficulty: {fileID: 1048921811}
@@ -2213,7 +2213,7 @@ MonoBehaviour:
   levelButtonPrefab: {fileID: 5169805967420779137, guid: ce190d3a1ab64524cb67ad5ea508258c, type: 3}
   levelList: {fileID: 697209746}
   levelDetails: {fileID: 2130600771}
-  levelLoader: {fileID: 239693912}
+  levelInfoHandler: {fileID: 1074500513}
   START_KEY: Start
   RESET_KEY: ResetProgress
   BACK_KEY: Back
@@ -3399,7 +3399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b9663ed42286045bb5c4151a353c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemapMain: {fileID: 239693910}
   levelLoaderMain: {fileID: 239693912}
 --- !u!1 &963194225
 GameObject:
@@ -3496,7 +3495,7 @@ GameObject:
   - component: {fileID: 965214411}
   - component: {fileID: 965214410}
   m_Layer: 5
-  m_Name: Popup
+  m_Name: PopupYesNo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3876,44 +3875,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1839735485 &1074500513
-Tilemap:
+--- !u!114 &1074500513
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074500510}
   m_Enabled: 1
-  m_Tiles: {}
-  m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
-  m_TileObjectToInstantiateArray: []
-  m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 50, y: 50, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
-  m_TileOrientationMatrix:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3478f9e99cc5aa742ba8d64517b75d49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelsPath: Level\Level
 --- !u!1 &1109508425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4196,7 +4170,7 @@ MonoBehaviour:
   popupText: {fileID: 1646253165}
   popupYes: {fileID: 1553993681}
   popupNo: {fileID: 689877124}
-  levelLoader: {fileID: 239693912}
+  levelInfoHandler: {fileID: 1074500513}
   POPUP_WARNING_KEY: PopupWarning
   POPUP_YES_KEY: Yes
   POPUP_NO_KEY: No
@@ -4314,7 +4288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2765459}
-  m_AnchoredPosition: {x: -175, y: 24.503113}
+  m_AnchoredPosition: {x: -175, y: 24.503357}
   m_SizeDelta: {x: -450, y: -51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522492959
@@ -4501,7 +4475,7 @@ GameObject:
   - component: {fileID: 1543594767}
   m_Layer: 0
   m_Name: BackgroundTilemap
-  m_TagString: Untagged
+  m_TagString: BackgroundLoader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6144,9 +6118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   tilemap: {fileID: 1543594766}
-  levelName: Level\Level1_Background
-  levelsPath: 
-  loadLevelInfo: 0
+  levelDir: Level\Level
   tiles:
   - Code: 81
     Type: 0

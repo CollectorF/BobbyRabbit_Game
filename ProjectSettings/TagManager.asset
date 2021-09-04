@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MainMenu
   - LevelMenu
+  - MainLoader
+  - BackgroundLoader
   layers:
   - Default
   - TransparentFX

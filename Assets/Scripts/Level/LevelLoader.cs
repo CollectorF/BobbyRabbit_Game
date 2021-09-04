@@ -21,21 +21,14 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private Tilemap tilemap;
     [SerializeField]
-    private string levelName;
-    [SerializeField]
-    private string levelsPath;
-    [SerializeField]
-    [Tooltip("Set at least for one Level Loader on the scene")]
-    private bool loadLevelInfo;
+    private string levelDir = "Level\\Level";
     [SerializeField]
     private List<Tiles> tiles;
 
     private ILevelLoader levelLoader;
-    private ILevelInfoLoader levelInfoLoader;
     private ILevelFiller levelFiller;
+    private string backgroundPostfix = "_Background";
     internal Map map;
-    internal Level level;
-    internal List<Level> levels;
 
     private void Awake()
     {
@@ -47,26 +40,29 @@ public class LevelLoader : MonoBehaviour
             loadingResource.Add(tile.Code, tile.Type);
         }
         levelLoader = new ResourcesLevelLoader(tileAssets, loadingResource);
-        levelInfoLoader = new ResourcesLevelInfoLoader();
         levelFiller = new TilemapLevelFiller(tilemap, tileAssets);
-        SetupLevel(levelName);
     }
 
-    private void SetupLevel(string levelName)
+    internal void SetupLevel(int levelid)
     {
+        string levelName = null;
+        if (tag == "MainLoader")
+        {
+            levelName = levelDir + (levelid + 1);
+        }
+        if (tag == "BackgroundLoader")
+        {
+            levelName = levelDir + (levelid + 1) + backgroundPostfix;
+        }
         tilemap.ClearAllTiles();
         tilemap.size = new Vector3Int(50, 50, 0);
         map = levelLoader.ReadLevel(levelName);
         levelFiller.FillLevel(map);
-        if (player != null)
+        if (tag == "MainLoader")
         {
             MapTile startTile = map.GetSingleTileByType(TileType.StartPoint);
             Vector2 playerStartPoint = map.GetTileCenter(tilemap, startTile);
             player.transform.position = playerStartPoint;
-        }
-        if (loadLevelInfo)
-        {
-            levels = levelInfoLoader.ReadAllLevelsInfo(levelsPath);
         }
     }
 }

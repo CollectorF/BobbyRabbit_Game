@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class LevelMenu : MonoBehaviour
 {
     [SerializeField]
-    internal TMP_Text startButton;
+    internal GameObject startButtonObj;
     [SerializeField]
     internal TMP_Text clearProgressButton;
     [SerializeField]
@@ -24,7 +24,7 @@ public class LevelMenu : MonoBehaviour
     [SerializeField]
     private GameObject levelDetails;
     [SerializeField]
-    private LevelLoader levelLoader;
+    private LevelInfoHandler levelInfoHandler;
 
     [Space(20)]
     [SerializeField]
@@ -44,15 +44,39 @@ public class LevelMenu : MonoBehaviour
     [SerializeField]
     internal string LEVEL_HARD_KEY = "Hard";
 
+    private TMP_Text startText;
+    private Button startButton;
     internal string levelName;
-
+    private int? levelId = null;
     private List<GameObject> buttons = new List<GameObject>();
-    internal Action OnBackButtonClick;
-    internal Action<string> OnClearButtonClick;
 
-    private void Start()
+    internal Action<int?> OnStartButtonClick;
+    internal Action<string> OnClearButtonClick;
+    internal Action OnBackButtonClick;
+
+    private void Awake()
     {
         levelDetails.SetActive(false);
+        startText = startButtonObj.GetComponentInChildren<TMP_Text>();
+        startButton = startButtonObj.GetComponent<Button>();
+        startButton.interactable = false;
+    }
+
+    private void OnLevelClick(string stringId)
+    {
+        levelId = int.Parse(stringId) - 1;
+        DisplayLevelInfo(levelId);
+        startButton.interactable = true;
+    }
+
+    public void OnStartClick()
+    {
+        OnStartButtonClick?.Invoke(levelId);
+    }
+
+    public void OnClearClick()
+    {
+        OnClearButtonClick?.Invoke(tag);
     }
 
     public void OnBackClick()
@@ -63,16 +87,13 @@ public class LevelMenu : MonoBehaviour
             DestroyImmediate(item);
         }
         levelDetails.SetActive(false);
+        startButton.interactable = false;
+        levelId = null;
     }
 
-    public void OnClearClick()
+public void UpdateMenu(string start, string clear, string back, string diff)
     {
-        OnClearButtonClick?.Invoke(tag);
-    }
-
-    public void UpdateMenu(string start, string clear, string back, string diff)
-    {
-        startButton.text = start;
+        startText.text = start;
         clearProgressButton.text = clear;
         backButton.text = back;
         difficulty.text = diff;
@@ -89,23 +110,17 @@ public class LevelMenu : MonoBehaviour
             buttonName.text = $"{levelName} {i + 1}";
             //buttonComponent.interactable = levels[i].IsOpen;
             buttonComponent.name = (i + 1).ToString();
-            buttonComponent.onClick.AddListener(() => LevelButtonClicked(buttonComponent.name));
+            buttonComponent.onClick.AddListener(() => OnLevelClick(buttonComponent.name));
             buttons.Add(button);
         }
     }
 
-    private void LevelButtonClicked(string stringId)
-    {
-        int levelId = int.Parse(stringId) - 1;
-        DisplayLevelInfo(levelId);
-    }
-
-    private void DisplayLevelInfo(int id)
+    private void DisplayLevelInfo(int? id)
     {
         if (!levelDetails.activeSelf)
         {
             levelDetails.SetActive(true);
         }
-        levelDifficulty.text = levelLoader.levels[id].DifficultyString;
+        levelDifficulty.text = levelInfoHandler.levels[(int)id].DifficultyString;
     }
 }

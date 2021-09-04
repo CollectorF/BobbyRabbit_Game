@@ -6,8 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class InteractionHandler : MonoBehaviour
 {
-    [SerializeField]
-    private Tilemap tilemapMain;
+    //[SerializeField]
+    //private Tilemap tilemapMain;
     [SerializeField]
     private LevelLoader levelLoaderMain;
 
@@ -21,27 +21,33 @@ public class InteractionHandler : MonoBehaviour
     void Start()
     {
         playerController = GetComponent<PlayerController>();
-        lastTile = playerController.GetCurrentTile(levelLoaderMain, playerController.currentPositionVector);
+        if (levelLoaderMain.map != null)
+        {
+            lastTile = playerController.GetCurrentTile(levelLoaderMain, playerController.currentPositionVector);
+        }
     }
 
     void Update()
     {
-        currentTile = playerController.GetCurrentTile(levelLoaderMain, playerController.currentPositionVector);
-        foreach (var button in levelLoaderMain.map.Buttons)
+        if (levelLoaderMain.map != null)
         {
-            if (currentTile.Position == button.Position)
+            currentTile = playerController.GetCurrentTile(levelLoaderMain, playerController.currentPositionVector);
+            foreach (var button in levelLoaderMain.map.Buttons)
             {
-                number = levelLoaderMain.map.Buttons.IndexOf(button);
+                if (currentTile.Position == button.Position)
+                {
+                    number = levelLoaderMain.map.Buttons.IndexOf(button);
+                }
             }
+            if (currentTile.Position != lastTile.Position)
+            {
+                CheckInteraction(currentTile, TileType.Carrot, null);
+                CheckInteraction(currentTile, TileType.Bonus, null);
+                CheckInteraction(currentTile, TileType.FinishPoint, null);
+                CheckInteraction(currentTile, TileType.ButtonOnOff, number);
+            }
+            lastTile = currentTile;
         }
-        if (currentTile.Position != lastTile.Position)
-        {
-            CheckInteraction(currentTile, TileType.Carrot, null);
-            CheckInteraction(currentTile, TileType.Bonus, null);
-            CheckInteraction(currentTile, TileType.FinishPoint, null);
-            CheckInteraction(currentTile, TileType.ButtonOnOff, number);
-        }
-        lastTile = currentTile;
     }
 
     private void CheckInteraction(MapTile currentTile, TileType tileType, int? number)

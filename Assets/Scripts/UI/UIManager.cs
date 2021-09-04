@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     internal TMP_Text popupNo;
     [SerializeField]
-    private LevelLoader levelLoader;
+    private LevelInfoHandler levelInfoHandler;
 
     [Space(20)]
     [SerializeField]
@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     internal event Action<int, int, int> OnUpdateScore;
     internal event Action<string, float> OnUpdateTimer;
     internal event Action OnClearPrefs;
+    internal event Action<int> OnStartGame;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
 
         levelMenuManager.OnClearButtonClick += ShowPopup;
         levelMenuManager.OnBackButtonClick += ActivateMainMenu;
+        levelMenuManager.OnStartButtonClick += ActivateGameplayUI;
     }
 
     private void Start()
@@ -57,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdateLevelList()
     {
-        levelMenuManager.FillLevelList(levelLoader.levels);
+        levelMenuManager.FillLevelList(levelInfoHandler.levels);
     }
 
     public void ActivateMainMenu()
@@ -76,12 +78,13 @@ public class UIManager : MonoBehaviour
         popup.SetActive(false);
     }
 
-    public void StartGame()
+    public void ActivateGameplayUI(int? id)
     {
         mainMenu.SetActive(false);
         levelMenu.SetActive(false);
         gameplayUI.SetActive(true);
         popup.SetActive(false);
+        OnStartGame?.Invoke((int)id);
     }
 
     internal void DisplayMessage(string msg)

@@ -32,6 +32,7 @@ public class TilemapHandler : MonoBehaviour
     [SerializeField]
     private Tile spikesOff;
 
+    private LevelInfoHandler levelInfoHandler;
     private Tilemap tilemapMain;
     private LevelLoader levelLoaderMain;
     private MapTile tileToChange;
@@ -40,15 +41,15 @@ public class TilemapHandler : MonoBehaviour
     {
         tilemapMain = GetComponent<Tilemap>();
         levelLoaderMain = GetComponent<LevelLoader>();
-        SetObstacleInitialState(levelLoaderMain.map, levelLoaderMain.levels);
+        levelInfoHandler = GetComponentInParent<LevelInfoHandler>();
     }
 
-    private void SetObstacleInitialState(Map map, List<Level> levels)
+    internal void SetObstacleInitialState(Map map, List<Level> levels, int levelId)
     {
         for (int i = 0; i < map.Obstacles.Count; i++)
         {
             Vector3Int position = new Vector3Int(map.Obstacles[i].Position.x, -map.Obstacles[i].Position.y, 0);
-            levelLoaderMain.map.SetTileState(position, levels[0].Obstacles[i]);
+            levelLoaderMain.map.SetTileState(position, levels[levelId].Obstacles[i]);
         }
     }
 

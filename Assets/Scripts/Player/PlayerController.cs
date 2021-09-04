@@ -43,19 +43,18 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        currentPositionVector = GetCurrentPosInVector(tilemapMain);
-        nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
-        Walk(walkDirection, nextPosition);
+        if (levelLoaderMain.map != null)
+        {
+            currentPositionVector = GetCurrentPosInVector(tilemapMain);
+            nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
+            Walk(walkDirection, nextPosition);
+        }
     }
 
     private void Walk(Vector2 direction, MapTile nextTile)
     {
         if (nextTile.Type != TileType.InteractiveObstacle && nextTile.Type != TileType.Obstacle)
         {
-            if (true)
-            {
-
-            }
             animator.SetFloat("Vertical", direction.y);
             animator.SetFloat("Horizontal", direction.x);
             Vector3 movementDirection = transform.up * direction.y;
