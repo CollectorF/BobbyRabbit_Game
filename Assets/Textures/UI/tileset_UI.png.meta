@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 6900795217836330426
     second: Button_Menu
+  - first:
+      213: 7639831359788191785
+    second: ArroeButton
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -198,7 +201,7 @@ TextureImporter:
         width: 256
         height: 90
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 41, y: 25, z: 40, w: 19}
       outline: []
       physicsShape: []
@@ -206,6 +209,27 @@ TextureImporter:
       bones: []
       spriteID: abd49da40bc84cf50800000000000000
       internalID: 6900795217836330426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArroeButton
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 95
+        width: 82
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9209018e422260a60800000000000000
+      internalID: 7639831359788191785
       vertices: []
       indices: 
       edges: []

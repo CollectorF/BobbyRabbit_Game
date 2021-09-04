@@ -18,6 +18,8 @@ public class LevelMenu : MonoBehaviour
     [SerializeField]
     internal TMP_Text levelDifficulty;
     [SerializeField]
+    private TMP_Text startText;
+    [SerializeField]
     private GameObject levelButtonPrefab;
     [SerializeField]
     private GameObject levelList;
@@ -44,7 +46,6 @@ public class LevelMenu : MonoBehaviour
     [SerializeField]
     internal string LEVEL_HARD_KEY = "Hard";
 
-    private TMP_Text startText;
     private Button startButton;
     internal string levelName;
     private int? levelId = null;
@@ -56,10 +57,9 @@ public class LevelMenu : MonoBehaviour
 
     private void Awake()
     {
-        levelDetails.SetActive(false);
-        startText = startButtonObj.GetComponentInChildren<TMP_Text>();
         startButton = startButtonObj.GetComponent<Button>();
         startButton.interactable = false;
+        levelDetails.SetActive(false);
     }
 
     private void OnLevelClick(string stringId)

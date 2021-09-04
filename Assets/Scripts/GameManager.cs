@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private LevelMenu levelMenu;
     [SerializeField]
+    private GameplayUI gameplayUi;
+    [SerializeField]
     private TilemapHandler tilemapHandler;
     [SerializeField]
     private LevelLoader levelLoaderMain;
@@ -46,8 +48,6 @@ public class GameManager : MonoBehaviour
     private GameStatus status;
     private PlayerPrefsManager prefsManager;
     private int currentLevelId;
-
-    //internal event Action<int> OnButtonInteraction;
 
     private void Awake()
     {
@@ -82,9 +82,9 @@ public class GameManager : MonoBehaviour
         tilemapHandler.SetObstacleInitialState(levelLoaderMain.map, levelInfoHandler.levels, currentLevelId);
         status = GameStatus.Runing;
         carrotsAll = levelLoaderMain.map.CarrotQuantity;
-        uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
         secondsToPassLevel = levelInfoHandler.levels[currentLevelId].Timer;
         secondsLeft = secondsToPassLevel;
+        uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
     }
 
     private void UpdateMenuTexts()
@@ -106,10 +106,11 @@ public class GameManager : MonoBehaviour
         string levelMediumText = FindByKey(levelMenu.LEVEL_MEDIUM_KEY);
         string levelHardText = FindByKey(levelMenu.LEVEL_HARD_KEY);
 
-        mainMenu.UpdateMenu(startText, storeText, quitText);
         uiManager.UpdatePopup(warningText, yesText, noText);
+        mainMenu.UpdateMenu(startText, storeText, quitText);
         levelMenu.UpdateMenu(goText, resetText, backText, levelDifficultyText);
         levelMenu.levelName = levelNameText;
+        gameplayUi.UpdateMenu(quitText);
 
         foreach (var item in levelInfoHandler.levels)
         {

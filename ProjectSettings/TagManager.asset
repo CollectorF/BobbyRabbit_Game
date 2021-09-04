@@ -8,6 +8,7 @@ TagManager:
   - LevelMenu
   - MainLoader
   - BackgroundLoader
+  - GameplayUI
   layers:
   - Default
   - TransparentFX

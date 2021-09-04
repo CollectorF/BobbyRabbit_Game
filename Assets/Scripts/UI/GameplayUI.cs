@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -16,10 +17,17 @@ public class GameplayUI : MonoBehaviour
     private TMP_Text timerText;
     [SerializeField]
     private float highlightOnTimeLeft;
+    [SerializeField]
+    internal TMP_Text quitButton;
+
+    [Space(20)]
+    [SerializeField]
+    internal string QUIT_KEY = "Quit";
 
     private TMP_Text messagePanelText;
     private Coroutine timerCoroutine;
     private UIManager uiManager;
+    internal event Action<string> OnQuitButtonClick;
 
     private void Start()
     {
@@ -28,7 +36,6 @@ public class GameplayUI : MonoBehaviour
         messagePanel.SetActive(false);
         timerText.color = Color.white;
         uiManager.OnDisplayTextMessage += DisplayTextMessage;
-        uiManager.OnUpdateScore += UpdateScore;
         uiManager.OnUpdateTimer += UpdateTimer;
     }
 
@@ -55,6 +62,16 @@ public class GameplayUI : MonoBehaviour
             timerText.color = Color.red;
         }
         timerText.text = timer;
+    }
+
+    public void UpdateMenu(string quit)
+    {
+        quitButton.text = quit;
+    }
+
+    public void OnQuitClick()
+    {
+        OnQuitButtonClick?.Invoke(tag);
     }
 
     private IEnumerator DisplayByTimeCoroutine(GameObject obj, float time)

@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     private MainMenu mainMenuManager;
     private LevelMenu levelMenuManager;
+    private GameplayUI gameplayUiManager;
     private string popupCaller;
 
     internal event Action<string> OnDisplayTextMessage;
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
     {
         mainMenuManager = mainMenu.GetComponent<MainMenu>();
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
+        gameplayUiManager = gameplayUI.GetComponent<GameplayUI>();
 
         mainMenuManager.OnStartButtonClick += UpdateLevelList;
         mainMenuManager.OnQuitButtonClick += ShowPopup;
@@ -50,6 +52,8 @@ public class UIManager : MonoBehaviour
         levelMenuManager.OnClearButtonClick += ShowPopup;
         levelMenuManager.OnBackButtonClick += ActivateMainMenu;
         levelMenuManager.OnStartButtonClick += ActivateGameplayUI;
+
+        gameplayUiManager.OnQuitButtonClick += ShowPopup;
     }
 
     private void Start()
@@ -94,7 +98,7 @@ public class UIManager : MonoBehaviour
 
     public void ScoreUpdate(int carrots, int carrotsAll, int bonuses)
     {
-        OnUpdateScore?.Invoke(carrots, carrotsAll, bonuses);
+        gameplayUiManager.UpdateScore(carrots, carrotsAll, bonuses);
     }
     public void TimerUpdate(string timer, float timeLeft)
     {
@@ -127,6 +131,11 @@ public class UIManager : MonoBehaviour
         if (popupCaller == "LevelMenu")
         {
             OnClearPrefs?.Invoke();
+            HidePopup();
+        }
+        if (popupCaller == "GameplayUI")
+        {
+            ActivateLevelMenu();
             HidePopup();
         }
     }
