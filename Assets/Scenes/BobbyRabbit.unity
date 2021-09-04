@@ -1372,6 +1372,7 @@ GameObject:
   - component: {fileID: 243963055}
   - component: {fileID: 243963054}
   - component: {fileID: 243963056}
+  - component: {fileID: 243963057}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1433,6 +1434,18 @@ MonoBehaviour:
   defaultLocale: en-US
   localeFolder: Localization
   mainMenu: {fileID: 1340322496}
+--- !u!114 &243963057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243963053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219191b7aad95d140a428543889eda48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &258314032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,7 +2304,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 586656471}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 564011434}
+        m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
+        m_MethodName: OnClearClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &586656471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4289,7 +4314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2765459}
-  m_AnchoredPosition: {x: -175, y: 24.50299}
+  m_AnchoredPosition: {x: -175, y: 24.503113}
   m_SizeDelta: {x: -450, y: -51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522492959

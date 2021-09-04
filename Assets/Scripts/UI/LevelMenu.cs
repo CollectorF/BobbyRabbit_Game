@@ -48,6 +48,7 @@ public class LevelMenu : MonoBehaviour
 
     private List<GameObject> buttons = new List<GameObject>();
     internal Action OnBackButtonClick;
+    internal Action<string> OnClearButtonClick;
 
     private void Start()
     {
@@ -62,6 +63,11 @@ public class LevelMenu : MonoBehaviour
             DestroyImmediate(item);
         }
         levelDetails.SetActive(false);
+    }
+
+    public void OnClearClick()
+    {
+        OnClearButtonClick?.Invoke(tag);
     }
 
     public void UpdateMenu(string start, string clear, string back, string diff)

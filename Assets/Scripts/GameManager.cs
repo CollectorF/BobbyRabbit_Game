@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     private float secondsLeft;
     private float secondsToPassLevel;
     private GameStatus status;
+    private PlayerPrefsManager prefsManager;
 
     //internal event Action<int> OnButtonInteraction;
 
@@ -53,10 +54,12 @@ public class GameManager : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         interactionProcessor = player.GetComponent<InteractionHandler>();
         localeHandler = GetComponent<LocalizationHandler>();
+        prefsManager = GetComponent<PlayerPrefsManager>();
 
         playerController.OnNoWay += DisplayMessage;
         interactionProcessor.OnInteraction += ProcessInteraction;
         localeHandler.OnLocaleDictFill += UpdateMenuTexts;
+        uiManager.OnClearPrefs += prefsManager.ClearPlayerPrefs;
     }
     private void Start()
     {

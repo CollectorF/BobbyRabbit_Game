@@ -36,14 +36,18 @@ public class UIManager : MonoBehaviour
     internal event Action<string> OnDisplayTextMessage;
     internal event Action<int, int, int> OnUpdateScore;
     internal event Action<string, float> OnUpdateTimer;
+    internal event Action OnClearPrefs;
 
     private void Awake()
     {
         mainMenuManager = mainMenu.GetComponent<MainMenu>();
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
-        mainMenuManager.OnQuitButtonClick += ShowPopup;
-        levelMenuManager.OnBackButtonClick += ActivateMainMenu;
+
         mainMenuManager.OnStartButtonClick += UpdateLevelList;
+        mainMenuManager.OnQuitButtonClick += ShowPopup;
+
+        levelMenuManager.OnClearButtonClick += ShowPopup;
+        levelMenuManager.OnBackButtonClick += ActivateMainMenu;
     }
 
     private void Start()
@@ -119,7 +123,8 @@ public class UIManager : MonoBehaviour
         }
         if (popupCaller == "LevelMenu")
         {
-
+            OnClearPrefs?.Invoke();
+            HidePopup();
         }
     }
     public void OnPopupNo()
