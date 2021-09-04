@@ -80,16 +80,42 @@ public class GameManager : MonoBehaviour
         string startText = FindByKey(mainMenu.START_GAME_KEY);
         string storeText = FindByKey(mainMenu.STORE_KEY);
         string quitText = FindByKey(mainMenu.QUIT_KEY);
+
         string warningText = FindByKey(uiManager.POPUP_WARNING_KEY);
         string yesText = FindByKey(uiManager.POPUP_YES_KEY);
         string noText = FindByKey(uiManager.POPUP_NO_KEY);
+
         string goText = FindByKey(levelMenu.START_KEY);
         string resetText = FindByKey(levelMenu.RESET_KEY);
         string backText = FindByKey(levelMenu.BACK_KEY);
+        string levelNameText = FindByKey(levelMenu.LEVEL_NAME_KEY);
+        string levelDifficultyText = FindByKey(levelMenu.LEVEL_DIFFICULTY_KEY);
+        string levelEasyText = FindByKey(levelMenu.LEVEL_EASY_KEY);
+        string levelMediumText = FindByKey(levelMenu.LEVEL_MEDIUM_KEY);
+        string levelHardText = FindByKey(levelMenu.LEVEL_HARD_KEY);
+
         mainMenu.UpdateMenu(startText, storeText, quitText);
         uiManager.UpdatePopup(warningText, yesText, noText);
-        levelMenu.UpdateMenu(goText, resetText, backText);
+        levelMenu.UpdateMenu(goText, resetText, backText, levelDifficultyText);
+        levelMenu.levelName = levelNameText;
 
+        foreach (var item in levelLoaderMain.levels)
+        {
+            switch (item.Difficulty)
+            {
+                case Difficulty.Easy:
+                    item.DifficultyString = levelEasyText;
+                    break;
+                case Difficulty.Medium:
+                    item.DifficultyString = levelMediumText;
+                    break;
+                case Difficulty.Hard:
+                    item.DifficultyString = levelHardText;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void DisplayMessage(string key)

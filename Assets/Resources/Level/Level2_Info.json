@@ -1,7 +1,6 @@
 ﻿{
-	"name" : "Level 2",
-	"difficulty" : "Easy",
+	"difficultyString" : "Hard",
 	"timer" : 60,
-	"isLocked" : true,
+	"isOpen" : false,
 	"obstacles" : [true]
 }

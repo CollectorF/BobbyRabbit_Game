@@ -11,5 +11,10 @@
 	"Back" : "Back",
 	"PopupWarning" : "Are you sure?",
 	"Yes" : "Yes",
-	"No" : "No"
+	"No" : "No",
+	"Level" : "Level",
+	"LevelDifficulty" : "Difficulty:",
+	"Easy" : "Easy",
+	"Medium" : "Medium",
+	"Hard" : "Hard"
 }

@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
 
     internal Action<string> OnLocaleButtonClick;
     internal Action<string> OnQuitButtonClick;
+    internal Action OnStartButtonClick;
 
     public void OnLocaleClick(string locale)
     {
@@ -34,6 +35,11 @@ public class MainMenu : MonoBehaviour
         startGameButton.text = start;
         storeButton.text = store;
         quitButton.text = quit;
+    }
+
+    public void OnStartClick()
+    {
+        OnStartButtonClick?.Invoke();
     }
 
     public void OnQuitClick()

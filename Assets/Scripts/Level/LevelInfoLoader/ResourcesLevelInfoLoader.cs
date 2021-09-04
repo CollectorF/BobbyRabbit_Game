@@ -19,7 +19,7 @@ public class ResourcesLevelInfoLoader : ILevelInfoLoader
             {
                 json = Resources.Load(fullFileName).ToString();
                 Level level = JsonConvert.DeserializeObject<Level>(json);
-                levels.Add(new Level(level.Name, level.Difficulty, level.Timer, level.IsLocked, level.Obstacles));
+                levels.Add(new Level(level.DifficultyString, level.Timer, level.IsOpen, level.Obstacles));
                 i++;
             }
             catch (NullReferenceException)

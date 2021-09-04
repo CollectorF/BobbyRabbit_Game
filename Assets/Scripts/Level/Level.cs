@@ -1,20 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum Difficulty
+{
+    Easy,
+    Medium,
+    Hard
+}
+
 public class Level
 {
-	public string Name;
-	public string Difficulty;
+    public Difficulty Difficulty;
+    public string DifficultyString;
 	public float Timer;
-    public bool IsLocked;
+    public bool IsOpen;
     public bool[] Obstacles;
 
-    public Level(string name, string difficulty, float timer, bool isLocked, bool[] obstacles)
+    public Level(string difficultyString, float timer, bool isOpen, bool[] obstacles)
     {
-        Name = name;
-        Difficulty = difficulty;
+        DifficultyString = difficultyString;
         Timer = timer;
-        IsLocked = isLocked;
+        IsOpen = isOpen;
         Obstacles = obstacles;
+        switch (DifficultyString)
+        {
+            case "Easy":
+                Difficulty = Difficulty.Easy;
+                break;
+            case "Medium":
+                Difficulty = Difficulty.Medium;
+                break;
+            case "Hard":
+                Difficulty = Difficulty.Hard;
+                break;
+            default:
+                break;
+        }
     }
 }

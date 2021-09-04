@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     internal TMP_Text popupYes;
     [SerializeField]
     internal TMP_Text popupNo;
+    [SerializeField]
+    private LevelLoader levelLoader;
 
     [Space(20)]
     [SerializeField]
@@ -41,11 +43,17 @@ public class UIManager : MonoBehaviour
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
         mainMenuManager.OnQuitButtonClick += ShowPopup;
         levelMenuManager.OnBackButtonClick += ActivateMainMenu;
+        mainMenuManager.OnStartButtonClick += UpdateLevelList;
     }
 
     private void Start()
     {
         ActivateMainMenu();
+    }
+
+    private void UpdateLevelList()
+    {
+        levelMenuManager.FillLevelList(levelLoader.levels);
     }
 
     public void ActivateMainMenu()

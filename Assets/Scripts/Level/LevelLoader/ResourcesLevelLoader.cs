@@ -63,6 +63,6 @@ public class ResourcesLevelLoader : ILevelLoader
         var fullFileName = string.Concat(levelId, levelInfoFilePostfix);
         string json = Resources.Load(fullFileName).ToString();
         Level level = JsonConvert.DeserializeObject<Level>(json);
-        return new Level(level.Name, level.Difficulty, level.Timer, level.IsLocked, level.Obstacles);
+        return new Level(level.DifficultyString, level.Timer, level.IsOpen, level.Obstacles);
     }
 }
