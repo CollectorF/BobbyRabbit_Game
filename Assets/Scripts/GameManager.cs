@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     private LevelLoader levelLoaderBackground;
     [SerializeField]
     private LevelInfoHandler levelInfoHandler;
+    [SerializeField]
+    private CameraController cameraController;
 
     [Space(20)]
     [SerializeField]
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         uiManager.OnStartGame += StartGame;
 
         UpdateMenuTexts();
+        cameraController.enabled = false;
     }
 
     private void Update()
@@ -85,6 +88,8 @@ public class GameManager : MonoBehaviour
         secondsToPassLevel = levelInfoHandler.levels[currentLevelId].Timer;
         secondsLeft = secondsToPassLevel;
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
+        cameraController.enabled = true;
+        cameraController.tilemapBounds = cameraController.GetTilemapBounds();
     }
 
     private void UpdateMenuTexts()
