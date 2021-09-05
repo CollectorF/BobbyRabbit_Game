@@ -8,6 +8,8 @@ public enum GameStatus
     Menu
 }
 
+[DefaultExecutionOrder(10)]
+[RequireComponent(typeof(PlayerPrefsManager))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     [SerializeField]
     private MainMenu mainMenu;
+    [SerializeField]
+    private StoreUI storeUi;
     [SerializeField]
     private LevelMenu levelMenu;
     [SerializeField]
@@ -47,6 +51,7 @@ public class GameManager : MonoBehaviour
     private int carrotsAll;
     private int carrotsPicked = 0;
     private int bonusesPicked = 0;
+    private int bonusesAll = 0;
     private float secondsLeft;
     private float secondsToPassLevel;
     private GameStatus status;
@@ -69,11 +74,13 @@ public class GameManager : MonoBehaviour
         playerController.OnNoWay += DisplayMessage;
         interactionHandler.OnInteraction += ProcessInteraction;
         localeHandler.OnLocaleDictFill += UpdateMenuTexts;
-        uiManager.OnClearPrefs += prefsManager.ClearPlayerPrefs;
+        uiManager.OnClearPrefs += ClearPlayerPrefs;
         uiManager.OnStartGame += StartGame;
 
-        UpdateMenuTexts();
         cameraController.enabled = false;
+        levelInfoHandler.levels = prefsManager.LoadPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
+        UpdateMenuTexts();
+        storeUi.UpdateBonuses(bonusesAll);
     }
 
     private void Update()
@@ -126,11 +133,14 @@ public class GameManager : MonoBehaviour
         string levelMediumText = FindByKey(levelMenu.LEVEL_MEDIUM_KEY);
         string levelHardText = FindByKey(levelMenu.LEVEL_HARD_KEY);
 
+        string storeMainText = FindByKey(storeUi.STORE_TEXT_KEY);
+
         uiManager.UpdatePopup(warningText, yesText, noText);
         mainMenu.UpdateMenu(startText, storeText, quitText);
         levelMenu.UpdateMenu(goText, resetText, backText, levelDifficultyText);
         levelMenu.levelName = levelNameText;
         gameplayUi.UpdateMenu(quitText);
+        storeUi.UpdateMenu(storeMainText, quitText);
 
         foreach (var item in levelInfoHandler.levels)
         {
@@ -206,12 +216,23 @@ public class GameManager : MonoBehaviour
     {
         if (carrotsPicked == carrotsAll && secondsLeft > 0)
         {
+            int unlockedLevels = 0;
             DisplayMessage(WIN_KEY);
-            UnlockNextLevel(currentLevelId);
             if (exitTimerCoroutine == null)
             {
                 exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
             }
+            bonusesAll += bonusesPicked;
+            storeUi.UpdateBonuses(bonusesAll);
+            foreach (var item in levelInfoHandler.levels)
+            {
+                if (item.IsOpen)
+                {
+                    unlockedLevels++;
+                }
+            }
+            prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
+            UnlockNextLevel(currentLevelId);
         }
         else
         {
@@ -239,8 +260,13 @@ public class GameManager : MonoBehaviour
         }
         catch (Exception)
         {
-
+            return;
         }
+    }
+
+    private void ClearPlayerPrefs()
+    {
+        prefsManager.ClearPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
     }
 
     //private void CheckInteraction(int number)

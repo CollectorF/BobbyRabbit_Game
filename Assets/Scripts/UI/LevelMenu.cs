@@ -88,7 +88,7 @@ public class LevelMenu : MonoBehaviour
         levelId = null;
     }
 
-public void UpdateMenu(string start, string clear, string back, string diff)
+    public void UpdateMenu(string start, string clear, string back, string diff)
     {
         startText.text = start;
         clearProgressButton.text = clear;
@@ -117,6 +117,23 @@ public void UpdateMenu(string start, string clear, string back, string diff)
         foreach (var item in buttons)
         {
             DestroyImmediate(item);
+        }
+        buttons.Clear();
+    }
+
+    internal void UpdateLevelList()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            var buttonComponent = buttons[i].GetComponent<Button>();
+            if (levelInfoHandler.levels[i].IsOpen)
+            {
+                buttonComponent.interactable = true;
+            }
+            else
+            {
+                buttonComponent.interactable = false;
+            }
         }
     }
 

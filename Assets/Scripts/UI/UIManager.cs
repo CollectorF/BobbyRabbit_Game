@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject mainMenu;
     [SerializeField]
+    private GameObject storeUI;
+    [SerializeField]
     private GameObject levelMenu;
     [SerializeField]
     private GameObject gameplayUI;
@@ -46,7 +48,6 @@ public class UIManager : MonoBehaviour
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
         gameplayUiManager = gameplayUI.GetComponent<GameplayUI>();
 
-        //mainMenuManager.OnStartButtonClick += UpdateLevelList;
         mainMenuManager.OnQuitButtonClick += ShowPopup;
 
         levelMenuManager.OnClearButtonClick += ShowPopup;
@@ -69,6 +70,16 @@ public class UIManager : MonoBehaviour
     public void ActivateMainMenu()
     {
         mainMenu.SetActive(true);
+        storeUI.SetActive(false);
+        levelMenu.SetActive(false);
+        gameplayUI.SetActive(false);
+        popup.SetActive(false);
+    }
+
+    public void ActivateStoreUI()
+    {
+        mainMenu.SetActive(false);
+        storeUI.SetActive(true);
         levelMenu.SetActive(false);
         gameplayUI.SetActive(false);
         popup.SetActive(false);
@@ -77,6 +88,7 @@ public class UIManager : MonoBehaviour
     public void ActivateLevelMenu()
     {
         mainMenu.SetActive(false);
+        storeUI.SetActive(false);
         levelMenu.SetActive(true);
         gameplayUI.SetActive(false);
         popup.SetActive(false);
@@ -86,6 +98,7 @@ public class UIManager : MonoBehaviour
     public void ActivateGameplayUI(int? id)
     {
         mainMenu.SetActive(false);
+        storeUI.SetActive(false);
         levelMenu.SetActive(false);
         gameplayUI.SetActive(true);
         popup.SetActive(false);
@@ -133,6 +146,7 @@ public class UIManager : MonoBehaviour
         if (popupCaller == "LevelMenu")
         {
             OnClearPrefs?.Invoke();
+            levelMenuManager.UpdateLevelList();
             HidePopup();
         }
         if (popupCaller == "GameplayUI")

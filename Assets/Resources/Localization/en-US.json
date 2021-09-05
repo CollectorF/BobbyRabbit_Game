@@ -16,5 +16,6 @@
 	"LevelDifficulty" : "Difficulty:",
 	"Easy" : "Easy",
 	"Medium" : "Medium",
-	"Hard" : "Hard"
+	"Hard" : "Hard",
+	"StoreText" : "Store is in development stage"
 }
