@@ -7,43 +7,35 @@ using UnityEngine.Tilemaps;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed;
+    [Range(1,5)]
+    private float smoothFactor;
     [SerializeField]
-    private TilemapRenderer tilemap;
+    private Transform target;
+    [SerializeField]
+    [Range(-4,-1)]
+    private float cameraZPosition = -3.2f;
 
     private Camera cameraMain;
-    private Vector2 mooveDirection;
-    private Vector2 cameraBounds;
-    public Vector2 tilemapBounds;
 
     private void Awake()
     {
         cameraMain = Camera.main;
-        cameraBounds = cameraMain.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-        tilemapBounds = new Vector2(tilemap.bounds.size.x / 2, tilemap.bounds.size.y / 2);
     }
     
-    private void Update()
+    private void FixedUpdate()
     {
-        Look(mooveDirection);
-    }
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        mooveDirection = context.ReadValue<Vector2>();
+        FollowTarget();
     }
 
-    private void Look(Vector2 direction)
+    internal void SetInitialCameraPosition()
     {
-        Vector3 movementDirection = transform.up * direction.y;
-        movementDirection += transform.right * direction.x;
-        movementDirection.x = Mathf.Clamp(movementDirection.x, cameraBounds.x + tilemapBounds.x, cameraBounds.x * -1 - tilemapBounds.x);
-        movementDirection.y = Mathf.Clamp(movementDirection.y, cameraBounds.y + tilemapBounds.y, cameraBounds.y * -1 - tilemapBounds.y);
-        cameraMain.transform.position += movementDirection * moveSpeed * Time.deltaTime;
+        cameraMain.transform.position = new Vector3(target.position.x, target.position.y, cameraZPosition);
     }
 
-    public Vector2 GetTilemapBounds()
+    private void FollowTarget()
     {
-        tilemapBounds = new Vector2(tilemap.bounds.size.x / 2, tilemap.bounds.size.y / 2);
-        return tilemapBounds;
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y, cameraZPosition);
+        Vector3 smoothPosition = Vector3.Lerp(cameraMain.transform.position, targetPosition, smoothFactor * Time.fixedDeltaTime);
+        cameraMain.transform.position = smoothPosition;
     }
 }

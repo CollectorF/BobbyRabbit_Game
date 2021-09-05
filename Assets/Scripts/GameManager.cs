@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         secondsLeft = secondsToPassLevel;
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
         cameraController.enabled = true;
-        cameraController.tilemapBounds = cameraController.GetTilemapBounds();
+        cameraController.SetInitialCameraPosition();
     }
 
     private void UpdateMenuTexts()
