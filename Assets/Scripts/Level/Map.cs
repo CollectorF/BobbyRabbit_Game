@@ -41,6 +41,7 @@ public class Map
     public int BonusQuantity { get; private set; }
     public List<MapTile> Buttons = new List<MapTile>();
     public List<MapTile> Obstacles = new List<MapTile>();
+    public MapTile foundedTile;
 
     public Map(MapTile[][] tiles, int carrots, int bonuses, List<MapTile> buttons, List<MapTile> obstacles)
     {
@@ -58,7 +59,6 @@ public class Map
 
     public MapTile GetSingleTileByType(TileType type)
     {
-        MapTile foundedTile = map[0][0];
         for (int i = 0; i < map.Length; i++)
         {
             for (int j = 0; j < map[0].Length; j++)

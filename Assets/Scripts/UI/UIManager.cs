@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
         gameplayUiManager = gameplayUI.GetComponent<GameplayUI>();
 
-        mainMenuManager.OnStartButtonClick += UpdateLevelList;
+        //mainMenuManager.OnStartButtonClick += UpdateLevelList;
         mainMenuManager.OnQuitButtonClick += ShowPopup;
 
         levelMenuManager.OnClearButtonClick += ShowPopup;
@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
         ActivateMainMenu();
     }
 
-    private void UpdateLevelList()
+    internal void UpdateLevelList()
     {
         levelMenuManager.FillLevelList(levelInfoHandler.levels);
     }
@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour
         levelMenu.SetActive(true);
         gameplayUI.SetActive(false);
         popup.SetActive(false);
+        UpdateLevelList();
     }
 
     public void ActivateGameplayUI(int? id)
@@ -89,6 +90,7 @@ public class UIManager : MonoBehaviour
         gameplayUI.SetActive(true);
         popup.SetActive(false);
         OnStartGame?.Invoke((int)id);
+        levelMenuManager.DestroyLevelList();
     }
 
     internal void DisplayMessage(string msg)

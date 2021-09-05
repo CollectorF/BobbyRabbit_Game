@@ -51,6 +51,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetPlayerInitialPosition()
+    {
+        MapTile startTile = levelLoaderMain.map.GetSingleTileByType(TileType.StartPoint);
+        Vector2 playerStartPoint = levelLoaderMain.map.GetTileCenter(tilemapMain, startTile);
+        transform.position = playerStartPoint;
+    }
+
     private void Walk(Vector2 direction, MapTile nextTile)
     {
         if (nextTile.Type != TileType.InteractiveObstacle && nextTile.Type != TileType.Obstacle)

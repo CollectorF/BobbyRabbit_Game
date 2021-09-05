@@ -82,10 +82,7 @@ public class LevelMenu : MonoBehaviour
     public void OnBackClick()
     {
         OnBackButtonClick?.Invoke();
-        foreach (var item in buttons)
-        {
-            DestroyImmediate(item);
-        }
+        DestroyLevelList();
         levelDetails.SetActive(false);
         startButton.interactable = false;
         levelId = null;
@@ -108,10 +105,18 @@ public void UpdateMenu(string start, string clear, string back, string diff)
             TMP_Text buttonName = button.GetComponentInChildren<TMP_Text>();
             var buttonComponent = button.GetComponentInChildren<Button>();
             buttonName.text = $"{levelName} {i + 1}";
-            //buttonComponent.interactable = levels[i].IsOpen;
+            buttonComponent.interactable = levels[i].IsOpen;
             buttonComponent.name = (i + 1).ToString();
             buttonComponent.onClick.AddListener(() => OnLevelClick(buttonComponent.name));
             buttons.Add(button);
+        }
+    }
+
+    internal void DestroyLevelList()
+    {
+        foreach (var item in buttons)
+        {
+            DestroyImmediate(item);
         }
     }
 

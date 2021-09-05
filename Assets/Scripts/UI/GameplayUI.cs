@@ -57,6 +57,7 @@ public class GameplayUI : MonoBehaviour
 
     public void UpdateTimer(string timer, float timeLeft)
     {
+        timerText.color = Color.white;
         if (highlightOnTimeLeft > timeLeft)
         {
             timerText.color = Color.red;

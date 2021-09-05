@@ -1,11 +1,11 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public enum GameStatus
 {
     Runing,
-    PlayerWin,
-    PlayerLoose
+    Menu
 }
 
 public class GameManager : MonoBehaviour
@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     private LevelInfoHandler levelInfoHandler;
     [SerializeField]
     private CameraController cameraController;
+    [SerializeField]
+    private float delayOnGameEnd = 3f;
 
     [Space(20)]
     [SerializeField]
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
     private GameStatus status;
     private PlayerPrefsManager prefsManager;
     private int currentLevelId;
+    private Coroutine exitTimerCoroutine;
 
     private void Awake()
     {
@@ -57,9 +60,12 @@ public class GameManager : MonoBehaviour
         interactionHandler = player.GetComponent<InteractionHandler>();
         localeHandler = GetComponent<LocalizationHandler>();
         prefsManager = GetComponent<PlayerPrefsManager>();
+
+        status = GameStatus.Menu;
     }
     private void Start()
     {
+        levelLoaderMain.OnLevelLoad += SetStartPosition;
         playerController.OnNoWay += DisplayMessage;
         interactionHandler.OnInteraction += ProcessInteraction;
         localeHandler.OnLocaleDictFill += UpdateMenuTexts;
@@ -74,11 +80,13 @@ public class GameManager : MonoBehaviour
     {
         uiManager.TimerUpdate(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
         secondsLeft -= Time.deltaTime;
-        status = CheckLooseConditions();
+        CheckLooseConditions();
     }
 
     private void StartGame(int levelId)
     {
+        carrotsPicked = 0;
+        bonusesPicked = 0;
         currentLevelId = levelId;
         levelLoaderMain.SetupLevel(currentLevelId);
         levelLoaderBackground.SetupLevel(currentLevelId);
@@ -90,6 +98,13 @@ public class GameManager : MonoBehaviour
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
         cameraController.enabled = true;
         cameraController.SetInitialCameraPosition();
+    }
+
+    private void SetStartPosition()
+    {
+        player.SetActive(false);
+        playerController.SetPlayerInitialPosition();
+        player.SetActive(true);
     }
 
     private void UpdateMenuTexts()
@@ -155,15 +170,7 @@ public class GameManager : MonoBehaviour
                 uiManager.ScoreUpdate(carrotsPicked, carrotsAll, ++bonusesPicked);
                 break;
             case TileType.FinishPoint:
-                status = CheckWinConditions();
-                if (status == GameStatus.PlayerWin)
-                {
-                    DisplayMessage(WIN_KEY);
-                }
-                else
-                {
-                    DisplayMessage(NOT_ALL_CARROTS_KEY);
-                }
+                CheckWinConditions();
                 break;
             case TileType.ButtonOnOff:
                 bool controlState = tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType); //changes button on/off tiles
@@ -172,6 +179,13 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator ExitTimerCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        uiManager.ActivateLevelMenu();
+        levelLoaderMain.map = null;
     }
 
     private string FindByKey(string key)
@@ -188,27 +202,45 @@ public class GameManager : MonoBehaviour
         return timer;
     }
 
-    private GameStatus CheckWinConditions()
+    private void CheckWinConditions()
     {
         if (carrotsPicked == carrotsAll && secondsLeft > 0)
         {
-            status = GameStatus.PlayerWin;
+            DisplayMessage(WIN_KEY);
+            UnlockNextLevel(currentLevelId);
+            if (exitTimerCoroutine == null)
+            {
+                exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
+            }
         }
         else
         {
-            status = GameStatus.Runing;
+            DisplayMessage(NOT_ALL_CARROTS_KEY);
         }
-        return status;
     }
 
-    private GameStatus CheckLooseConditions()
+    private void CheckLooseConditions()
     {
-        if (secondsLeft == 0)
+        if (status == GameStatus.Runing && secondsLeft <= 0)
         {
             DisplayMessage(LOOSE_KEY);
-            status = GameStatus.PlayerLoose;
+            if (exitTimerCoroutine == null)
+            {
+                exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
+            }
         }
-        return status;
+    }
+
+    private void UnlockNextLevel(int currentLevel)
+    {
+        try
+        {
+            levelInfoHandler.levels[currentLevel + 1].IsOpen = true;
+        }
+        catch (Exception)
+        {
+
+        }
     }
 
     //private void CheckInteraction(int number)

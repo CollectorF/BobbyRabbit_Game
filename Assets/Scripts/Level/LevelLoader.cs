@@ -17,8 +17,6 @@ public struct Tiles
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField]
-    private GameObject player;
-    [SerializeField]
     private Tilemap tilemap;
     [SerializeField]
     private string levelDir = "Level\\Level";
@@ -29,6 +27,8 @@ public class LevelLoader : MonoBehaviour
     private ILevelFiller levelFiller;
     private string backgroundPostfix = "_Background";
     internal Map map;
+
+    internal event Action OnLevelLoad;
 
     private void Awake()
     {
@@ -55,15 +55,9 @@ public class LevelLoader : MonoBehaviour
             levelName = levelDir + (levelid + 1) + backgroundPostfix;
         }
         tilemap.ClearAllTiles();
-        tilemap.size = new Vector3Int(50, 50, 0);
         map = levelLoader.ReadLevel(levelName);
         levelFiller.FillLevel(map);
-        if (tag == "MainLoader")
-        {
-            MapTile startTile = map.GetSingleTileByType(TileType.StartPoint);
-            Vector2 playerStartPoint = map.GetTileCenter(tilemap, startTile);
-            player.transform.position = playerStartPoint;
-        }
+        OnLevelLoad?.Invoke();
     }
 }
 

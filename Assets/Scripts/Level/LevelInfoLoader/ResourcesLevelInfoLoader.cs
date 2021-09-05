@@ -29,12 +29,4 @@ public class ResourcesLevelInfoLoader : ILevelInfoLoader
         }
         return levels;
     }
-
-    //public Level ReadLevelInfo(string levelId)
-    //{
-    //    var fullFileName = string.Concat(levelId, levelInfoFilePostfix);
-    //    string json = Resources.Load(fullFileName).ToString();
-    //    Level level = JsonConvert.DeserializeObject<Level>(json);
-    //    return new Level(level.Name, level.Difficulty, level.Timer, level.IsLocked, level.Obstacles);
-    //}
 }
