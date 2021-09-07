@@ -1,20 +1,36 @@
-T T T T T T T T T T T T T T T T T T T T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 Q W W W W E 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 A S S S S D 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 A S S S S D 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 Z X R X X C 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 B 0 0 0 0 0 F 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 P 0 0 0 V 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 T
-T T T T T T T T T T T T T T T T T T T T
+e e e e e e e e e e e e e e e e e N e e e e e e e e e e e e e e e e e e
+e e e e e e e e e e e e e e e e e e e 7 e e e e e e 1 e e e e 6 e e e e
+e e e 2 e e 8 e e e e e e e e e e e e 4 e e e e e e e e e 8 e e e e 9 e
+e e e e e e e e e e e e 1 e e e e e e e e e e e 7 e e e e e e e e 5 e e
+e 8 e e e e e e e e e e e e e 5 e e e e 3 e e e 4 e e e e e e e e e e e
+e e e e e e e e e e e e e 0 e e e e e e e e e e e e e e e e e 1 e e N e
+e e e e e e e e e e e e e e e e e e e e e e 0 e e e e e e e e e e e e e
+e e e e e 5 e T T T T T T T T T T T T T T T T 8 9 8 T T T e e e e e e e
+e e 5 1 e e e T 8 9 e e e e e 0 e e e e e e e e e e e e T e e e e e e e
+e e e e e e e T 5 e e e e e e e e e e Q W W W W W W W E T e e e e e e e
+e e e e e e N T e 1 P e e e e e e 8 e A 1 e e e e e e D T e e 8 e e 0 e
+e 9 e e e e e T 1 2 e e e e e e 9 5 e A e S S S S B e D T e e e e 9 e e
+e e e e e e e T e e e e e e N e e e e A e S S S S e e D T e 6 e N e e e
+e e e e 2 e e T e e e e e e e e 1 e e A e e e e 8 e 2 D T e e e e e e e
+e 5 e e e e e T e e e e e e e e e e e Z X X X R X X X C T e e e e 2 e e
+e e e e e e e T e e e e e e 9 e e e e e e e e e e e e e T M 3 e e e e e
+e e e e e e e A e e e e e 5 e 8 e e e e e e e e e e e 7 T e e e e e e e
+e e 8 e e 7 e A e e e e e e e e e e e e e V e e e e e 4 T e 9 e e e 7 e
+e e e e e 4 e A e e e e e e e e e e e e 1 e e e e e e e T e e e e e 4 e
+e e e e e e e A e e e e e e e e e e e e e e e e e e e e T e e e e e e e
+e 6 e e e e e A e e 6 e e S S S e e 7 e e e e e e e e e T 6 e e e e e e
+e e e e 1 e 7 A e e e e e S S S e e 4 e N e 8 e e e e e T e e e 1 e 5 e
+e e e e e e 4 T e e e e e e e e e e e e e e e e e 2 e e T e e e e 2 e e
+e e 9 e 0 e e T 7 e e e e e e e e e e e e e e e 2 1 e e T e e e e e e e
+e e e e e e 5 T 4 e B e e e e 2 e e e 6 e e e e e e B e T N e e e 0 e e
+e e e 0 e e e T e e e e e e e e 2 e e e e e e S S S e 3 T e e e e e e e
+e e e e e e e T e e e e e e e e e e e e e F e e e e e e T e e e e 3 e e
+e e e e e e e T e 0 e e 3 e e e e e e e e e e e e e e 0 T e e 9 e e e e
+e e e e e e e T T T T T T T T T T T X X X X T T T T T T T e e e e e e e
+e e e e e e e e e e e e e 0 e e e e e e e e e e e e e e 8 e e M e 8 e e
+e e 1 e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e
+e e e e e e e e e 3 e 8 e e e e e e e e 7 e e e e e 6 e e e e e e e e e
+e e e e e e e e e e M e e e e e 1 e 7 e 4 e 2 e e e e e 9 e e e e N e e
+e e e e e 5 e e 0 e e e e e e e e e 4 e e e e e 5 e e e e 8 e e e e 3 e
+e e e 9 e e e e e e e 5 e e e e e e e 0 e e e e e e e e 6 e e 2 e 5 e e
+e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e e

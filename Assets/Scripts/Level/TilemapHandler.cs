@@ -55,28 +55,31 @@ public class TilemapHandler : MonoBehaviour
 
     internal bool ChangeTile(Vector3Int position, TileType tileType)
     {
+        Vector3Int newPosition = new Vector3Int(-position.y, -position.x, 0);
         bool state = false;
         if (tileType == TileType.Carrot)
         {
             tilemapMain.SetTile(position, carrotEmpty);
-            levelLoaderMain.map.SetTileType(position, TileType.Background);
+            levelLoaderMain.map.SetTileType(newPosition, TileType.Background);
         }
         if (tileType == TileType.Bonus)
         {
             tilemapMain.SetTile(position, null);
-            levelLoaderMain.map.SetTileType(position, TileType.Background);
+            levelLoaderMain.map.SetTileType(newPosition, TileType.Background);
         }
         if (tileType == TileType.ButtonOnOff)
         {
-            if (levelLoaderMain.map.GetTileAt(position.x, -position.y).IsOn)
+            
+            var currentButton = levelLoaderMain.map.GetTileAt(position.x, -position.y);
+            if (currentButton.IsOn)
             {
                 tilemapMain.SetTile(position, buttonOff);
-                levelLoaderMain.map.SetTileState(position, false);
+                levelLoaderMain.map.SetTileState(newPosition, false);
             }
             else
             {
                 tilemapMain.SetTile(position, buttonOn);
-                levelLoaderMain.map.SetTileState(position, true);
+                levelLoaderMain.map.SetTileState(newPosition, true);
                 state = true;
             }
         }
@@ -84,19 +87,19 @@ public class TilemapHandler : MonoBehaviour
     }
     internal void ChangeInteractiveObstacle(bool controlButtonState, int i)
     {
-        Vector3Int position = new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.x, -levelLoaderMain.map.Obstacles[i].Position.y, 0);
-        tileToChange = levelLoaderMain.map.GetTileAt(position.x, -position.y); //ONLY positive Y position (-/- = +) !!!
+        Vector3Int position = new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.x, -levelLoaderMain.map.Obstacles[i].Position.y, 0); //input Xpos, Yneg
+        tileToChange = levelLoaderMain.map.GetTileAt(-position.y, position.x); //ONLY positive Y position (-/- = +) !!!
         if (tileToChange.Tile == spikesOn || tileToChange.Tile == spikesOff)
         {
             if (controlButtonState)
             {
-                tilemapMain.SetTile(position, spikesOff);
+                tilemapMain.SetTile(new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.y, -levelLoaderMain.map.Obstacles[i].Position.x, 0), spikesOff);
                 levelLoaderMain.map.SetTileState(position, false); //ONLY negative Y position !!!
                 levelLoaderMain.map.SetTileType(position, TileType.Walkable);
             }
             else
             {
-                tilemapMain.SetTile(position, spikesOn);
+                tilemapMain.SetTile(new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.y, -levelLoaderMain.map.Obstacles[i].Position.x, 0), spikesOn);
                 levelLoaderMain.map.SetTileState(position, true);
                 levelLoaderMain.map.SetTileType(position, TileType.InteractiveObstacle);
             }

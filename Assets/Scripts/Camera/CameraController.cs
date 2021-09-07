@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform target;
     [SerializeField]
-    [Range(-4,-1)]
+    [Range(-3.3f,-2f)]
     private float cameraZPosition = -3.2f;
 
     private Camera cameraMain;

@@ -26,6 +26,30 @@ TextureImporter:
   - first:
       213: 4818688311654491798
     second: terrain_atlas_7
+  - first:
+      213: 329386709405086495
+    second: Tree2
+  - first:
+      213: -8423211074148797338
+    second: Stump1
+  - first:
+      213: 741030023473804363
+    second: Stump2
+  - first:
+      213: -8116610545250455992
+    second: Rock1
+  - first:
+      213: 3557554457561515331
+    second: Rock2
+  - first:
+      213: 8498308036931192802
+    second: Rock3
+  - first:
+      213: 3508854298320826789
+    second: Pine1
+  - first:
+      213: -8689864928591469805
+    second: Pine2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -294,7 +318,7 @@ TextureImporter:
         width: 95
         height: 117
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,6 +326,174 @@ TextureImporter:
       bones: []
       spriteID: e3e5478d2292d6f70800000000000000
       internalID: 9182040444915441214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tree2
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 3
+        width: 60
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1333df8777329400800000000000000
+      internalID: 329386709405086495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stump1
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 418
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6647939f72eba1b80800000000000000
+      internalID: -8423211074148797338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stump2
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 587
+        width: 52
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b443e0551eaa84a00800000000000000
+      internalID: 741030023473804363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock1
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 320
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84e282676b10c5f80800000000000000
+      internalID: -8116610545250455992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock2
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 320
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 345cf003ee8fe5130800000000000000
+      internalID: 3557554457561515331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock3
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 126
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e78125322e00f570800000000000000
+      internalID: 8498308036931192802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine1
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 432
+        width: 85
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a1f304c464f1b030800000000000000
+      internalID: 3508854298320826789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pine2
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 377
+        width: 59
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3132e2963e5676780800000000000000
+      internalID: -8689864928591469805
       vertices: []
       indices: 
       edges: []

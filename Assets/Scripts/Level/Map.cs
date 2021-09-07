@@ -90,11 +90,11 @@ public class Map
 
     public void SetTileType(Vector3Int position, TileType tileType)
     {
-        map[-position.y][position.x].Type = tileType;
+        map[position.x][-position.y].Type = tileType;
     }
 
     public void SetTileState(Vector3Int position, bool state)
     {
-        map[-position.y][position.x].IsOn = state;
+        map[position.x][-position.y].IsOn = state;
     }
 }
