@@ -8,7 +8,6 @@ public enum GameStatus
     Menu
 }
 
-[DefaultExecutionOrder(10)]
 [RequireComponent(typeof(PlayerPrefsManager))]
 public class GameManager : MonoBehaviour
 {
@@ -35,7 +34,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CameraController cameraController;
     [SerializeField]
+    private SoundManager soundManager;
+
+    [Space(20)]
+    [SerializeField]
     private float delayOnGameEnd = 3f;
+    [SerializeField]
+    private float musicVolumeInMenu = 1f;
+    [SerializeField]
+    private float musicVolumeInGameplay = 0.5f;
 
     [Space(20)]
     [SerializeField]
@@ -81,6 +88,8 @@ public class GameManager : MonoBehaviour
         levelInfoHandler.levels = prefsManager.LoadPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
         UpdateMenuTexts();
         storeUi.UpdateBonuses(bonusesAll);
+        soundManager.SetMusicVolume(musicVolumeInMenu);
+        soundManager.PlayMusic();
     }
 
     private void Update()
@@ -105,6 +114,7 @@ public class GameManager : MonoBehaviour
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
         cameraController.enabled = true;
         cameraController.SetInitialCameraPosition();
+        soundManager.SetMusicVolume(musicVolumeInGameplay);
     }
 
     private void SetStartPosition()
@@ -174,10 +184,12 @@ public class GameManager : MonoBehaviour
             case TileType.Carrot:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
                 uiManager.ScoreUpdate(++carrotsPicked, carrotsAll, bonusesPicked);
+                soundManager.PlaySound(tileType.ToString());
                 break;
             case TileType.Bonus:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
                 uiManager.ScoreUpdate(carrotsPicked, carrotsAll, ++bonusesPicked);
+                soundManager.PlaySound(tileType.ToString());
                 break;
             case TileType.FinishPoint:
                 CheckWinConditions();
@@ -185,6 +197,7 @@ public class GameManager : MonoBehaviour
             case TileType.ButtonOnOff:
                 bool controlState = tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType); //changes button on/off tiles
                 tilemapHandler.ChangeInteractiveObstacle(controlState, (int)number);
+                soundManager.PlaySound(tileType.ToString());
                 break;
             default:
                 break;
@@ -237,6 +250,8 @@ public class GameManager : MonoBehaviour
             prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
             UnlockNextLevel(currentLevelId);
             status = GameStatus.Menu;
+            soundManager.PlaySound("Win");
+            soundManager.SetMusicVolume(musicVolumeInMenu);
         }
         else
         {
@@ -273,13 +288,4 @@ public class GameManager : MonoBehaviour
     {
         prefsManager.ClearPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
     }
-
-    //private void CheckInteraction(int number)
-    //{
-    //    if (levelLoaderMain.map.Buttons[number].IsOn)
-    //    {
-    //        MapTile obstacleToInteract = levelLoaderMain.map.Obstacles[(int)number];
-    //        tilemapHandler.ChangeTile(new Vector3Int(obstacleToInteract.Position.y, -obstacleToInteract.Position.x, 0), obstacleToInteract.Type);
-    //    }
-    //}
 }
