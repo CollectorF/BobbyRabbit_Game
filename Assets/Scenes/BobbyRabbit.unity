@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/a
+  m_ControlPath: <Gamepad>/dpad/left
 --- !u!114 &114568323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/d
+  m_ControlPath: <Gamepad>/dpad/right
 --- !u!114 &124292062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,6 +2941,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  enableKeyboardInput: 1
   levelLoaderMain: {fileID: 239693912}
   tilemapMain: {fileID: 239693910}
   NO_WAY_KEY: CantGoThere
@@ -3029,6 +3030,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1c1d67d1-7150-45d4-8a2c-c904295e3fd1
     m_ActionName: UI/NavigateGameLocation[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 540147953}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnWalkDebug
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 259692fe-5bac-42e6-b35a-6cb8ea8ad68b
+    m_ActionName: Player/Move_Debug[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4042,7 +4059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/w
+  m_ControlPath: <Gamepad>/dpad/up
 --- !u!114 &859001521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4694,7 +4711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/s
+  m_ControlPath: <Gamepad>/dpad/down
 --- !u!114 &986630695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5819,7 +5836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1482643446
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8641,7 +8658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1609807438
 RectTransform:
   m_ObjectHideFlags: 0

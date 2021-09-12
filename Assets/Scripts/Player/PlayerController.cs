@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private AnimationCurve speedCurve;
+    [SerializeField]
+    [Tooltip("Use for dedug")]
+    private bool enableKeyboardInput;
 
     [Space(20)]
     [SerializeField]
@@ -108,9 +111,13 @@ public class PlayerController : MonoBehaviour
     public void OnWalk(InputAction.CallbackContext value)
     {
         walkDirection = value.ReadValue<Vector2>();
-        if (walkDirection.x != 0 && walkDirection.y != 0)
+    }
+
+    public void OnWalkDebug(InputAction.CallbackContext value)
+    {
+        if (enableKeyboardInput)
         {
-            walkDirection = Vector2.zero;
+            walkDirection = value.ReadValue<Vector2>();
         }
     }
 }
