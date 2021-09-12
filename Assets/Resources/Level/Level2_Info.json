@@ -1,6 +1,6 @@
 ﻿{
-	"difficultyString" : "Hard",
-	"timer" : 80,
+	"difficultyString" : "Medium",
+	"timer" : 120,
 	"isOpen" : false,
-	"obstacles" : [true]
+	"obstacles" : [true,true]
 }

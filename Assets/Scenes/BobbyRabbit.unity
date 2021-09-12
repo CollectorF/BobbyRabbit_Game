@@ -1582,6 +1582,8 @@ MonoBehaviour:
   buttonOff: {fileID: 11400000, guid: 5b338ccafc318f04689404087b089f5c, type: 2}
   spikesOn: {fileID: 11400000, guid: b898b3b681cb57d4d96125b7a49fb35f, type: 2}
   spikesOff: {fileID: 11400000, guid: 475d4dddf9f188547ae3f96851dd27bb, type: 2}
+  turnerOn: {fileID: 11400000, guid: 7a62f339118caa84b8f45d341fa9ed22, type: 2}
+  turnerOff: {fileID: 11400000, guid: dfbb25c7aa53ab14c8653e7b421840d6, type: 2}
 --- !u!114 &239693912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,9 +1638,6 @@ MonoBehaviour:
   - Code: 86
     Type: 9
     TileAsset: {fileID: 11400000, guid: 5b338ccafc318f04689404087b089f5c, type: 2}
-  - Code: 82
-    Type: 3
-    TileAsset: {fileID: 11400000, guid: b898b3b681cb57d4d96125b7a49fb35f, type: 2}
   - Code: 84
     Type: 2
     TileAsset: {fileID: 0}
@@ -1678,6 +1677,42 @@ MonoBehaviour:
   - Code: 77
     Type: 2
     TileAsset: {fileID: 11400000, guid: e842ff0910d78ea46b6c07c74b62baa4, type: 2}
+  - Code: 82
+    Type: 3
+    TileAsset: {fileID: 11400000, guid: b898b3b681cb57d4d96125b7a49fb35f, type: 2}
+  - Code: 71
+    Type: 3
+    TileAsset: {fileID: 11400000, guid: 7a62f339118caa84b8f45d341fa9ed22, type: 2}
+  - Code: 113
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: bca1ad1462e66ce4fa49be546d230305, type: 2}
+  - Code: 119
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: 397ee86c1dc7cc54db5ee68199150ace, type: 2}
+  - Code: 101
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: bbe292b96f5f99d45a2a865f3d1dfd51, type: 2}
+  - Code: 97
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: f33f644973501bc4c9606852a57ebcfe, type: 2}
+  - Code: 115
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: 8e94454bba4e82c42a5df2abe772b6b4, type: 2}
+  - Code: 100
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: fd10b10f5143aef4fb80762b41059269, type: 2}
+  - Code: 122
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: 68eed7777847d494e8bdfcddd0a59081, type: 2}
+  - Code: 120
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: 18f7e61d415409d45bceb5025167a320, type: 2}
+  - Code: 99
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: 2fe24653d40e2cf43bd65f6bc9ee9319, type: 2}
+  - Code: 114
+    Type: 2
+    TileAsset: {fileID: 11400000, guid: 503c113d728d86546b3dad3e49d2bb5b, type: 2}
 --- !u!1 &241475167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,10 +2103,10 @@ RectTransform:
   m_Father: {fileID: 564011431}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -463, y: -79}
-  m_SizeDelta: {x: 559.4927, y: 84.16492}
+  m_AnchoredPosition: {x: 365, y: -79}
+  m_SizeDelta: {x: -1096.5073, y: 84.16492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &306217566
 MonoBehaviour:
@@ -2695,10 +2730,6 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: eba9f432-7893-4ef3-b83b-99ef16bdedfd
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 9d86befd-545d-4e4b-abd1-eeb2b00c15d6
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -2993,10 +3024,10 @@ RectTransform:
   m_Father: {fileID: 564011431}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -463, y: -192}
-  m_SizeDelta: {x: 559.4927, y: 84.16492}
+  m_AnchoredPosition: {x: 365, y: -192}
+  m_SizeDelta: {x: -1096.5073, y: 84.16492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &586656470
 MonoBehaviour:
@@ -3392,9 +3423,9 @@ RectTransform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 507.87866, y: 414}
-  m_SizeDelta: {x: 559.4927, y: 827.99}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -320.12134, y: 414}
+  m_SizeDelta: {x: -1096.5073, y: 827.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697209748
 MonoBehaviour:
@@ -3691,10 +3722,10 @@ RectTransform:
   m_Father: {fileID: 564011431}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -463, y: -309}
-  m_SizeDelta: {x: 559.4927, y: 84.16492}
+  m_AnchoredPosition: {x: 365, y: -309}
+  m_SizeDelta: {x: -1096.5073, y: 84.16492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &883211176
 MonoBehaviour:
@@ -5599,7 +5630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2765459}
-  m_AnchoredPosition: {x: -80, y: 15.398132}
+  m_AnchoredPosition: {x: -80, y: 15.398193}
   m_SizeDelta: {x: -857.2322, y: -69.2163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522492959
@@ -7490,6 +7521,9 @@ MonoBehaviour:
   - Code: 74
     Type: 0
     TileAsset: {fileID: 11400000, guid: 17fed45a1cd59934cb6ade673bd64031, type: 2}
+  - Code: 115
+    Type: 0
+    TileAsset: {fileID: 11400000, guid: 3fda36ceba53cd348933171113b3a39f, type: 2}
 --- !u!1 &1553993679
 GameObject:
   m_ObjectHideFlags: 0
@@ -7977,11 +8011,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 33.55
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 15
+  m_fontSizeMin: 12
   m_fontSizeMax: 55
   m_fontStyle: 1
   m_HorizontalAlignment: 2
@@ -7993,7 +8027,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -8013,7 +8047,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20.059235, y: 0, z: 17.193695, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9171,7 +9205,7 @@ GameObject:
   - component: {fileID: 1995610922}
   - component: {fileID: 1995610921}
   m_Layer: 5
-  m_Name: LevelDetails
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9192,10 +9226,10 @@ RectTransform:
   m_Father: {fileID: 1482643446}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -313}
-  m_SizeDelta: {x: 1580.2466, y: 559.1873}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0.000061035156, y: 90}
+  m_SizeDelta: {x: -133.4403, y: 559.1873}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995610921
 MonoBehaviour:
@@ -9537,10 +9571,10 @@ RectTransform:
   m_Father: {fileID: 564011431}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -463, y: -223.25977}
-  m_SizeDelta: {x: 559.49, y: 331.6985}
+  m_AnchoredPosition: {x: 365, y: -223.25977}
+  m_SizeDelta: {x: -1096.51, y: 331.6985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2130600773
 MonoBehaviour:

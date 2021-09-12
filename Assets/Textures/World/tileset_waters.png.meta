@@ -1,64 +1,40 @@
 fileFormatVersion: 2
-guid: 49f5ed65f2caf6b439273aaea5b2b9df
+guid: db79b93c26c9f8348b2e67a9d91226e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7637027100310183001
-    second: Fence_Top_Left
+      213: 8055384475749440650
+    second: Water_Top_Left
   - first:
-      213: 8914377794724248415
-    second: Fence_Top_Right
+      213: 8321878434514392389
+    second: Water_Bottom_Left
   - first:
-      213: 975726026604220588
-    second: Fence_Top
+      213: 5621523843335338789
+    second: Water_Top_Right
   - first:
-      213: -5920222853211970683
-    second: Fence_Bottom
+      213: -7165460296781898735
+    second: Water_Bottom_Right
   - first:
-      213: -1095819001279895145
-    second: Fence_Left
+      213: 7346291045214096611
+    second: Water2
   - first:
-      213: -6491558727815771521
-    second: Fence_Right
+      213: 4141570905519942927
+    second: Water1
   - first:
-      213: -5875007557442039344
-    second: Carrot_Main
+      213: -6627740058462970518
+    second: Water_Top
   - first:
-      213: 3194434932749950196
-    second: Fence_Bottom_Left
+      213: -5004789250339003500
+    second: Water_Bottom
   - first:
-      213: 3173916134931876075
-    second: Fence_Bottom_Right
+      213: -4427400085374452554
+    second: Water_Left
   - first:
-      213: -6963970503893104294
-    second: Carrot_Empty
+      213: -3463979750351794563
+    second: Water_Right
   - first:
-      213: 4073450209396934300
-    second: Target
-  - first:
-      213: -2642807797493501379
-    second: Fence_Pole
-  - first:
-      213: -7727342441139247179
-    second: Bonus
-  - first:
-      213: -9107332740215795285
-    second: Button_On
-  - first:
-      213: -8410114757688102176
-    second: Button_Off
-  - first:
-      213: 3085453732333286058
-    second: Spikes_Off
-  - first:
-      213: -6344847732045904330
-    second: Spikes_On
-  - first:
-      213: 4624603676838799469
-    second: Turner_Off
-  - first:
-      213: 349858907341897017
-    second: Turner_On
+      213: -1576364508772127232
+    second: Water_Rocks
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -172,7 +148,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fence_Top_Left
+      name: Water_Top_Left
       rect:
         serializedVersion: 2
         x: 0
@@ -186,14 +162,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95c150e5fab2cf960800000000000000
-      internalID: 7637027100310183001
+      spriteID: a8cdd3e50897acf60800000000000000
+      internalID: 8055384475749440650
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fence_Top_Right
+      name: Water_Bottom_Left
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 158
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 545d63158504d7370800000000000000
+      internalID: 8321878434514392389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water_Top_Right
       rect:
         serializedVersion: 2
         x: 50
@@ -207,14 +204,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5b3b28bf5b36bb70800000000000000
-      internalID: 8914377794724248415
+      spriteID: 52b3462c62aa30e40800000000000000
+      internalID: 5621523843335338789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fence_Top
+      name: Water_Bottom_Right
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 158
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11c562603db2f8c90800000000000000
+      internalID: -7165460296781898735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 208
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec8e9688c443f560800000000000000
+      internalID: 7346291045214096611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 158
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0deb9babc0d97930800000000000000
+      internalID: 4141570905519942927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Water_Top
       rect:
         serializedVersion: 2
         x: 150
@@ -228,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca019ddc6a97a8d00800000000000000
-      internalID: 975726026604220588
+      spriteID: a6d10b738898504a0800000000000000
+      internalID: -6627740058462970518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fence_Bottom
+      name: Water_Bottom
       rect:
         serializedVersion: 2
         x: 150
@@ -249,14 +309,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 583a6238ea427dda0800000000000000
-      internalID: -5920222853211970683
+      spriteID: 493a9dd71ba6b8ab0800000000000000
+      internalID: -5004789250339003500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fence_Left
+      name: Water_Left
       rect:
         serializedVersion: 2
         x: 200
@@ -270,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 799a69a9c6edac0f0800000000000000
-      internalID: -1095819001279895145
+      spriteID: 6bcb8b86417be82c0800000000000000
+      internalID: -4427400085374452554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fence_Right
+      name: Water_Right
       rect:
         serializedVersion: 2
         x: 200
@@ -291,249 +351,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7a44f51bb959e5a0800000000000000
-      internalID: -6491558727815771521
+      spriteID: d7e822f15c87defc0800000000000000
+      internalID: -3463979750351794563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Carrot_Main
+      name: Water_Rocks
       rect:
         serializedVersion: 2
         x: 0
         y: 108
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d19eede0c7c77ea0800000000000000
-      internalID: -5875007557442039344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Bottom_Left
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 158
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4fcd8a085a9e45c20800000000000000
-      internalID: 3194434932749950196
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Bottom_Right
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 158
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be8ce7998e30c0c20800000000000000
-      internalID: 3173916134931876075
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Carrot_Empty
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 108
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a59472139b10b5f90800000000000000
-      internalID: -6963970503893104294
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Target
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 108
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c964855226dc78830800000000000000
-      internalID: 4073450209396934300
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Pole
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 158
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3274c47f4cd25bd0800000000000000
-      internalID: -2642807797493501379
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bonus
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 108
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b76812bdf6f2c490800000000000000
-      internalID: -7727342441139247179
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_On
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 58
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ba1172020214c9180800000000000000
-      internalID: -9107332740215795285
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_Off
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 58
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0e2fab3cf25494b80800000000000000
-      internalID: -8410114757688102176
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spikes_Off
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 58
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa2f0a672dbb1da20800000000000000
-      internalID: 3085453732333286058
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Spikes_On
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 58
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6360679aa9292f7a0800000000000000
-      internalID: -6344847732045904330
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Turner_Off
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
         width: 48
         height: 48
       alignment: 0
@@ -543,29 +372,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6821f8ba84ed2040800000000000000
-      internalID: 4624603676838799469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Turner_On
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 8
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93dbe9592d2fad400800000000000000
-      internalID: 349858907341897017
+      spriteID: 00eaa1ac4d0af1ae0800000000000000
+      internalID: -1576364508772127232
       vertices: []
       indices: 
       edges: []
@@ -573,7 +381,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: d43b4591412b77046ba7f2e4a232f67b
+    spriteID: 642e1b1de713d944d85fc56ce2181fd5
     internalID: 0
     vertices: []
     indices: 

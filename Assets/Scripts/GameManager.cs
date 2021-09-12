@@ -217,7 +217,10 @@ public class GameManager : MonoBehaviour
         if (carrotsPicked == carrotsAll && secondsLeft > 0)
         {
             int unlockedLevels = 0;
-            DisplayMessage(WIN_KEY);
+            if (status == GameStatus.Runing)
+            {
+                DisplayMessage(WIN_KEY);
+            }
             if (exitTimerCoroutine == null)
             {
                 exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
@@ -233,6 +236,7 @@ public class GameManager : MonoBehaviour
             }
             prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
             UnlockNextLevel(currentLevelId);
+            status = GameStatus.Menu;
         }
         else
         {
@@ -249,6 +253,7 @@ public class GameManager : MonoBehaviour
             {
                 exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
             }
+            status = GameStatus.Menu;
         }
     }
 

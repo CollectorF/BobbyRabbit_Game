@@ -4,23 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-//[Serializable]
-//public struct ReplacementTiles
-//{
-//    public string Name;
-//    public Tile Tile;
-
-//    public ReplacementTiles(string name, Tile tile)
-//    {
-//        Name = name;
-//        Tile = tile;
-//    }
-//}
-
 public class TilemapHandler : MonoBehaviour
 {
-    //[SerializeField]
-    //private List<ReplacementTiles> replacementTiles;
     [SerializeField]
     private Tile carrotEmpty;
     [SerializeField]
@@ -31,6 +16,10 @@ public class TilemapHandler : MonoBehaviour
     private Tile spikesOn;
     [SerializeField]
     private Tile spikesOff;
+    [SerializeField]
+    private Tile turnerOn;
+    [SerializeField]
+    private Tile turnerOff;
 
     private LevelInfoHandler levelInfoHandler;
     private Tilemap tilemapMain;
@@ -100,6 +89,21 @@ public class TilemapHandler : MonoBehaviour
             else
             {
                 tilemapMain.SetTile(new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.y, -levelLoaderMain.map.Obstacles[i].Position.x, 0), spikesOn);
+                levelLoaderMain.map.SetTileState(position, true);
+                levelLoaderMain.map.SetTileType(position, TileType.InteractiveObstacle);
+            }
+        }
+        if (tileToChange.Tile == turnerOn || tileToChange.Tile == turnerOff)
+        {
+            if (controlButtonState)
+            {
+                tilemapMain.SetTile(new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.y, -levelLoaderMain.map.Obstacles[i].Position.x, 0), turnerOff);
+                levelLoaderMain.map.SetTileState(position, false); //ONLY negative Y position !!!
+                levelLoaderMain.map.SetTileType(position, TileType.Walkable);
+            }
+            else
+            {
+                tilemapMain.SetTile(new Vector3Int(levelLoaderMain.map.Obstacles[i].Position.y, -levelLoaderMain.map.Obstacles[i].Position.x, 0), turnerOn);
                 levelLoaderMain.map.SetTileState(position, true);
                 levelLoaderMain.map.SetTileType(position, TileType.InteractiveObstacle);
             }

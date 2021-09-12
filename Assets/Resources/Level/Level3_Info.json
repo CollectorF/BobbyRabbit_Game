@@ -1,0 +1,6 @@
+﻿{
+	"difficultyString" : "Hard",
+	"timer" : 180,
+	"isOpen" : false,
+	"obstacles" : [true,true,true]
+}

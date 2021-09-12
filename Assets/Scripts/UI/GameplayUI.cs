@@ -41,12 +41,15 @@ public class GameplayUI : MonoBehaviour
 
     internal void DisplayTextMessage(string msg)
     {
-        messagePanelText.text = msg;
-        if (timerCoroutine == null)
+        if (isActiveAndEnabled && !messagePanel.activeSelf)
         {
-            timerCoroutine = StartCoroutine(DisplayByTimeCoroutine(messagePanel, messageDisplayTime));
+            messagePanelText.text = msg;
+            if (timerCoroutine == null)
+            {
+                timerCoroutine = StartCoroutine(DisplayByTimeCoroutine(messagePanel, messageDisplayTime));
+            }
+            timerCoroutine = null;
         }
-        timerCoroutine = null;
     }
 
     public void UpdateScore(int carrots, int carrotsAll, int bonuses)
