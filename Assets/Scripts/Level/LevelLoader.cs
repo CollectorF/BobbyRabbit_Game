@@ -13,7 +13,7 @@ public struct Tiles
     public Tile TileAsset;
 }
 
-[ExecuteInEditMode]
+
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField]

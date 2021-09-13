@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
         cameraController.enabled = true;
         cameraController.SetInitialCameraPosition();
         soundManager.SetMusicVolume(musicVolumeInGameplay);
+        exitTimerCoroutine = null;
     }
 
     private void SetStartPosition()

@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private float currentClipLength;
     private float currentTime = 0f;
     private Vector2 walkDirection;
+    private Vector2Int walkDirectionDiscreet;
+    private Vector3 movementDirection;
     internal Vector2 currentPositionVector;
     private MapTile nextPosition;
 
@@ -48,9 +50,10 @@ public class PlayerController : MonoBehaviour
     {
         if (levelLoaderMain.map != null)
         {
+            walkDirectionDiscreet = Vector2Int.RoundToInt(walkDirection);
             currentPositionVector = GetCurrentPosInVector(tilemapMain);
             nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
-            Walk(walkDirection, nextPosition);
+            Walk(walkDirectionDiscreet, nextPosition);
         }
     }
 
@@ -65,10 +68,20 @@ public class PlayerController : MonoBehaviour
     {
         if (nextTile.Type != TileType.InteractiveObstacle && nextTile.Type != TileType.Obstacle)
         {
-            animator.SetFloat("Vertical", direction.y);
             animator.SetFloat("Horizontal", direction.x);
-            Vector3 movementDirection = transform.up * direction.y;
-            movementDirection += transform.right * direction.x;
+            animator.SetFloat("Vertical", direction.y);
+            if (direction.x != 0)
+            { 
+                movementDirection = transform.right * direction.x;
+            }
+            if (direction.y != 0)
+            {
+                movementDirection = transform.up * direction.y;
+            }
+            if (direction == Vector2.zero)
+            {
+                movementDirection = Vector2.zero;
+            }
             characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
             if (direction == Vector2.zero ^ currentTime >= currentClipLength)
             {
@@ -98,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     private MapTile GetNextTile(LevelLoader levelLoader, Vector2 position)
     {
-        MapTile nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(position.x + walkDirection.x), Mathf.FloorToInt(position.y - walkDirection.y));
+        MapTile nextPosition = levelLoader.map.GetTileAt(Mathf.FloorToInt(position.x + walkDirectionDiscreet.x), Mathf.FloorToInt(position.y - walkDirectionDiscreet.y));
         return nextPosition;
     }
 
@@ -113,11 +126,11 @@ public class PlayerController : MonoBehaviour
         walkDirection = value.ReadValue<Vector2>();
     }
 
-    public void OnWalkDebug(InputAction.CallbackContext value)
-    {
-        if (enableKeyboardInput)
-        {
-            walkDirection = value.ReadValue<Vector2>();
-        }
-    }
+    //public void OnWalkDebug(InputAction.CallbackContext value)
+    //{
+    //    if (enableKeyboardInput)
+    //    {
+    //        walkDirection = value.ReadValue<Vector2>();
+    //    }
+    //}
 }
