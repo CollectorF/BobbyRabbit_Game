@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         MapTile startTile = levelLoaderMain.map.GetSingleTileByType(TileType.StartPoint);
         Vector2 playerStartPoint = levelLoaderMain.map.GetTileCenter(tilemapMain, startTile);
         transform.position = playerStartPoint;
+        walkDirectionDiscreet = Vector2Int.zero;
     }
 
     private void Walk(Vector2 direction, MapTile nextTile)
