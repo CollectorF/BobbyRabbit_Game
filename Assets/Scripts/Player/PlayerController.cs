@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem.OnScreen;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     internal event Action<string> OnNoWay;
 
     private CharacterController characterController;
+    private OnScreenStick stick;
     private AnimatorClipInfo[] currentClipInfo;
     private float characterSpeedCurrent;
     private float currentClipLength;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        stick = FindObjectOfType<OnScreenStick>();
     }
 
     private void Update()
@@ -125,6 +128,11 @@ public class PlayerController : MonoBehaviour
     public void OnWalk(InputAction.CallbackContext value)
     {
         walkDirection = value.ReadValue<Vector2>();
+    }
+
+    public void ResetJoystick()
+    {
+        stick.OnPointerUp(null);
     }
 
     //public void OnWalkDebug(InputAction.CallbackContext value)

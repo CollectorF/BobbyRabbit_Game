@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     private string popupCaller;
 
     internal event Action<string> OnDisplayTextMessage;
-    internal event Action<int, int, int> OnUpdateScore;
+    //internal event Action<int, int, int> OnUpdateScore;
     internal event Action<string, float> OnUpdateTimer;
     internal event Action OnClearPrefs;
     internal event Action<int> OnStartGame;

@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
         cameraController.SetInitialCameraPosition();
         soundManager.SetMusicVolume(musicVolumeInGameplay);
         exitTimerCoroutine = null;
+        playerController.ResetJoystick();
     }
 
     private void SetStartPosition()

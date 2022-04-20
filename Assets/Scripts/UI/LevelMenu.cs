@@ -100,8 +100,7 @@ public class LevelMenu : MonoBehaviour
     {
         for (int i = 0; i < levels.Count; i++)
         {
-            GameObject button = Instantiate(levelButtonPrefab);
-            button.transform.SetParent(levelList.transform);
+            GameObject button = Instantiate(levelButtonPrefab, levelList.transform, false);
             TMP_Text buttonName = button.GetComponentInChildren<TMP_Text>();
             var buttonComponent = button.GetComponentInChildren<Button>();
             buttonName.text = $"{levelName} {i + 1}";
