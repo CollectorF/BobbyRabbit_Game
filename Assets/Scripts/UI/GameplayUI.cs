@@ -10,15 +10,17 @@ public class GameplayUI : MonoBehaviour
     [SerializeField]
     private float messageDisplayTime;
     [SerializeField]
-    private TMP_Text carrotsText;
+    private TextMeshProUGUI carrotsText;
     [SerializeField]
-    private TMP_Text bonusesText;
+    private TextMeshProUGUI bonusesText;
     [SerializeField]
-    private TMP_Text timerText;
+    private TextMeshProUGUI timerText;
     [SerializeField]
     private float highlightOnTimeLeft;
     [SerializeField]
-    internal TMP_Text quitButton;
+    internal TextMeshProUGUI quitButton;
+    [SerializeField]
+    internal RectTransform joystick;
 
     [Space(20)]
     [SerializeField]
@@ -27,10 +29,12 @@ public class GameplayUI : MonoBehaviour
     private TMP_Text messagePanelText;
     private Coroutine timerCoroutine;
     private UIManager uiManager;
+    private Vector3 stickStartPos;
     internal event Action<string> OnQuitButtonClick;
 
     private void Start()
     {
+        stickStartPos = joystick.anchoredPosition;
         uiManager = GetComponentInParent<UIManager>();
         messagePanelText = messagePanel.GetComponentInChildren<TMP_Text>();
         messagePanel.SetActive(false);
@@ -71,6 +75,11 @@ public class GameplayUI : MonoBehaviour
     public void UpdateMenu(string quit)
     {
         quitButton.text = quit;
+    }
+
+    public void ResetStick()
+    {
+        joystick.anchoredPosition = stickStartPos;
     }
 
     public void OnQuitClick()

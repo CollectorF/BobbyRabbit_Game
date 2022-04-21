@@ -15,9 +15,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private AnimationCurve speedCurve;
-    [SerializeField]
-    [Tooltip("Use for dedug")]
-    private bool enableKeyboardInput;
 
     [Space(20)]
     [SerializeField]
@@ -32,7 +29,6 @@ public class PlayerController : MonoBehaviour
     internal event Action<string> OnNoWay;
 
     private CharacterController characterController;
-    private OnScreenStick stick;
     private AnimatorClipInfo[] currentClipInfo;
     private float characterSpeedCurrent;
     private float currentClipLength;
@@ -46,7 +42,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
-        stick = FindObjectOfType<OnScreenStick>();
     }
 
     private void Update()
@@ -129,17 +124,4 @@ public class PlayerController : MonoBehaviour
     {
         walkDirection = value.ReadValue<Vector2>();
     }
-
-    public void ResetJoystick()
-    {
-        stick.OnPointerUp(null);
-    }
-
-    //public void OnWalkDebug(InputAction.CallbackContext value)
-    //{
-    //    if (enableKeyboardInput)
-    //    {
-    //        walkDirection = value.ReadValue<Vector2>();
-    //    }
-    //}
 }

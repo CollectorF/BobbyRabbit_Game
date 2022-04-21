@@ -7,11 +7,11 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    internal TMP_Text startGameButton;
+    internal TextMeshProUGUI startGameButton;
     [SerializeField]
-    internal TMP_Text storeButton;
+    internal TextMeshProUGUI storeButton;
     [SerializeField]
-    internal TMP_Text quitButton;
+    internal TextMeshProUGUI quitButton;
 
     [Space(20)]
     [SerializeField]

@@ -6,11 +6,11 @@ using UnityEngine;
 public class StoreUI : MonoBehaviour
 {
     [SerializeField]
-    internal TMP_Text mainText;
+    internal TextMeshProUGUI mainText;
     [SerializeField]
-    internal TMP_Text bonuses;
+    internal TextMeshProUGUI bonuses;
     [SerializeField]
-    internal TMP_Text quitButton;
+    internal TextMeshProUGUI quitButton;
 
     [Space(20)]
     [SerializeField]

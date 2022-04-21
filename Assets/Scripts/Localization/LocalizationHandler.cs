@@ -15,13 +15,14 @@ public class LocalizationHandler : MonoBehaviour
     private MainMenu mainMenu;
 
     private JSONReader jsonReader;
-    internal Dictionary<string, string> dictionary = new Dictionary<string, string>();
-    string selectedLocale = null;
+    internal Dictionary<string, string> dictionary;
+    private string selectedLocale;
 
     internal Action OnLocaleDictFill;
 
     private void Awake()
     {
+        dictionary = new Dictionary<string, string>();
         jsonReader = new JSONReader(dictionary);
         SetDefaultLocale(defaultLocale);
         mainMenu.OnLocaleButtonClick += SetLocale;

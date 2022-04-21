@@ -10,15 +10,15 @@ public class LevelMenu : MonoBehaviour
     [SerializeField]
     internal GameObject startButtonObj;
     [SerializeField]
-    internal TMP_Text clearProgressButton;
+    internal TextMeshProUGUI clearProgressButton;
     [SerializeField]
-    internal TMP_Text backButton;
+    internal TextMeshProUGUI backButton;
     [SerializeField]
-    internal TMP_Text difficulty;
+    internal TextMeshProUGUI difficulty;
     [SerializeField]
-    internal TMP_Text levelDifficulty;
+    internal TextMeshProUGUI levelDifficulty;
     [SerializeField]
-    private TMP_Text startText;
+    private TextMeshProUGUI startText;
     [SerializeField]
     private GameObject levelButtonPrefab;
     [SerializeField]

@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string NOT_ALL_CARROTS_KEY = "NotAllCollected";
     [SerializeField]
-    private string LOOSE_KEY = "LooseGame";
+    private string LOSE_KEY = "LoseGame";
     [SerializeField]
     private string WIN_KEY = "WinGame";
 
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager.TimerUpdate(SetupTimer(Mathf.Clamp(secondsLeft, 0, secondsToPassLevel)), secondsLeft);
         secondsLeft -= Time.deltaTime;
-        CheckLooseConditions();
+        CheckLoseConditions();
     }
 
     private void StartGame(int levelId)
@@ -115,8 +115,12 @@ public class GameManager : MonoBehaviour
         cameraController.enabled = true;
         cameraController.SetInitialCameraPosition();
         soundManager.SetMusicVolume(musicVolumeInGameplay);
-        exitTimerCoroutine = null;
-        playerController.ResetJoystick();
+        if (exitTimerCoroutine != null)
+        {
+            StopCoroutine(exitTimerCoroutine);
+            exitTimerCoroutine = null;
+        }
+        gameplayUi.ResetStick();
     }
 
     private void SetStartPosition()
@@ -261,11 +265,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void CheckLooseConditions()
+    private void CheckLoseConditions()
     {
         if (status == GameStatus.Runing && secondsLeft <= 0)
         {
-            DisplayMessage(LOOSE_KEY);
+            DisplayMessage(LOSE_KEY);
             if (exitTimerCoroutine == null)
             {
                 exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));

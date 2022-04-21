@@ -15,11 +15,11 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject popup;
     [SerializeField]
-    internal TMP_Text popupText;
+    internal TextMeshProUGUI popupText;
     [SerializeField]
-    internal TMP_Text popupYes;
+    internal TextMeshProUGUI popupYes;
     [SerializeField]
-    internal TMP_Text popupNo;
+    internal TextMeshProUGUI popupNo;
     [SerializeField]
     private LevelInfoHandler levelInfoHandler;
 
