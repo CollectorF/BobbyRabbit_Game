@@ -6,8 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class InteractionHandler : MonoBehaviour
 {
-    //[SerializeField]
-    //private Tilemap tilemapMain;
     [SerializeField]
     private LevelLoader levelLoaderMain;
 

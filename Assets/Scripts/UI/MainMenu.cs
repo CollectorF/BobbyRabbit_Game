@@ -7,6 +7,8 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
+    internal LocalizationHandler localizationHandler;
+    [SerializeField]
     internal TextMeshProUGUI startGameButton;
     [SerializeField]
     internal TextMeshProUGUI storeButton;
@@ -25,16 +27,16 @@ public class MainMenu : MonoBehaviour
     internal Action<string> OnQuitButtonClick;
     internal Action OnStartButtonClick;
 
-    public void OnLocaleClick(string locale)
-    {
-        OnLocaleButtonClick?.Invoke(locale);
-    }
-
     public void UpdateMenu(string start, string store, string quit)
     {
         startGameButton.text = start;
         storeButton.text = store;
         quitButton.text = quit;
+    }
+
+    public void OnLocaleClick(string locale)
+    {
+        OnLocaleButtonClick?.Invoke(locale);
     }
 
     public void OnStartClick()

@@ -1786,7 +1786,6 @@ MonoBehaviour:
   - uk-UA
   defaultLocale: en-US
   localeFolder: Localization
-  mainMenu: {fileID: 1340322496}
 --- !u!114 &243963057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5341,6 +5340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4ea5b459ce25c4cab1c9faa1a5bcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localizationHandler: {fileID: 243963056}
   startGameButton: {fileID: 1741575594}
   storeButton: {fileID: 1566613896}
   quitButton: {fileID: 2108655825}

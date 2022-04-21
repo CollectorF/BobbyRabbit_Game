@@ -11,8 +11,6 @@ public class LocalizationHandler : MonoBehaviour
     private string defaultLocale;
     [SerializeField]
     private string localeFolder = "Localization";
-    [SerializeField]
-    private MainMenu mainMenu;
 
     private JSONReader jsonReader;
     internal Dictionary<string, string> dictionary;
@@ -25,7 +23,6 @@ public class LocalizationHandler : MonoBehaviour
         dictionary = new Dictionary<string, string>();
         jsonReader = new JSONReader(dictionary);
         SetDefaultLocale(defaultLocale);
-        mainMenu.OnLocaleButtonClick += SetLocale;
     }
 
     private void SetDefaultLocale(string locale)
@@ -40,7 +37,7 @@ public class LocalizationHandler : MonoBehaviour
         FillDictionary(selectedLocale);
     }
 
-    private void SetLocale(string locale)
+    internal void SetLocale(string locale)
     {
         foreach (var item in localizations)
         {

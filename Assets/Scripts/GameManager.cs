@@ -9,6 +9,7 @@ public enum GameStatus
 }
 
 [RequireComponent(typeof(PlayerPrefsManager))]
+[RequireComponent(typeof(LocalizationHandler))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
         localeHandler.OnLocaleDictFill += UpdateMenuTexts;
         uiManager.OnClearPrefs += ClearPlayerPrefs;
         uiManager.OnStartGame += StartGame;
+        mainMenu.OnLocaleButtonClick += SetLocale;
 
         cameraController.enabled = false;
         levelInfoHandler.levels = prefsManager.LoadPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
@@ -99,6 +101,10 @@ public class GameManager : MonoBehaviour
         CheckLoseConditions();
     }
 
+    private void SetLocale(string locale)
+    {
+        localeHandler.SetLocale(locale);
+    }
     private void StartGame(int levelId)
     {
         carrotsPicked = 0;
@@ -275,6 +281,7 @@ public class GameManager : MonoBehaviour
                 exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
             }
             status = GameStatus.Menu;
+            levelMenu.DestroyLevelList();
         }
     }
 
