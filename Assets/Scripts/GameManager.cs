@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public enum GameStatus
+public enum GameState
 {
-    Runing,
-    Menu
+    MainMenu,
+    LevelMenu,
+    StoreMenu,
+    Gameplay
 }
 
 [RequireComponent(typeof(PlayerPrefsManager))]
@@ -24,6 +26,8 @@ public class GameManager : MonoBehaviour
     private LevelMenu levelMenu;
     [SerializeField]
     private GameplayUI gameplayUi;
+    [SerializeField]
+    private Popup popup;
     [SerializeField]
     private TilemapHandler tilemapHandler;
     [SerializeField]
@@ -62,10 +66,10 @@ public class GameManager : MonoBehaviour
     private int bonusesAll = 0;
     private float secondsLeft;
     private float secondsToPassLevel;
-    private GameStatus status;
     private PlayerPrefsManager prefsManager;
     private int currentLevelId;
     private Coroutine exitTimerCoroutine;
+    private GameState gameState;
 
     private void Awake()
     {
@@ -73,8 +77,7 @@ public class GameManager : MonoBehaviour
         interactionHandler = player.GetComponent<InteractionHandler>();
         localeHandler = GetComponent<LocalizationHandler>();
         prefsManager = GetComponent<PlayerPrefsManager>();
-
-        status = GameStatus.Menu;
+        SetGameState(GameState.MainMenu);
     }
     private void Start()
     {
@@ -85,6 +88,11 @@ public class GameManager : MonoBehaviour
         uiManager.OnClearPrefs += ClearPlayerPrefs;
         uiManager.OnStartGame += StartGame;
         mainMenu.OnLocaleButtonClick += SetLocale;
+        mainMenu.OnStartButtonClick += SetGameState;
+        mainMenu.OnStoreButtonClick += SetGameState;
+        levelMenu.OnBackButtonClick += SetGameState;
+        storeUi.OnBackButtonClick += SetGameState;
+
 
         cameraController.enabled = false;
         levelInfoHandler.levels = prefsManager.LoadPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
@@ -101,19 +109,26 @@ public class GameManager : MonoBehaviour
         CheckLoseConditions();
     }
 
+    void SetGameState(GameState state)
+    {
+        gameState = state;
+        Debug.Log(gameState);
+    }
+
     private void SetLocale(string locale)
     {
         localeHandler.SetLocale(locale);
     }
+
     private void StartGame(int levelId)
     {
+        SetGameState(GameState.Gameplay);
         carrotsPicked = 0;
         bonusesPicked = 0;
         currentLevelId = levelId;
         levelLoaderMain.SetupLevel(currentLevelId);
         levelLoaderBackground.SetupLevel(currentLevelId);
         tilemapHandler.SetObstacleInitialState(levelLoaderMain.map, levelInfoHandler.levels, currentLevelId);
-        status = GameStatus.Runing;
         carrotsAll = levelLoaderMain.map.CarrotQuantity;
         secondsToPassLevel = levelInfoHandler.levels[currentLevelId].Timer;
         secondsLeft = secondsToPassLevel;
@@ -140,11 +155,11 @@ public class GameManager : MonoBehaviour
     {
         string startText = FindByKey(mainMenu.START_GAME_KEY);
         string storeText = FindByKey(mainMenu.STORE_KEY);
-        string quitText = FindByKey(mainMenu.QUIT_KEY);
+        string quitText = FindByKey(gameplayUi.QUIT_KEY);
 
-        string warningText = FindByKey(uiManager.POPUP_WARNING_KEY);
-        string yesText = FindByKey(uiManager.POPUP_YES_KEY);
-        string noText = FindByKey(uiManager.POPUP_NO_KEY);
+        string warningText = FindByKey(popup.POPUP_WARNING_KEY);
+        string yesText = FindByKey(popup.POPUP_YES_KEY);
+        string noText = FindByKey(popup.POPUP_NO_KEY);
 
         string goText = FindByKey(levelMenu.START_KEY);
         string resetText = FindByKey(levelMenu.RESET_KEY);
@@ -157,8 +172,8 @@ public class GameManager : MonoBehaviour
 
         string storeMainText = FindByKey(storeUi.STORE_TEXT_KEY);
 
-        uiManager.UpdatePopup(warningText, yesText, noText);
-        mainMenu.UpdateMenu(startText, storeText, quitText);
+        popup.UpdatePopup(warningText, yesText, noText);
+        mainMenu.UpdateMenu(startText, storeText);
         levelMenu.UpdateMenu(goText, resetText, backText, levelDifficultyText);
         levelMenu.levelName = levelNameText;
         gameplayUi.UpdateMenu(quitText);
@@ -221,6 +236,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         uiManager.ActivateLevelMenu();
         levelLoaderMain.map = null;
+        SetGameState(GameState.LevelMenu);
     }
 
     private string FindByKey(string key)
@@ -242,7 +258,7 @@ public class GameManager : MonoBehaviour
         if (carrotsPicked == carrotsAll && secondsLeft > 0)
         {
             int unlockedLevels = 0;
-            if (status == GameStatus.Runing)
+            if (gameState == GameState.Gameplay)
             {
                 DisplayMessage(WIN_KEY);
             }
@@ -261,7 +277,6 @@ public class GameManager : MonoBehaviour
             }
             prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
             UnlockNextLevel(currentLevelId);
-            status = GameStatus.Menu;
             soundManager.PlaySound("Win");
             soundManager.SetMusicVolume(musicVolumeInMenu);
         }
@@ -273,14 +288,13 @@ public class GameManager : MonoBehaviour
 
     private void CheckLoseConditions()
     {
-        if (status == GameStatus.Runing && secondsLeft <= 0)
+        if (gameState == GameState.Gameplay && secondsLeft <= 0)
         {
             DisplayMessage(LOSE_KEY);
             if (exitTimerCoroutine == null)
             {
                 exitTimerCoroutine = StartCoroutine(ExitTimerCoroutine(delayOnGameEnd));
             }
-            status = GameStatus.Menu;
             levelMenu.DestroyLevelList();
         }
     }

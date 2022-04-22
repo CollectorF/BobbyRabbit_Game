@@ -53,7 +53,7 @@ public class LevelMenu : MonoBehaviour
 
     internal Action<int?> OnStartButtonClick;
     internal Action<string> OnClearButtonClick;
-    internal Action OnBackButtonClick;
+    internal Action<GameState> OnBackButtonClick;
 
     private void Awake()
     {
@@ -81,7 +81,8 @@ public class LevelMenu : MonoBehaviour
 
     public void OnBackClick()
     {
-        OnBackButtonClick?.Invoke();
+        var state = GameState.MainMenu;
+        OnBackButtonClick?.Invoke(state);
         DestroyLevelList();
         levelDetails.SetActive(false);
         startButton.interactable = false;

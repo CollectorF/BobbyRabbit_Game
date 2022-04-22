@@ -15,29 +15,15 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject popup;
     [SerializeField]
-    internal TextMeshProUGUI popupText;
-    [SerializeField]
-    internal TextMeshProUGUI popupYes;
-    [SerializeField]
-    internal TextMeshProUGUI popupNo;
-    [SerializeField]
     private LevelInfoHandler levelInfoHandler;
-
-    [Space(20)]
-    [SerializeField]
-    internal string POPUP_WARNING_KEY = "PopupWarning";
-    [SerializeField]
-    internal string POPUP_YES_KEY = "Yes";
-    [SerializeField]
-    internal string POPUP_NO_KEY = "No";
 
     private MainMenu mainMenuManager;
     private LevelMenu levelMenuManager;
     private GameplayUI gameplayUiManager;
+    private Canvas canvas;
     private string popupCaller;
 
     internal event Action<string> OnDisplayTextMessage;
-    //internal event Action<int, int, int> OnUpdateScore;
     internal event Action<string, float> OnUpdateTimer;
     internal event Action OnClearPrefs;
     internal event Action<int> OnStartGame;
@@ -47,24 +33,19 @@ public class UIManager : MonoBehaviour
         mainMenuManager = mainMenu.GetComponent<MainMenu>();
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
         gameplayUiManager = gameplayUI.GetComponent<GameplayUI>();
+        canvas = GetComponentInChildren<Canvas>();
 
-        mainMenuManager.OnQuitButtonClick += ShowPopup;
+        // Popup control
+        gameplayUiManager.OnQuitButtonClick += HandlePopup;
+        levelMenuManager.OnClearButtonClick += HandlePopup;
 
-        levelMenuManager.OnClearButtonClick += ShowPopup;
-        levelMenuManager.OnBackButtonClick += ActivateMainMenu;
+        //mainMenuManager.OnStartButtonClick += ActivateLevelMenu;
         levelMenuManager.OnStartButtonClick += ActivateGameplayUI;
-
-        gameplayUiManager.OnQuitButtonClick += ShowPopup;
     }
 
     private void Start()
     {
         ActivateMainMenu();
-    }
-
-    internal void UpdateLevelList()
-    {
-        levelMenuManager.FillLevelList(levelInfoHandler.levels);
     }
 
     public void ActivateMainMenu()
@@ -73,16 +54,6 @@ public class UIManager : MonoBehaviour
         storeUI.SetActive(false);
         levelMenu.SetActive(false);
         gameplayUI.SetActive(false);
-        popup.SetActive(false);
-    }
-
-    public void ActivateStoreUI()
-    {
-        mainMenu.SetActive(false);
-        storeUI.SetActive(true);
-        levelMenu.SetActive(false);
-        gameplayUI.SetActive(false);
-        popup.SetActive(false);
     }
 
     public void ActivateLevelMenu()
@@ -91,7 +62,6 @@ public class UIManager : MonoBehaviour
         storeUI.SetActive(false);
         levelMenu.SetActive(true);
         gameplayUI.SetActive(false);
-        popup.SetActive(false);
         UpdateLevelList();
     }
 
@@ -101,10 +71,30 @@ public class UIManager : MonoBehaviour
         storeUI.SetActive(false);
         levelMenu.SetActive(false);
         gameplayUI.SetActive(true);
-        popup.SetActive(false);
         OnStartGame?.Invoke((int)id);
         levelMenuManager.DestroyLevelList();
     }
+
+    public void ActivateStoreUI()
+    {
+        mainMenu.SetActive(false);
+        storeUI.SetActive(true);
+        levelMenu.SetActive(false);
+        gameplayUI.SetActive(false);
+    }
+
+    public void HandlePopup(string caller)
+    {
+        popup.SetActive(true);
+        popupCaller = caller;
+    }
+
+    internal void UpdateLevelList()
+    {
+        levelMenuManager.FillLevelList(levelInfoHandler.levels);
+    }
+
+    // Transfer of events from GameManager to GameplayUI
 
     internal void DisplayMessage(string msg)
     {
@@ -115,48 +105,9 @@ public class UIManager : MonoBehaviour
     {
         gameplayUiManager.UpdateScore(carrots, carrotsAll, bonuses);
     }
+
     public void TimerUpdate(string timer, float timeLeft)
     {
         OnUpdateTimer?.Invoke(timer, timeLeft);
-    }
-
-    public void ShowPopup(string caller)
-    {
-        popup.SetActive(true);
-        popupCaller = caller;
-    }
-
-    public void HidePopup()
-    {
-        popup.SetActive(false);
-    }
-
-    public void UpdatePopup(string warning, string yes, string no)
-    {
-        popupText.text = warning;
-        popupYes.text = yes;
-        popupNo.text = no;
-    }
-    public void OnPopupYes()
-    {
-        if (popupCaller == "MainMenu")
-        {
-            Application.Quit();
-        }
-        if (popupCaller == "LevelMenu")
-        {
-            OnClearPrefs?.Invoke();
-            levelMenuManager.UpdateLevelList();
-            HidePopup();
-        }
-        if (popupCaller == "GameplayUI")
-        {
-            ActivateLevelMenu();
-            HidePopup();
-        }
-    }
-    public void OnPopupNo()
-    {
-        HidePopup();
     }
 }

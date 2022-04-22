@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,8 @@ public class StoreUI : MonoBehaviour
     [SerializeField]
     internal string STORE_TEXT_KEY = "StoreText";
 
+    internal Action<GameState> OnBackButtonClick;
+
     public void UpdateMenu(string main, string quit)
     {
         mainText.text = main;
@@ -25,6 +28,12 @@ public class StoreUI : MonoBehaviour
     public void UpdateBonuses(int bonus)
     {
         bonuses.text = bonus.ToString();
+    }
+
+    public void OnBackClick()
+    {
+        var state = GameState.MainMenu;
+        OnBackButtonClick?.Invoke(state);
     }
 }
 

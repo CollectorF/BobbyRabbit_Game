@@ -81,7 +81,9 @@ public class PlayerController : MonoBehaviour
             {
                 movementDirection = Vector2.zero;
             }
+
             characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
+
             if (direction == Vector2.zero ^ currentTime >= currentClipLength)
             {
                 currentTime = 0f;

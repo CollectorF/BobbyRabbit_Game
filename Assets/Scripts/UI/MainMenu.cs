@@ -12,26 +12,21 @@ public class MainMenu : MonoBehaviour
     internal TextMeshProUGUI startGameButton;
     [SerializeField]
     internal TextMeshProUGUI storeButton;
-    [SerializeField]
-    internal TextMeshProUGUI quitButton;
 
     [Space(20)]
     [SerializeField]
     internal string START_GAME_KEY = "StartGame";
     [SerializeField]
     internal string STORE_KEY = "Store";
-    [SerializeField]
-    internal string QUIT_KEY = "Quit";
 
     internal Action<string> OnLocaleButtonClick;
-    internal Action<string> OnQuitButtonClick;
-    internal Action OnStartButtonClick;
+    internal Action<GameState> OnStartButtonClick;
+    internal Action<GameState> OnStoreButtonClick;
 
-    public void UpdateMenu(string start, string store, string quit)
+    public void UpdateMenu(string start, string store)
     {
         startGameButton.text = start;
         storeButton.text = store;
-        quitButton.text = quit;
     }
 
     public void OnLocaleClick(string locale)
@@ -39,13 +34,15 @@ public class MainMenu : MonoBehaviour
         OnLocaleButtonClick?.Invoke(locale);
     }
 
-    public void OnStartClick()
+    public void OnStartClick()   
     {
-        OnStartButtonClick?.Invoke();
+        var state = GameState.LevelMenu;
+        OnStartButtonClick?.Invoke(state);
     }
 
-    public void OnQuitClick()
+    public void OnStoreClick()
     {
-        OnQuitButtonClick?.Invoke(tag);
+        var state = GameState.StoreMenu;
+        OnStoreButtonClick?.Invoke(state);
     }
 }
