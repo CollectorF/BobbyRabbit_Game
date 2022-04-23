@@ -13,34 +13,30 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject gameplayUI;
     [SerializeField]
-    private GameObject popup;
+    private Popup popup;
+    //[SerializeField]
+    //private GameObject popupHandler;
     [SerializeField]
     private LevelInfoHandler levelInfoHandler;
 
-    private MainMenu mainMenuManager;
     private LevelMenu levelMenuManager;
     private GameplayUI gameplayUiManager;
-    private Canvas canvas;
-    private string popupCaller;
 
     internal event Action<string> OnDisplayTextMessage;
     internal event Action<string, float> OnUpdateTimer;
-    internal event Action OnClearPrefs;
     internal event Action<int> OnStartGame;
 
     private void Awake()
     {
-        mainMenuManager = mainMenu.GetComponent<MainMenu>();
         levelMenuManager = levelMenu.GetComponent<LevelMenu>();
         gameplayUiManager = gameplayUI.GetComponent<GameplayUI>();
-        canvas = GetComponentInChildren<Canvas>();
+        levelMenuManager.OnStartButtonClick += ActivateGameplayUI;
 
         // Popup control
         gameplayUiManager.OnQuitButtonClick += HandlePopup;
         levelMenuManager.OnClearButtonClick += HandlePopup;
-
-        //mainMenuManager.OnStartButtonClick += ActivateLevelMenu;
-        levelMenuManager.OnStartButtonClick += ActivateGameplayUI;
+        popup.OnActivateLevelMenu += ActivateLevelMenu;
+        popup.OnUpdateLevelList += UpdateLevelList;
     }
 
     private void Start()
@@ -83,18 +79,17 @@ public class UIManager : MonoBehaviour
         gameplayUI.SetActive(false);
     }
 
-    public void HandlePopup(string caller)
-    {
-        popup.SetActive(true);
-        popupCaller = caller;
-    }
-
     internal void UpdateLevelList()
     {
+        levelMenuManager.DestroyLevelList();
         levelMenuManager.FillLevelList(levelInfoHandler.levels);
     }
 
     // Transfer of events from GameManager to GameplayUI
+    public void HandlePopup()
+    {
+        popup.HandlePopup(GameManager.GameState);
+    }
 
     internal void DisplayMessage(string msg)
     {

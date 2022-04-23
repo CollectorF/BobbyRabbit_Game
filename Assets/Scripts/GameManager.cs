@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     private PlayerPrefsManager prefsManager;
     private int currentLevelId;
     private Coroutine exitTimerCoroutine;
-    private GameState gameState;
+    public static GameState GameState { get; private set; }
 
     private void Awake()
     {
@@ -85,13 +85,13 @@ public class GameManager : MonoBehaviour
         playerController.OnNoWay += DisplayMessage;
         interactionHandler.OnInteraction += ProcessInteraction;
         localeHandler.OnLocaleDictFill += UpdateMenuTexts;
-        uiManager.OnClearPrefs += ClearPlayerPrefs;
         uiManager.OnStartGame += StartGame;
         mainMenu.OnLocaleButtonClick += SetLocale;
         mainMenu.OnStartButtonClick += SetGameState;
         mainMenu.OnStoreButtonClick += SetGameState;
         levelMenu.OnBackButtonClick += SetGameState;
         storeUi.OnBackButtonClick += SetGameState;
+        popup.OnClearPrefs += ClearPlayerPrefs;
 
 
         cameraController.enabled = false;
@@ -111,8 +111,7 @@ public class GameManager : MonoBehaviour
 
     void SetGameState(GameState state)
     {
-        gameState = state;
-        Debug.Log(gameState);
+        GameState = state;
     }
 
     private void SetLocale(string locale)
@@ -258,7 +257,7 @@ public class GameManager : MonoBehaviour
         if (carrotsPicked == carrotsAll && secondsLeft > 0)
         {
             int unlockedLevels = 0;
-            if (gameState == GameState.Gameplay)
+            if (GameState == GameState.Gameplay)
             {
                 DisplayMessage(WIN_KEY);
             }
@@ -268,6 +267,7 @@ public class GameManager : MonoBehaviour
             }
             bonusesAll += bonusesPicked;
             storeUi.UpdateBonuses(bonusesAll);
+            UnlockNextLevel(currentLevelId);
             foreach (var item in levelInfoHandler.levels)
             {
                 if (item.IsOpen)
@@ -275,10 +275,9 @@ public class GameManager : MonoBehaviour
                     unlockedLevels++;
                 }
             }
-            prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
-            UnlockNextLevel(currentLevelId);
             soundManager.PlaySound("Win");
             soundManager.SetMusicVolume(musicVolumeInMenu);
+            prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
         }
         else
         {
@@ -288,7 +287,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckLoseConditions()
     {
-        if (gameState == GameState.Gameplay && secondsLeft <= 0)
+        if (GameState == GameState.Gameplay && secondsLeft <= 0)
         {
             DisplayMessage(LOSE_KEY);
             if (exitTimerCoroutine == null)
@@ -314,5 +313,6 @@ public class GameManager : MonoBehaviour
     private void ClearPlayerPrefs()
     {
         prefsManager.ClearPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
+        storeUi.UpdateBonuses(bonusesAll);
     }
 }

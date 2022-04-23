@@ -30,7 +30,7 @@ public class GameplayUI : MonoBehaviour
     private Coroutine timerCoroutine;
     private UIManager uiManager;
     private Vector3 stickStartPos;
-    internal event Action<string> OnQuitButtonClick;
+    internal event Action OnQuitButtonClick;
 
     private void Start()
     {
@@ -84,7 +84,7 @@ public class GameplayUI : MonoBehaviour
 
     public void OnQuitClick()
     {
-        OnQuitButtonClick?.Invoke(tag);
+        OnQuitButtonClick?.Invoke();
     }
 
     private IEnumerator DisplayByTimeCoroutine(GameObject obj, float time)

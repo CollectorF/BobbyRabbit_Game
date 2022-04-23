@@ -52,7 +52,7 @@ public class LevelMenu : MonoBehaviour
     private List<GameObject> buttons = new List<GameObject>();
 
     internal Action<int?> OnStartButtonClick;
-    internal Action<string> OnClearButtonClick;
+    internal Action OnClearButtonClick;
     internal Action<GameState> OnBackButtonClick;
 
     private void Awake()
@@ -76,7 +76,7 @@ public class LevelMenu : MonoBehaviour
 
     public void OnClearClick()
     {
-        OnClearButtonClick?.Invoke(tag);
+        OnClearButtonClick?.Invoke();
     }
 
     public void OnBackClick()

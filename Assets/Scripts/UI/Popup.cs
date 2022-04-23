@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,6 +21,12 @@ public class Popup : MonoBehaviour
     [SerializeField]
     internal string POPUP_NO_KEY = "No";
 
+    private GameState currentState;
+
+    internal event Action OnActivateLevelMenu;
+    internal event Action OnClearPrefs;
+    internal event Action OnUpdateLevelList;
+
     public void UpdatePopup(string warning, string yes, string no)
     {
         popupText.text = warning;
@@ -27,26 +34,38 @@ public class Popup : MonoBehaviour
         popupNo.text = no;
     }
 
+    public void ShowPopup()
+    {
+        gameObject.SetActive(true);
+    }
     public void HidePopup()
     {
-        enabled = false;
+        gameObject.SetActive(false);
     }
 
-    //public void OnPopupYes()
-    //{
-    //    if (popupCaller == "LevelMenu")
-    //    {
-    //        OnClearPrefs?.Invoke();
-    //        levelMenuManager.UpdateLevelList();
-    //        HidePopup();
-    //    }
-    //    if (popupCaller == "GameplayUI")
-    //    {
-    //        ActivateLevelMenu();
-    //        HidePopup();
-    //    }
-    //}
+    public void HandlePopup(GameState state)
+    {
+        ShowPopup();
+        currentState = state;
+    }
 
+    public void OnPopupYes()
+    {
+        switch (currentState)
+        {
+            case GameState.Gameplay:
+                OnActivateLevelMenu?.Invoke();
+                HidePopup();
+                break;
+            case GameState.LevelMenu:
+                OnClearPrefs?.Invoke();
+                OnUpdateLevelList?.Invoke();
+                HidePopup();
+                break;
+            default:
+                break;
+        }
+    }
     public void OnPopupNo()
     {
         HidePopup();

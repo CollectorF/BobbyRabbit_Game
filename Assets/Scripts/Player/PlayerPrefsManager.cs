@@ -9,9 +9,8 @@ public class PlayerPrefsManager : MonoBehaviour
 
     public List<Level> LoadPlayerPrefs(List<Level> levels, out int bonuses)
     {
-        bonuses = 0;
         int unlockedLevels = PlayerPrefs.GetInt(UNLOCKED_LEVELS, 1);
-        PlayerPrefs.GetInt(BONUS, 0);
+        bonuses = PlayerPrefs.GetInt(BONUS, 0);
         for (int i = 0; i < unlockedLevels; i++)
         {
             levels[i].IsOpen = true;
@@ -29,7 +28,7 @@ public class PlayerPrefsManager : MonoBehaviour
     public List<Level> ClearPlayerPrefs(List<Level> levels, out int bonuses)
     {
         PlayerPrefs.DeleteAll();
-        bonuses = PlayerPrefs.GetInt(BONUS, 0);
+        bonuses = 0;
         levels[0].IsOpen = true;
         for (int i = 1; i < levels.Count; i++)
         {

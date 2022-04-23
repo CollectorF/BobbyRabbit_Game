@@ -1882,8 +1882,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1484034517}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 965214412}
+        m_TargetAssemblyTypeName: Popup, Assembly-CSharp
         m_MethodName: OnPopupYes
         m_Mode: 1
         m_Arguments:
@@ -5433,7 +5433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1482643446
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5559,7 +5559,7 @@ MonoBehaviour:
   storeUI: {fileID: 1482643445}
   levelMenu: {fileID: 564011430}
   gameplayUI: {fileID: 1609807437}
-  popup: {fileID: 965214408}
+  popup: {fileID: 965214412}
   levelInfoHandler: {fileID: 1074500513}
 --- !u!1 &1513414796
 GameObject:
@@ -8047,8 +8047,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1484034517}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 965214412}
+        m_TargetAssemblyTypeName: Popup, Assembly-CSharp
         m_MethodName: OnPopupNo
         m_Mode: 1
         m_Arguments:
@@ -8249,7 +8249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1609807438
 RectTransform:
   m_ObjectHideFlags: 0
