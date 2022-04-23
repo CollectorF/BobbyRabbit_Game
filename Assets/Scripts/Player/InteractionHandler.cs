@@ -1,8 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
+// This class is checking in Update, is player moved to new tile from old one, and is he did - 
+// checking is new tile is interactible. If it is - invoking event, on which the GameManager is subscribed.
+// All the actions on interaction are processed in GameManager.
 
 public class InteractionHandler : MonoBehaviour
 {

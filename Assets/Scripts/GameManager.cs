@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateMenuTexts()
     {
+        // This method is filling al the text fields in UI on start, and refilling them on locale change
+
         string startText = FindByKey(mainMenu.START_GAME_KEY);
         string storeText = FindByKey(mainMenu.STORE_KEY);
         string quitText = FindByKey(gameplayUi.QUIT_KEY);
@@ -205,6 +207,9 @@ public class GameManager : MonoBehaviour
 
     private void ProcessInteraction(MapTile currentTile, TileType tileType, int? number)
     {
+
+        // This method is processing all the interctions with interactible tiles
+
         switch (tileType)
         {
             case TileType.Carrot:
