@@ -1,9 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class SoundManager : MonoBehaviour
 {
+    [SerializeField]
+    private AudioMixer mixer;
+
+    public AudioMixerGroup MasterVolume;
+    public AudioMixerGroup MusicVolume;
+    public AudioMixerGroup SFXVolume;
+
+    [SerializeField]
+    [Range(-20f, 20f)]
+    private float allVolume = 0;
+    [SerializeField]
+    [Range(-20f, 20f)]
+    private float musicVolume = 0;
+    [SerializeField]
+    [Range(-20f, 20f)]
+    private float sfxVolume = 0;
+
+    [Space(20)]
     [SerializeField]
     private AudioSource bonus;
     [SerializeField]
@@ -15,35 +35,56 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource music;
 
-    internal void PlaySound(string type)
+    private float volume;
+
+
+    private void Start()
+    {
+        mixer.SetFloat("Master", allVolume);
+        mixer.SetFloat("Music", musicVolume);
+        mixer.SetFloat("SFX", sfxVolume);
+    }
+
+
+    internal void PlaySound(TileType type)
     {
         switch (type)
         {
-            case "Bonus":
+            case TileType.Bonus:
                 bonus.Play();
                 break;
-            case "ButtonOnOff":
+            case TileType.ButtonOnOff:
                 button.Play();
                 break;
-            case "Carrot":
+            case TileType.Carrot:
                 carrot.Play();
                 break;
-            case "Win":
+            case TileType.FinishPoint:
                 win.Play();
                 break;
         }
     }
 
+
     internal void PlayMusic()
     {
         music.Play();
     }
+
+
     internal void StopMusic()
     {
         music.Stop();
     }
-    internal void SetMusicVolume(float volume)
+
+    internal float GetVolume(AudioMixerGroup group)
     {
-        music.volume = Mathf.Clamp(volume, 0, 1);
+        mixer.GetFloat(group.ToString(), out volume);
+        return volume;
+    }
+
+    internal void SetVolume(AudioMixerGroup group, float volume)
+    {
+        mixer.SetFloat(group.ToString(), volume);
     }
 }

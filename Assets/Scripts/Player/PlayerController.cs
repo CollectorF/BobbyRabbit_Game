@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using UnityEngine.InputSystem.OnScreen;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -37,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private Vector2Int walkDirectionDiscreet;
     private Vector3 movementDirection;
     internal Vector2 currentPositionVector;
+    private Vector2 nextPositionCenter;
+    private MapTile currentPosition;
     private MapTile nextPosition;
 
     private void Start()
@@ -50,9 +51,21 @@ public class PlayerController : MonoBehaviour
         {
             walkDirectionDiscreet = Vector2Int.RoundToInt(walkDirection);
             currentPositionVector = GetCurrentPosInVector(tilemapMain);
+            currentPosition = GetCurrentTile(levelLoaderMain, currentPositionVector);
+            nextPositionCenter = levelLoaderMain.map.GetTileCenter(tilemapMain, nextPosition);
             nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
             Walk(walkDirectionDiscreet, nextPosition);
         }
+    }
+
+    private bool TwoVectorsEqual(Vector2 a, Vector2 b, float tolerance)
+    {
+        bool state = false;
+        if (Math.Abs(a.x - b.x) < tolerance | Math.Abs(a.y - b.y) < tolerance)
+        {
+            state = true;
+        }
+        return state;
     }
 
     public void SetPlayerInitialPosition()
@@ -70,7 +83,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Horizontal", direction.x);
             animator.SetFloat("Vertical", direction.y);
             if (direction.x != 0)
-            { 
+            {
                 movementDirection = transform.right * direction.x;
             }
             if (direction.y != 0)
@@ -97,6 +110,41 @@ public class PlayerController : MonoBehaviour
                 currentTime += Time.deltaTime;
             }
         }
+        //else if (nextTile.Type == TileType.InteractiveObstacle || nextTile.Type == TileType.Obstacle)
+        //{
+        //    if (Mathf.Abs(nextPositionCenter.x - transform.position.x) < 0.3f)
+        //    {
+        //        animator.SetFloat("Horizontal", direction.x);
+        //        animator.SetFloat("Vertical", direction.y);
+        //        if (direction.x != 0)
+        //        {
+        //            movementDirection = transform.right * direction.x;
+        //        }
+        //        if (direction.y != 0)
+        //        {
+        //            movementDirection = transform.up * direction.y;
+        //        }
+        //        if (direction == Vector2.zero)
+        //        {
+        //            movementDirection = Vector2.zero;
+        //        }
+
+        //        characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
+
+        //        if (direction == Vector2.zero ^ currentTime >= currentClipLength)
+        //        {
+        //            currentTime = 0f;
+        //        }
+        //        else
+        //        {
+        //            currentClipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        //            currentClipLength = currentClipInfo[0].clip.length;
+        //            currentTime = Mathf.Clamp(currentTime, 0, currentClipLength);
+        //            characterSpeedCurrent = speedCurve.Evaluate(currentTime) * characterSpeed;
+        //            currentTime += Time.deltaTime;
+        //        }
+        //    }
+        //}
         else
         {
             animator.Play("Player_Idle", 0);

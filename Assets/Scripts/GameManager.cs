@@ -45,9 +45,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float delayOnGameEnd = 3f;
     [SerializeField]
-    private float musicVolumeInMenu = 1f;
-    [SerializeField]
-    private float musicVolumeInGameplay = 0.5f;
+    private float musicVolumeInGameplay = -10f;
 
     [Space(20)]
     [SerializeField]
@@ -60,15 +58,16 @@ public class GameManager : MonoBehaviour
     private LocalizationHandler localeHandler;
     private PlayerController playerController;
     private InteractionHandler interactionHandler;
+    private PlayerPrefsManager prefsManager;
+    private Coroutine exitTimerCoroutine;
     private int carrotsAll;
     private int carrotsPicked = 0;
     private int bonusesPicked = 0;
     private int bonusesAll = 0;
     private float secondsLeft;
     private float secondsToPassLevel;
-    private PlayerPrefsManager prefsManager;
+    private float initialMusicVolume;
     private int currentLevelId;
-    private Coroutine exitTimerCoroutine;
     public static GameState GameState { get; private set; }
 
     private void Awake()
@@ -98,7 +97,7 @@ public class GameManager : MonoBehaviour
         levelInfoHandler.levels = prefsManager.LoadPlayerPrefs(levelInfoHandler.levels, out bonusesAll);
         UpdateMenuTexts();
         storeUi.UpdateBonuses(bonusesAll);
-        soundManager.SetMusicVolume(musicVolumeInMenu);
+        initialMusicVolume = soundManager.GetVolume(soundManager.MusicVolume);
         soundManager.PlayMusic();
     }
 
@@ -134,7 +133,7 @@ public class GameManager : MonoBehaviour
         uiManager.ScoreUpdate(carrotsPicked, carrotsAll, bonusesPicked);
         cameraController.enabled = true;
         cameraController.SetInitialCameraPosition();
-        soundManager.SetMusicVolume(musicVolumeInGameplay);
+        soundManager.SetVolume(soundManager.MusicVolume, musicVolumeInGameplay);
         if (exitTimerCoroutine != null)
         {
             StopCoroutine(exitTimerCoroutine);
@@ -215,20 +214,20 @@ public class GameManager : MonoBehaviour
             case TileType.Carrot:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
                 uiManager.ScoreUpdate(++carrotsPicked, carrotsAll, bonusesPicked);
-                soundManager.PlaySound(tileType.ToString());
+                soundManager.PlaySound(tileType);
                 break;
             case TileType.Bonus:
                 tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType);
                 uiManager.ScoreUpdate(carrotsPicked, carrotsAll, ++bonusesPicked);
-                soundManager.PlaySound(tileType.ToString());
+                soundManager.PlaySound(tileType);
                 break;
             case TileType.FinishPoint:
-                CheckWinConditions();
+                CheckWinConditions(tileType);
                 break;
             case TileType.ButtonOnOff:
                 bool controlState = tilemapHandler.ChangeTile(new Vector3Int(currentTile.Position.y, -currentTile.Position.x, 0), tileType); //changes button on/off tiles
                 tilemapHandler.ChangeInteractiveObstacle(controlState, (int)number);
-                soundManager.PlaySound(tileType.ToString());
+                soundManager.PlaySound(tileType);
                 break;
             default:
                 break;
@@ -241,6 +240,7 @@ public class GameManager : MonoBehaviour
         uiManager.ActivateLevelMenu();
         levelLoaderMain.map = null;
         SetGameState(GameState.LevelMenu);
+        soundManager.SetVolume(soundManager.MusicVolume, initialMusicVolume);
     }
 
     private string FindByKey(string key)
@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
         return timer;
     }
 
-    private void CheckWinConditions()
+    private void CheckWinConditions(TileType type)
     {
         if (carrotsPicked == carrotsAll && secondsLeft > 0)
         {
@@ -280,8 +280,7 @@ public class GameManager : MonoBehaviour
                     unlockedLevels++;
                 }
             }
-            soundManager.PlaySound("Win");
-            soundManager.SetMusicVolume(musicVolumeInMenu);
+            soundManager.PlaySound(type);
             prefsManager.SavePlayerPrefs(bonusesAll, unlockedLevels);
         }
         else
