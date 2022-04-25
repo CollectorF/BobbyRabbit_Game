@@ -34,10 +34,9 @@ public class PlayerController : MonoBehaviour
     private float currentTime = 0f;
     private Vector2 walkDirection;
     private Vector2Int walkDirectionDiscreet;
-    private Vector3 movementDirection;
+    private Vector2 chosenDirection;
     internal Vector2 currentPositionVector;
-    private Vector2 nextPositionCenter;
-    private MapTile currentPosition;
+    private Vector3 movementDirection;
     private MapTile nextPosition;
 
     private void Start()
@@ -51,21 +50,9 @@ public class PlayerController : MonoBehaviour
         {
             walkDirectionDiscreet = Vector2Int.RoundToInt(walkDirection);
             currentPositionVector = GetCurrentPosInVector(tilemapMain);
-            currentPosition = GetCurrentTile(levelLoaderMain, currentPositionVector);
-            nextPositionCenter = levelLoaderMain.map.GetTileCenter(tilemapMain, nextPosition);
             nextPosition = GetNextTile(levelLoaderMain, currentPositionVector);
             Walk(walkDirectionDiscreet, nextPosition);
         }
-    }
-
-    private bool TwoVectorsEqual(Vector2 a, Vector2 b, float tolerance)
-    {
-        bool state = false;
-        if (Math.Abs(a.x - b.x) < tolerance | Math.Abs(a.y - b.y) < tolerance)
-        {
-            state = true;
-        }
-        return state;
     }
 
     public void SetPlayerInitialPosition()
@@ -82,73 +69,55 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat("Horizontal", direction.x);
             animator.SetFloat("Vertical", direction.y);
-            if (direction.x != 0)
-            {
-                movementDirection = transform.right * direction.x;
-            }
-            if (direction.y != 0)
-            {
-                movementDirection = transform.up * direction.y;
-            }
-            if (direction == Vector2.zero)
-            {
-                movementDirection = Vector2.zero;
-            }
+
+            movementDirection = ChooseMovementDirection(direction);
 
             characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
 
-            if (direction == Vector2.zero ^ currentTime >= currentClipLength)
-            {
-                currentTime = 0f;
-            }
-            else
-            {
-                currentClipInfo = animator.GetCurrentAnimatorClipInfo(0);
-                currentClipLength = currentClipInfo[0].clip.length;
-                currentTime = Mathf.Clamp(currentTime, 0, currentClipLength);
-                characterSpeedCurrent = speedCurve.Evaluate(currentTime) * characterSpeed;
-                currentTime += Time.deltaTime;
-            }
+            AnimateCharacterMovement(direction);
         }
-        //else if (nextTile.Type == TileType.InteractiveObstacle || nextTile.Type == TileType.Obstacle)
-        //{
-        //    if (Mathf.Abs(nextPositionCenter.x - transform.position.x) < 0.3f)
-        //    {
-        //        animator.SetFloat("Horizontal", direction.x);
-        //        animator.SetFloat("Vertical", direction.y);
-        //        if (direction.x != 0)
-        //        {
-        //            movementDirection = transform.right * direction.x;
-        //        }
-        //        if (direction.y != 0)
-        //        {
-        //            movementDirection = transform.up * direction.y;
-        //        }
-        //        if (direction == Vector2.zero)
-        //        {
-        //            movementDirection = Vector2.zero;
-        //        }
-
-        //        characterController.Move(movementDirection * characterSpeedCurrent * Time.deltaTime);
-
-        //        if (direction == Vector2.zero ^ currentTime >= currentClipLength)
-        //        {
-        //            currentTime = 0f;
-        //        }
-        //        else
-        //        {
-        //            currentClipInfo = animator.GetCurrentAnimatorClipInfo(0);
-        //            currentClipLength = currentClipInfo[0].clip.length;
-        //            currentTime = Mathf.Clamp(currentTime, 0, currentClipLength);
-        //            characterSpeedCurrent = speedCurve.Evaluate(currentTime) * characterSpeed;
-        //            currentTime += Time.deltaTime;
-        //        }
-        //    }
-        //}
         else
         {
-            animator.Play("Player_Idle", 0);
-            OnNoWay?.Invoke(NO_WAY_KEY);
+            ActionsOnNoWay(NO_WAY_KEY);
+        }
+    }
+
+    private void ActionsOnNoWay(string key)
+    {
+        animator.Play("Player_Idle", 0);
+        OnNoWay?.Invoke(key);
+    }
+
+    private Vector2 ChooseMovementDirection(Vector2 direction)
+    {
+        if (direction.x != 0)
+        {
+            chosenDirection = transform.right * direction.x;
+        }
+        if (direction.y != 0)
+        {
+            chosenDirection = transform.up * direction.y;
+        }
+        if (direction == Vector2.zero)
+        {
+            chosenDirection = Vector2.zero;
+        }
+        return chosenDirection;
+    }
+
+    private void AnimateCharacterMovement(Vector2 direction)
+    {
+        if (direction == Vector2.zero ^ currentTime >= currentClipLength)
+        {
+            currentTime = 0f;
+        }
+        else
+        {
+            currentClipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            currentClipLength = currentClipInfo[0].clip.length;
+            currentTime = Mathf.Clamp(currentTime, 0, currentClipLength);
+            characterSpeedCurrent = speedCurve.Evaluate(currentTime) * characterSpeed;
+            currentTime += Time.deltaTime;
         }
     }
 

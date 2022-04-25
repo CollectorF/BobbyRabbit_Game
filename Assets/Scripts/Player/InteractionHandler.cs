@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-// This class is checking in Update, is player moved to new tile from old one, and is he did - 
+// This class is checking in Update, is player moved to new tile from old one, and if he did - 
 // checking is new tile is interactible. If it is - invoking event, on which the GameManager is subscribed.
 // All the actions on interaction are processed in GameManager.
 
