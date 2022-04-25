@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -3491484475685166301
     second: ukrainian
+  - first:
+      213: 1642261082821810540
+    second: polish
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,10 +130,10 @@ TextureImporter:
       name: russian
       rect:
         serializedVersion: 2
-        x: 132
-        y: 140
-        width: 110
-        height: 110
+        x: 4
+        y: 3
+        width: 118
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,10 +151,10 @@ TextureImporter:
       name: english
       rect:
         serializedVersion: 2
-        x: 14
-        y: 6
-        width: 110
-        height: 110
+        x: 4
+        y: 135
+        width: 118
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,12 +172,12 @@ TextureImporter:
       name: ukrainian
       rect:
         serializedVersion: 2
-        x: 132
-        y: 7
-        width: 110
-        height: 110
+        x: 133
+        y: 134
+        width: 118
+        height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,6 +185,27 @@ TextureImporter:
       bones: []
       spriteID: 323aef73e51cb8fc0800000000000000
       internalID: -3491484475685166301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: polish
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 2
+        width: 118
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c69da06f0cb7ac610800000000000000
+      internalID: 1642261082821810540
       vertices: []
       indices: 
       edges: []

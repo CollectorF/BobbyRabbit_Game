@@ -1,0 +1,21 @@
+﻿{
+	"CantGoThere":"Przed Tobą przeszkoda!",
+	"NotAllCollected":"Nie zebrałem jeszcze wszystkich marchewek!",
+	"LoseGame" : "Nie miałem czasu na żniwa!",
+	"WinGame" : "Hurra! Żniwa są zbierane!",
+	"StartGame" : "Zacząć gre",
+	"Store" : "Sklep Bobby'ego",
+	"Quit" : "Wyjście",
+	"Start" : "Biegnijmy!",
+	"ResetProgress" : "Zresetuj postęp",
+	"Back" : "Powrót",
+	"PopupWarning" : "Jesteś pewien?",
+	"Yes" : "Tak",
+	"No" : "Nie",
+	"Level" : "Poziom",
+	"LevelDifficulty" : "Złożoność:",
+	"Easy" : "Prosty",
+	"Medium" : "Średni",
+	"Hard" : "Złożony",
+	"StoreText" : "Sklep jest w trakcie budowy"
+}
